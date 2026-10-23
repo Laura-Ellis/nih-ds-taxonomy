@@ -106,5 +106,20 @@ def test_training_activity_code_flags_workforce():
     df = pd.DataFrame({"project_title": [""], "abstract_text": ["Mechanisms of T cell exhaustion."],
                        "activity_code": ["F31"]})
     r = tx.label_projects(df).iloc[0]
-    assert "training_education" in r.categories
+    assert r.training_mechanism
+    assert "training_education" not in r.categories
     assert not r.ds_workforce
+
+
+def test_umbrella_dropped_when_specific_method_present():
+    r = label("A data science approach using random forest models.")
+    assert "machine_learning" in r.categories
+    assert "data_science_general" not in r.categories
+
+
+def test_data_science_training_counts():
+    df = pd.DataFrame({"project_title": [""], "abstract_text": ["Trainees learn machine learning for genomics."],
+                       "activity_code": ["T32"]})
+    r = tx.label_projects(df).iloc[0]
+    assert "training_education" in r.categories
+    assert r.ds_workforce

@@ -9,7 +9,7 @@ authors:
 repository-code: "https://github.com/Laura-Ellis/nih-ds-taxonomy"
 url: "https://laura-ellis.github.io"
 license: MIT
-version: "0.2.0"
+version: "0.3.0"
 date-released: "2026-01-01"
 keywords:
   - data science

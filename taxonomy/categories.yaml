@@ -1,7 +1,7 @@
 taxonomy:
   name: NIH Data Science Taxonomy
-  version: 0.2.0
-  status: draft, tested on 749 NIH projects
+  version: 0.3.0
+  status: draft, tested on 749 NIH projects and 150 hand-coded
   updated: 2026-10-23
   author: Laura Ellis
   description: >
@@ -176,9 +176,10 @@ dimensions:
         definition: Hackathons, communities of practice, and capacity building at institutions new to data science.
     activity_codes:
       note: >
-        Training and career mechanisms. Projects with these activity codes get
-        training_education even without training terms. A data science workforce
-        project = training_education plus any data science label.
+        Training and career mechanisms. Projects with these activity codes get the
+        training_mechanism flag. training_education (training in data science) counts
+        only with a data science label. ds_workforce = data science label plus
+        training_education or training_mechanism.
       prefixes: [T, F, K, D43]
       codes: [R25]
 

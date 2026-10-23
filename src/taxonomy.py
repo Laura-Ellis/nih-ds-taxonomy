@@ -109,10 +109,13 @@ def label_projects(df: pd.DataFrame, text_cols=("project_title", "abstract_text"
     found = text.map(lambda s: match_terms(s, terms))
     out = df.copy()
     out["categories"] = found.map(assign)
-    if "activity_code" in out:
-        training = out["activity_code"].fillna("").map(_is_training_code)
-        out["categories"] = [sorted(set(cs) | {"training_education"}) if t else cs
-                             for cs, t in zip(out.categories, training)]
+    out["training_mechanism"] = (out["activity_code"].fillna("").map(_is_training_code)
+                                 if "activity_code" in out else False)
+    # The umbrella category counts only when no specific method is named
+    specific = set(cats.loc[(cats.dimension == "methods") & (cats.category_id != "data_science_general"),
+                            "category_id"])
+    out["categories"] = [[c for c in cs if c != "data_science_general"] if set(cs) & specific else cs
+                         for cs in out.categories]
     out["matched_terms"] = found.map(
         lambda f: "; ".join(f"{c}: {', '.join(sorted(h['strong'] | h['weak']))}" for c, h in sorted(f.items()))
     )
@@ -120,15 +123,21 @@ def label_projects(df: pd.DataFrame, text_cols=("project_title", "abstract_text"
         out[f"dim_{dim}"] = out.categories.map(lambda cs, d=dim: any(dim_of.get(c) == d for c in cs))
     ai_cats = set(cats.loc[cats.group == "artificial_intelligence", "category_id"])
     out["ai_related"] = out.categories.map(lambda cs: any(c in ai_cats for c in cs))
-    out["ds_workforce"] = out["dim_workforce"]  # refined below once data_science_related is set
     out["data_science_related"] = out[[f"dim_{d}" for d in
                                        ("methods", "software_tools", "data_infrastructure", "data_sharing")]].any(axis=1)
-    # Application areas only count for data science projects
-    area_cats = set(cats.loc[cats.dimension == "application_area", "category_id"])
+    # Application areas and training only count for data science projects
+    area_cats = set(cats.loc[cats.dimension == "application_area", "category_id"]) | {"training_education"}
     out["categories"] = [
         cs if ds else [c for c in cs if c not in area_cats]
         for cs, ds in zip(out.categories, out.data_science_related)
     ]
     out["dim_application_area"] &= out["data_science_related"]
-    out["ds_workforce"] = out["dim_workforce"] & out["data_science_related"]
+    out["dim_workforce"] = out.categories.map(lambda cs: any(dim_of.get(c) == "workforce" for c in cs))
+    out["ds_workforce"] = out["data_science_related"] & (
+        out.categories.map(lambda cs: "training_education" in cs) | out["training_mechanism"])
+    # Signals of how central AI is (the LLM review decides substantive vs. mention)
+    ai_terms = [t for t in terms if t.category_id in ai_cats]
+    titles = df[text_cols[0]].fillna("")
+    out["ai_in_title"] = titles.map(lambda s: any(t.pattern.search(s) for t in ai_terms))
+    out["ai_term_count"] = text.map(lambda s: sum(len(t.pattern.findall(s)) for t in ai_terms))
     return out

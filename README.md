@@ -2,7 +2,7 @@
 
 A taxonomy for classifying NIH-funded projects by the data science methods they use (statistics and analytics, computational modeling, and AI), the software and infrastructure they build, how they manage data and use AI responsibly, the workforce they train, and the biomedical area they apply it to.
 
-**Status:** draft v0.2.0, tested on 749 NIH projects (FY2019, FY2022, FY2025). Keyword AI labels find 98% of projects in NIH's RCDC AI category; hand review is next. See [`reports/sample_review_v0.2.md`](reports/sample_review_v0.2.md).
+**Status:** draft v0.3.0. Tested on 749 NIH projects and 150 hand-coded ones. Keyword labels catch AI mentions almost perfectly (κ = 0.93) but cannot separate substantive AI use from mentions (κ = 0.63); that is the LLM step's job. See [`reports/hand_coding_review_v0.3.md`](reports/hand_coding_review_v0.3.md).
 
 **Portfolio page:** https://laura-ellis.github.io/skills/nlp-llms.html
 
@@ -41,7 +41,9 @@ Keyword baseline (`src/taxonomy.py`):
 - Routine statistics (t-tests, regression, p-values) do not count; statistical methods count when the project develops or uses advanced methods
 - Application areas count only when the project has a methods, software, infrastructure, or data sharing label, since nearly every NIH project has a biomedical area
 - Singular and plural forms count as one term
-- Training and career activity codes (T, F, K, D43, R25) add training and education even without training words
+- Data science (general) counts only when no specific method is named
+- Training and education counts only with a data science label; training and career activity codes (T, F, K, D43, R25) set a separate `training_mechanism` flag
+- `ai_in_title` and `ai_term_count` record how prominent AI is, as inputs to the LLM review
 - Three summary flags: `data_science_related` (any methods, software, infrastructure, or data sharing label), `ai_related` (any method in the artificial intelligence group), and `ds_workforce` (training plus data science)
 
 The keyword baseline is the comparison point for LLM labeling, and both are checked against a hand-coded sample and the RCDC category "Machine Learning and Artificial Intelligence."
@@ -50,6 +52,7 @@ The keyword baseline is the comparison point for LLM labeling, and both are chec
 
 1. `notebooks/01_pull_sample.py` pulls about 750 projects from the NIH RePORTER API for FY2019, FY2022, and FY2025, in three strata: AI search hits, random research projects, and training projects.
 2. `notebooks/02_review_sample.py` labels them, compares with RCDC, charts how often each category fires, and exports `reports/taxonomy_review_sample.xlsx` for hand-coding 150 projects.
+3. `notebooks/03_agreement.py` compares keyword and RCDC labels with the hand coding.
 
 Agreement measures:
 
@@ -59,7 +62,7 @@ Agreement measures:
 
 ## Changes from the 2024 term lists
 
-This revises the term lists in [Laura-Ellis/NIH](https://github.com/Laura-Ellis/NIH) (`01 Term lists.ipynb`): 16 lists and 415 terms. 237 terms were kept and assigned to categories; 178 were dropped with a reason in [`taxonomy/dropped_terms.csv`](taxonomy/dropped_terms.csv). The revised taxonomy has 691 term entries. Main changes:
+This revises the term lists in [Laura-Ellis/NIH](https://github.com/Laura-Ellis/NIH) (`01 Term lists.ipynb`): 16 lists and 415 terms. 237 terms were kept and assigned to categories; 178 were dropped with a reason in [`taxonomy/dropped_terms.csv`](taxonomy/dropped_terms.csv). The revised taxonomy has 706 term entries. Main changes:
 
 - Lists organized into dimensions that follow the NIH Strategic Plan for Data Science, 2025–2030
 - Software and tools separated into its own dimension
