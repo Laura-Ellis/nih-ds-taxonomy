@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this code or analysis, please cite it as below."
+title: "NIH Data Science Taxonomy"
+abstract: "A taxonomy of data science methods (statistics and analytics, computational modeling, and AI), software, infrastructure, data sharing, and workforce for classifying NIH-funded projects."
+type: software
+authors:
+  - given-names: "Laura"
+    family-names: "Ellis"
+repository-code: "https://github.com/Laura-Ellis/nih-ds-taxonomy"
+url: "https://laura-ellis.github.io"
+license: MIT
+version: "0.1.0"
+date-released: "2026-01-01"
+keywords:
+  - data science
+  - artificial intelligence
+  - taxonomy
+  - NIH
+  - research funding

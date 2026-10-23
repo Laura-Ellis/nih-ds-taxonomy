@@ -1,0 +1,223 @@
+taxonomy:
+  name: NIH Data Science Taxonomy
+  version: 0.1.0
+  status: draft
+  updated: 2026-10-23
+  author: Laura Ellis
+  description: >
+    Classifies NIH-funded projects by the data science methods they use (statistics and
+    analytics, computational modeling, and AI), the software and infrastructure they
+    build, how they manage data and use AI responsibly, the workforce they train, and the
+    biomedical area they apply it to.
+  alignment:
+    - source: NIH Strategic Plan for Data Science, 2025-2030
+      url: https://datascience.nih.gov/nih-strategic-plan-data-science
+    - source: NIH AI Strategy Request for Information (NOT-OD-25-117), 2025
+      url: https://grants.nih.gov/grants/guide/notice-files/NOT-OD-25-117.html
+    - source: RCDC category "Machine Learning and Artificial Intelligence" (validation set)
+  derived_from: >
+    Term lists in github.com/Laura-Ellis/NIH (01 Term lists.ipynb, 2024), revised.
+
+# Labeling rule (keyword baseline):
+#   A project gets a category when its title + abstract contain at least one
+#   strong term, or at least two distinct weak terms, from that category,
+#   after exclusions are applied. A project can have several categories.
+#   "data_science_related" = any category in methods, software_tools,
+#   data_infrastructure, or data_sharing.
+#   "ai_related" = any methods category in the artificial_intelligence group.
+#   Application areas are only reported for projects with at least one label in
+#   methods, software_tools, data_infrastructure, or data_sharing.
+labeling_rule:
+  strong_terms_required: 1
+  weak_terms_required: 2
+  fields: [project_title, abstract_text]
+
+dimensions:
+
+  - id: methods
+    label: Data science methods
+    plan_goal: "Goal 3: Software, Computational Methods, and AI"
+    description: >
+      Analytic and computational methods the project develops or applies. Grouped into
+      statistics and analytics, computational modeling, and artificial intelligence.
+    groups:
+      - id: statistics_analytics
+        label: Statistics and analytics
+      - id: computational_modeling
+        label: Computational modeling
+      - id: artificial_intelligence
+        label: Artificial intelligence
+    categories:
+      - id: statistical_methods
+        group: statistics_analytics
+        label: Statistical methods development
+        definition: New or advanced statistical methods, such as Bayesian hierarchical models, causal inference methods, high-dimensional statistics, and statistical learning. Routine hypothesis tests and regression do not count.
+      - id: data_exploration
+        group: statistics_analytics
+        label: Data preparation and exploration
+        definition: Data cleaning, wrangling, harmonization for analysis, feature engineering, and exploratory data analysis as a stated part of the work.
+      - id: data_visualization
+        group: statistics_analytics
+        label: Data visualization
+        definition: Visual and interactive exploration or communication of data, including dashboards and visual analytics.
+      - id: network_analysis
+        group: statistics_analytics
+        label: Network and graph analysis
+        definition: Analysis of networks and graphs, such as biological, social, or collaboration networks.
+      - id: computational_modeling
+        group: computational_modeling
+        label: Computational and simulation modeling
+        definition: Mathematical, mechanistic, agent-based, and simulation models, including digital twins and hybrid physics- or theory-informed models.
+      - id: machine_learning
+        group: artificial_intelligence
+        label: Machine learning
+        definition: Supervised and unsupervised learning, including random forests, gradient boosting, support vector machines, and clustering used for prediction or pattern finding.
+      - id: deep_learning
+        group: artificial_intelligence
+        label: Deep learning
+        definition: Multi-layer neural networks, including convolutional, recurrent, transformer, and graph neural networks.
+      - id: nlp
+        group: artificial_intelligence
+        label: Natural language processing
+        definition: Methods that extract, classify, or summarize information from text, such as clinical notes or literature.
+      - id: computer_vision
+        group: artificial_intelligence
+        label: Computer vision
+        definition: Automated analysis of images and video, such as segmentation, detection, and image classification.
+      - id: generative_ai
+        group: artificial_intelligence
+        label: Generative AI and large language models
+        definition: Models that generate text, images, molecules, or other content, including large language models, diffusion models, and generative adversarial networks.
+      - id: other_ai
+        group: artificial_intelligence
+        label: Other AI
+        definition: Reinforcement learning, knowledge graphs, AI agents, causal discovery, and expert or rule-based systems.
+
+  - id: software_tools
+    label: Software and tools
+    plan_goal: "Goal 3: Software, Computational Methods, and AI"
+    description: Research software the project builds, maintains, or names as a core tool.
+    categories:
+      - id: research_software
+        label: Research software development
+        definition: Building, maintaining, or disseminating software, packages, pipelines, or workflows for others to use.
+      - id: ml_frameworks
+        label: ML frameworks and libraries
+        definition: Named machine learning and data science libraries, such as PyTorch, TensorFlow, and scikit-learn.
+      - id: analysis_platforms
+        label: Analysis and workflow platforms
+        definition: Shared platforms for running analyses, such as Galaxy, Terra, Jupyter, and workflow languages.
+      - id: visualization_tools
+        label: Visualization tools
+        definition: Software for interactive or visual exploration of data, such as dashboards and visualization libraries.
+
+  - id: data_infrastructure
+    label: Data infrastructure and computing
+    plan_goal: "Goal 4: Federated Biomedical Research Data Infrastructure"
+    description: Systems that store, connect, or compute on research data.
+    categories:
+      - id: cloud_computing
+        label: Cloud computing
+        definition: Use of commercial or NIH cloud environments for storage or analysis.
+      - id: hpc_compute
+        label: High-performance computing
+        definition: High-performance or GPU computing and other advanced computing resources.
+      - id: data_platforms
+        label: Data platforms and repositories
+        definition: Data commons, repositories, knowledge bases, data warehouses, and federated data ecosystems.
+      - id: data_engineering
+        label: Data engineering
+        definition: Pipelines and systems for integrating and processing large data, such as ETL, distributed processing, and streaming.
+
+  - id: data_sharing
+    label: Data management and sharing
+    plan_goal: "Goal 1: Data Management and Sharing; Goal 2: Human-Derived Data"
+    description: How the project makes data findable, reusable, and linkable.
+    categories:
+      - id: fair_data
+        label: FAIR data and standards
+        definition: Metadata, ontologies, common data elements, persistent identifiers, and interoperability standards.
+      - id: data_management_sharing
+        label: Data management and sharing
+        definition: Data management and sharing plans, data curation, and making data available to others.
+      - id: human_data_linkage
+        label: Human-derived data access and linkage
+        definition: Access to and linkage of human-derived data, such as real-world data, privacy-preserving record linkage, health IT standards, and data enclaves.
+
+  - id: responsible_ai
+    label: Responsible AI
+    plan_goal: "AI Strategy RFI: Reproducibility and Trust"
+    description: Ethics, privacy, transparency, and evaluation of AI and data use.
+    categories:
+      - id: fairness_bias
+        label: Fairness and bias
+        definition: Algorithmic bias, fairness, and equity in data and models.
+      - id: privacy_security
+        label: Privacy and security
+        definition: Privacy-preserving methods and data protection, such as federated learning, differential privacy, and de-identification.
+      - id: transparency_reproducibility
+        label: Transparency and reproducibility
+        definition: Explainability, interpretability, model reporting, benchmarking, and reproducibility of computational results.
+
+  - id: workforce
+    label: Workforce and training
+    plan_goal: "Goal 5: Strengthen the Data Science Community"
+    description: Building data science and AI skills and community.
+    categories:
+      - id: training_education
+        label: Training and education
+        definition: Courses, curricula, workshops, mentoring, and training programs in data science or AI.
+      - id: community_capacity
+        label: Community and capacity building
+        definition: Hackathons, communities of practice, and capacity building at institutions new to data science.
+    activity_codes:
+      note: Training and career mechanisms; used with training terms to flag workforce projects.
+      prefixes: [T, F, K, D43]
+      codes: [R25]
+
+  - id: application_area
+    label: Biomedical application area
+    description: The biomedical domain where data science or AI is applied.
+    categories:
+      - id: medical_imaging
+        label: Medical imaging
+        definition: Radiology, pathology, microscopy, and other medical images.
+      - id: omics
+        label: Genomics and other omics
+        definition: Genomic, transcriptomic, proteomic, metabolomic, and single-cell data.
+      - id: clinical_care
+        label: Clinical care and EHR
+        definition: Electronic health records, clinical decision support, diagnosis, and prognosis.
+      - id: drug_discovery
+        label: Drug discovery and development
+        definition: Target identification, molecular design, and drug repurposing.
+      - id: population_health
+        label: Population and public health
+        definition: Epidemiology, surveillance, social determinants, and environmental exposures.
+      - id: mental_behavioral
+        label: Mental and behavioral health
+        definition: Psychiatric, substance use, and behavioral research.
+      - id: neuroscience
+        label: Neuroscience
+        definition: Brain structure, function, and neurological disease.
+      - id: sensors_wearables
+        label: Sensors and wearables
+        definition: Physiological signals and data from wearable or mobile devices.
+
+  - id: ai_role
+    label: Role of AI in the project
+    description: Assigned by LLM review, not by keywords. One value per AI-related project.
+    method: llm
+    categories:
+      - id: develops_ai
+        label: Develops AI methods
+        definition: The main aim is a new or improved AI method.
+      - id: applies_ai
+        label: Applies AI to a research question
+        definition: Uses existing AI methods to answer a biomedical question.
+      - id: studies_ai
+        label: Studies AI itself
+        definition: Evaluates AI's safety, bias, ethics, policy, or effect on care or research.
+      - id: supports_ai
+        label: Supports AI
+        definition: Builds data, software, infrastructure, or workforce that AI work depends on.

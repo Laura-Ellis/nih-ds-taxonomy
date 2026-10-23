@@ -1,0 +1,44 @@
+#######################################
+# REQUIREMENTS TEMPLATE
+#######################################
+
+# CORE
+numpy
+pandas
+pyarrow
+jupyter
+ipykernel
+python-dotenv
+tqdm
+
+# VISUALIZATION
+matplotlib
+seaborn
+plotly
+
+# ML / MODELING
+scikit-learn
+
+# TEXT / NLP
+nltk
+spacy
+
+# TIME SERIES
+statsmodels
+pmdarima
+
+# DATA I/O
+openpyxl
+
+# OPTIONAL EXTRAS
+# requests
+# transformers
+# bokeh
+# altair
+# gensim
+
+# THIS PROJECT
+pyyaml
+requests
+openpyxl
+pytest

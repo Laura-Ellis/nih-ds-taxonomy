@@ -1,0 +1,685 @@
+term,category_id,match_type,strength,exclude_pattern,source_list,notes
+machine learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+supervised learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+unsupervised learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+random forest,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+random forests,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+gradient boosting,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+XGBoost,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+support vector machine,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+support vector machines,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+k-nearest neighbors,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+predictive analytics,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+predictive modeling,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+predictive model,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+feature selection,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+hyperparameter tuning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+ensemble learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+AdaBoost,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+data mining,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+statistical learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+k-means clustering,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+hierarchical clustering,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+self-organizing maps,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+Gaussian mixture model,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+manifold learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+t-SNE,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+UMAP,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+non-negative matrix factorization,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+anomaly detection,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+pattern recognition,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+AutoML,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+federated learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+active learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+semi-supervised learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+few-shot learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+zero-shot learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+transfer learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+self-supervised learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+SVM,machine_learning,acronym,strong,,ML; Supervised; Unsupervised,
+KNN,machine_learning,acronym,strong,,ML; Supervised; Unsupervised,
+DBSCAN,machine_learning,acronym,strong,,ML; Supervised; Unsupervised,
+classifier,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+classification model,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+clustering,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+cross-validation,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+training set,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+test set,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+validation set,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+overfitting,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+ROC curve,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+area under the curve,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+F1 score,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+confusion matrix,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+feature importance,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+dimensionality reduction,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+decision tree,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+decision trees,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+deep learning,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+neural network,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+neural networks,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+artificial neural network,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+convolutional neural network,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+convolutional neural networks,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+recurrent neural network,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+long short-term memory,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+transformer model,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+transformer models,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+transformer-based,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+graph neural network,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+graph neural networks,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+autoencoder,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+autoencoders,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+variational autoencoder,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+attention mechanism,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+backpropagation,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+foundation model,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+foundation models,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+multimodal AI,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+neural architecture search,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+CNN,deep_learning,acronym,strong,,Deep Learning; Neural Network,Case-sensitive
+CNNs,deep_learning,acronym,strong,,Deep Learning; Neural Network,Case-sensitive
+LSTM,deep_learning,acronym,strong,,Deep Learning; Neural Network,Case-sensitive
+GNN,deep_learning,acronym,strong,,Deep Learning; Neural Network,Case-sensitive
+GNNs,deep_learning,acronym,strong,,Deep Learning; Neural Network,Case-sensitive
+U-Net,deep_learning,acronym,strong,,Deep Learning; Neural Network,Case-sensitive
+ResNet,deep_learning,acronym,strong,,Deep Learning; Neural Network,Case-sensitive
+RNN,deep_learning,acronym,weak,,Deep Learning,Also used for RNA-related abbreviations; needs a second term
+fine-tuning,deep_learning,phrase,weak,,Deep Learning; Neural Network,
+fine-tuned,deep_learning,phrase,weak,,Deep Learning; Neural Network,
+gradient descent,deep_learning,phrase,weak,,Deep Learning; Neural Network,
+dropout,deep_learning,phrase,weak,,Deep Learning; Neural Network,
+batch normalization,deep_learning,phrase,weak,,Deep Learning; Neural Network,
+learning rate,deep_learning,phrase,weak,,Deep Learning; Neural Network,
+epochs,deep_learning,phrase,weak,,Deep Learning; Neural Network,
+natural language processing,nlp,phrase,strong,,AI,
+natural language understanding,nlp,phrase,strong,,AI,
+text mining,nlp,phrase,strong,,AI,
+information extraction,nlp,phrase,strong,,AI,
+named entity recognition,nlp,phrase,strong,,AI,
+topic modeling,nlp,phrase,strong,,AI,
+topic model,nlp,phrase,strong,,AI,
+sentiment analysis,nlp,phrase,strong,,AI,
+word embeddings,nlp,phrase,strong,,AI,
+word2vec,nlp,phrase,strong,,AI,
+BERT,nlp,phrase,strong,,AI,
+BioBERT,nlp,phrase,strong,,AI,
+ClinicalBERT,nlp,phrase,strong,,AI,
+text classification,nlp,phrase,strong,,AI,
+speech recognition,nlp,phrase,strong,,AI,
+voice recognition,nlp,phrase,strong,,AI,
+language model,nlp,phrase,strong,,AI,
+clinical notes,nlp,phrase,weak,,new,Needs a second NLP term
+unstructured text,nlp,phrase,weak,,new,Needs a second NLP term
+free text,nlp,phrase,weak,,new,Needs a second NLP term
+NLP,nlp,acronym,strong,neuro[- ]?linguistic programming,AI,
+computer vision,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+image segmentation,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+semantic segmentation,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+object detection,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+image classification,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+image recognition,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+automated image analysis,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+image analysis pipeline,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+pathology image analysis,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+computational pathology,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+radiomics,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+digital pathology,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+super-resolution,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+image synthesis,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+image registration,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+generative AI,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+generative artificial intelligence,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+generative model,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+generative models,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+large language model,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+large language models,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+generative adversarial network,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+generative adversarial networks,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+diffusion model,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+diffusion models,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+text generation,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+prompt engineering,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+retrieval-augmented generation,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+reinforcement learning from human feedback,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+synthetic data generation,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+ChatGPT,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+GPT-4,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+chatbot,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+chatbots,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+conversational agent,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+AI agent,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+AI agents,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+agentic,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+LLM,generative_ai,acronym,strong,,Generative AI; Trending,
+LLMs,generative_ai,acronym,strong,,Generative AI; Trending,
+GANs,generative_ai,acronym,strong,,Generative AI; Trending,
+RLHF,generative_ai,acronym,strong,,Generative AI; Trending,
+RAG,generative_ai,acronym,strong,,Generative AI; Trending,
+GAN,generative_ai,acronym,weak,,Generative AI,"Fixes merged term 'generative adversarial network""GAN' in original list"
+GPT,generative_ai,acronym,weak,glutamic[- ]pyruvic|transaminase|alanine aminotransferase,Trending,Also a liver enzyme abbreviation
+artificial intelligence,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+reinforcement learning,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+knowledge graph,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+knowledge graphs,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+expert system,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+expert systems,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+multi-agent system,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+multi-agent systems,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+causal machine learning,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+causal discovery,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+knowledge representation,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+fuzzy logic,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+rule-based system,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+semantic web,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+quantum machine learning,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+AI,other_ai,acronym,strong,\bAI/AN\b|American Indian|Alaska Native|adequate intake|aromatase inhibitor|apical infundibulum,AI,Excludes AI/AN (American Indian/Alaska Native) and other abbreviations
+statistical methods development,statistical_methods,phrase,strong,,Statistical Analysis; new,
+novel statistical methods,statistical_methods,phrase,strong,,Statistical Analysis; new,
+new statistical methods,statistical_methods,phrase,strong,,Statistical Analysis; new,
+statistical methodology,statistical_methods,phrase,strong,,Statistical Analysis; new,
+develop statistical methods,statistical_methods,phrase,strong,,Statistical Analysis; new,
+Bayesian hierarchical model,statistical_methods,phrase,strong,,Statistical Analysis; new,
+Bayesian hierarchical models,statistical_methods,phrase,strong,,Statistical Analysis; new,
+Bayesian modeling,statistical_methods,phrase,strong,,Statistical Analysis; new,
+Bayesian inference,statistical_methods,phrase,strong,,Statistical Analysis; new,
+causal inference methods,statistical_methods,phrase,strong,,Statistical Analysis; new,
+high-dimensional statistics,statistical_methods,phrase,strong,,Statistical Analysis; new,
+statistical learning,statistical_methods,phrase,strong,,Statistical Analysis; new,
+nonparametric methods,statistical_methods,phrase,strong,,Statistical Analysis; new,
+semiparametric,statistical_methods,phrase,strong,,Statistical Analysis; new,
+functional data analysis,statistical_methods,phrase,strong,,Statistical Analysis; new,
+multiple testing correction,statistical_methods,phrase,strong,,Statistical Analysis; new,
+statistical genetics,statistical_methods,phrase,strong,,Statistical Analysis; new,
+causal inference,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+high-dimensional data,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+time series analysis,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+survival analysis,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+longitudinal data analysis,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+mixed-effects models,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+propensity score,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+Mendelian randomization,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+bootstrapping,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+false discovery rate,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+missing data,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+multiple imputation,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+power analysis,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+biostatistics,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+biostatistical,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+Bayesian,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+multivariate analysis,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+regression analysis,statistical_methods,phrase,weak,,Statistical Analysis; Biomedical,Common in NIH projects; needs a second term
+exploratory data analysis,data_exploration,phrase,strong,,Data Exploration; Data Science,
+data cleaning,data_exploration,phrase,strong,,Data Exploration; Data Science,
+data wrangling,data_exploration,phrase,strong,,Data Exploration; Data Science,
+data profiling,data_exploration,phrase,strong,,Data Exploration; Data Science,
+data preprocessing,data_exploration,phrase,strong,,Data Exploration; Data Science,
+data quality control,data_exploration,phrase,strong,,Data Exploration; Data Science,
+feature engineering,data_exploration,phrase,strong,,Data Exploration; Data Science,
+outlier detection,data_exploration,phrase,strong,,Data Exploration; Data Science,
+data curation pipeline,data_exploration,phrase,strong,,Data Exploration; Data Science,
+EDA,data_exploration,acronym,weak,electrodermal,Data Exploration,Also electrodermal activity
+data normalization,data_exploration,phrase,weak,,Data Exploration; Statistical Analysis,
+data transformation,data_exploration,phrase,weak,,Data Exploration; Statistical Analysis,
+data aggregation,data_exploration,phrase,weak,,Data Exploration; Statistical Analysis,
+descriptive statistics,data_exploration,phrase,weak,,Data Exploration; Statistical Analysis,
+missing values,data_exploration,phrase,weak,,Data Exploration; Statistical Analysis,
+data sampling,data_exploration,phrase,weak,,Data Exploration; Statistical Analysis,
+data visualization,data_visualization,phrase,strong,,Data Visualization; Data Science,
+interactive visualization,data_visualization,phrase,strong,,Data Visualization; Data Science,
+visual analytics,data_visualization,phrase,strong,,Data Visualization; Data Science,
+visualization methods,data_visualization,phrase,strong,,Data Visualization; Data Science,
+dashboard,data_visualization,phrase,strong,,Data Visualization; Data Science,
+dashboards,data_visualization,phrase,strong,,Data Visualization; Data Science,
+geospatial visualization,data_visualization,phrase,strong,,Data Visualization; Data Science,
+information visualization,data_visualization,phrase,strong,,Data Visualization; Data Science,
+visual exploration,data_visualization,phrase,strong,,Data Visualization; Data Science,
+data storytelling,data_visualization,phrase,strong,,Data Visualization; Data Science,
+infographic,data_visualization,phrase,strong,,Data Visualization; Data Science,
+infographics,data_visualization,phrase,strong,,Data Visualization; Data Science,
+visualization,data_visualization,phrase,weak,,Data Visualization,Also used for microscopy; needs a second term
+network analysis,network_analysis,phrase,strong,,new,Supports Gephi network plots
+social network analysis,network_analysis,phrase,strong,,new,Supports Gephi network plots
+network science,network_analysis,phrase,strong,,new,Supports Gephi network plots
+graph theory,network_analysis,phrase,strong,,new,Supports Gephi network plots
+graph analytics,network_analysis,phrase,strong,,new,Supports Gephi network plots
+graph analysis,network_analysis,phrase,strong,,new,Supports Gephi network plots
+co-authorship network,network_analysis,phrase,strong,,new,Supports Gephi network plots
+collaboration network,network_analysis,phrase,strong,,new,Supports Gephi network plots
+protein-protein interaction network,network_analysis,phrase,strong,,new,Supports Gephi network plots
+gene regulatory network,network_analysis,phrase,strong,,new,Supports Gephi network plots
+gene regulatory networks,network_analysis,phrase,strong,,new,Supports Gephi network plots
+network medicine,network_analysis,phrase,strong,,new,Supports Gephi network plots
+community detection,network_analysis,phrase,strong,,new,Supports Gephi network plots
+network topology,network_analysis,phrase,strong,,new,Supports Gephi network plots
+network visualization,network_analysis,phrase,strong,,new,Supports Gephi network plots
+network-based,network_analysis,phrase,strong,,new,Supports Gephi network plots
+interactome,network_analysis,phrase,strong,,new,Supports Gephi network plots
+centrality,network_analysis,phrase,weak,,new,
+graph-based,network_analysis,phrase,weak,,new,
+computational modeling,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+computational model,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+computational models,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+mathematical model,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+mathematical models,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+mathematical modeling,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+agent-based model,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+agent-based models,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+agent-based modeling,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+simulation model,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+simulation modeling,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+microsimulation,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+mechanistic model,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+mechanistic models,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+quantitative systems pharmacology,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+multiscale model,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+multiscale modeling,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+molecular dynamics simulation,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+molecular dynamics simulations,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+finite element,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+physics-informed,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+in silico,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+digital twin,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+digital twins,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+systems modeling,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+simulation,computational_modeling,phrase,weak,,new,
+compartmental model,computational_modeling,phrase,weak,,new,
+pharmacokinetic modeling,computational_modeling,phrase,weak,,new,
+dynamical systems,computational_modeling,phrase,weak,,new,
+open-source software,research_software,phrase,strong,,new,
+open source software,research_software,phrase,strong,,new,
+software package,research_software,phrase,strong,,new,
+software tool,research_software,phrase,strong,,new,
+software tools,research_software,phrase,strong,,new,
+R package,research_software,phrase,strong,,new,
+Python package,research_software,phrase,strong,,new,
+Bioconductor package,research_software,phrase,strong,,new,
+web server,research_software,phrase,strong,,new,
+web-based tool,research_software,phrase,strong,,new,
+analysis pipeline,research_software,phrase,strong,,new,
+computational pipeline,research_software,phrase,strong,,new,
+bioinformatics pipeline,research_software,phrase,strong,,new,
+software development,research_software,phrase,strong,,new,
+research software,research_software,phrase,strong,,new,
+toolkit,research_software,phrase,strong,,new,
+user-friendly software,research_software,phrase,strong,,new,
+command-line tool,research_software,phrase,strong,,new,
+software,research_software,phrase,weak,,AI (algorithms),Too common alone
+pipeline,research_software,phrase,weak,,AI (algorithms),Too common alone
+workflow,research_software,phrase,weak,,AI (algorithms),Too common alone
+GitHub,research_software,phrase,weak,,AI (algorithms),Too common alone
+algorithm,research_software,phrase,weak,,AI (algorithms),Too common alone
+algorithms,research_software,phrase,weak,,AI (algorithms),Too common alone
+PyTorch,ml_frameworks,acronym,strong,,Deep Learning,
+TensorFlow,ml_frameworks,acronym,strong,,Deep Learning,
+Keras,ml_frameworks,acronym,strong,,Deep Learning,
+scikit-learn,ml_frameworks,acronym,strong,,Deep Learning,
+Hugging Face,ml_frameworks,acronym,strong,,Deep Learning,
+MONAI,ml_frameworks,acronym,strong,,Deep Learning,
+JAX,ml_frameworks,acronym,strong,,Deep Learning,
+Jupyter,analysis_platforms,phrase,strong,,new,
+Jupyter notebook,analysis_platforms,phrase,strong,,new,
+Galaxy platform,analysis_platforms,phrase,strong,,new,
+Nextflow,analysis_platforms,phrase,strong,,new,
+Snakemake,analysis_platforms,phrase,strong,,new,
+Common Workflow Language,analysis_platforms,phrase,strong,,new,
+Workflow Description Language,analysis_platforms,phrase,strong,,new,
+Terra platform,analysis_platforms,phrase,strong,,new,
+Docker,analysis_platforms,phrase,strong,,new,
+Singularity container,analysis_platforms,phrase,strong,,new,
+containerized,analysis_platforms,phrase,strong,,new,
+notebook environment,analysis_platforms,phrase,strong,,new,
+Galaxy,analysis_platforms,acronym,weak,,new,Ambiguous words; needs a second term
+Terra,analysis_platforms,acronym,weak,,new,Ambiguous words; needs a second term
+WDL,analysis_platforms,acronym,weak,,new,Ambiguous words; needs a second term
+CWL,analysis_platforms,acronym,weak,,new,Ambiguous words; needs a second term
+Tableau,visualization_tools,phrase,strong,,Data Visualization,
+Plotly,visualization_tools,phrase,strong,,Data Visualization,
+D3.js,visualization_tools,phrase,strong,,Data Visualization,
+Shiny app,visualization_tools,phrase,strong,,Data Visualization,
+R Shiny,visualization_tools,phrase,strong,,Data Visualization,
+ggplot2,visualization_tools,phrase,strong,,Data Visualization,
+Matplotlib,visualization_tools,phrase,strong,,Data Visualization,
+Seaborn,visualization_tools,phrase,strong,,Data Visualization,
+Power BI,visualization_tools,phrase,strong,,Data Visualization,
+visualization tool,visualization_tools,phrase,strong,,Data Visualization,
+visualization tools,visualization_tools,phrase,strong,,Data Visualization,
+visualization software,visualization_tools,phrase,strong,,Data Visualization,
+Cytoscape,visualization_tools,phrase,strong,,Data Visualization,
+Gephi,visualization_tools,phrase,strong,,Data Visualization,
+cloud computing,cloud_computing,phrase,strong,,Big Data; Data Science,
+cloud-based,cloud_computing,phrase,strong,,Big Data; Data Science,
+cloud platform,cloud_computing,phrase,strong,,Big Data; Data Science,
+cloud environment,cloud_computing,phrase,strong,,Big Data; Data Science,
+Amazon Web Services,cloud_computing,phrase,strong,,Big Data; Data Science,
+Google Cloud,cloud_computing,phrase,strong,,Big Data; Data Science,
+Microsoft Azure,cloud_computing,phrase,strong,,Big Data; Data Science,
+NIH STRIDES,cloud_computing,phrase,strong,,Big Data; Data Science,
+STRIDES Initiative,cloud_computing,phrase,strong,,Big Data; Data Science,
+cloud storage,cloud_computing,phrase,strong,,Big Data; Data Science,
+serverless,cloud_computing,phrase,strong,,Big Data; Data Science,
+AWS,cloud_computing,acronym,strong,,Big Data,
+GCP,cloud_computing,acronym,strong,,Big Data,
+Azure,cloud_computing,acronym,strong,,Big Data,
+BigQuery,cloud_computing,acronym,strong,,Big Data,
+high-performance computing,hpc_compute,phrase,strong,,Big Data,
+high performance computing,hpc_compute,phrase,strong,,Big Data,
+supercomputer,hpc_compute,phrase,strong,,Big Data,
+supercomputing,hpc_compute,phrase,strong,,Big Data,
+GPU cluster,hpc_compute,phrase,strong,,Big Data,
+graphics processing unit,hpc_compute,phrase,strong,,Big Data,
+GPU computing,hpc_compute,phrase,strong,,Big Data,
+distributed computing,hpc_compute,phrase,strong,,Big Data,
+parallel computing,hpc_compute,phrase,strong,,Big Data,
+exascale,hpc_compute,phrase,strong,,Big Data,
+HPC,hpc_compute,acronym,strong,,new,
+GPU,hpc_compute,acronym,strong,,new,
+GPUs,hpc_compute,acronym,strong,,new,
+data commons,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data repository,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data repositories,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data ecosystem,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data warehouse,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data lake,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+knowledge base,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+knowledgebase,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data portal,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data platform,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data coordinating center,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data resource,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+federated data,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+biobank,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+BioData Catalyst,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+Cancer Research Data Commons,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+All of Us Research Program,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+dbGaP,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+NIH Cloud Platform Interoperability,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+Researcher Auth Service,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data enclave,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+trusted research environment,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+NCPI,data_platforms,acronym,strong,,new,
+CRDC,data_platforms,acronym,strong,,new,
+AnVIL,data_platforms,acronym,strong,,new,
+data integration,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+data pipeline,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+data pipelines,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+"extract, transform, load",data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+stream processing,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+batch processing,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+real-time analytics,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+Apache Spark,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+Apache Hadoop,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+Hadoop,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+MapReduce,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+NoSQL,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+data harmonization,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+big data,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+ETL,data_engineering,acronym,strong,,Big Data,
+FAIR data,fair_data,phrase,strong,,FAIR Principles,
+FAIR principles,fair_data,phrase,strong,,FAIR Principles,
+FAIR-compliant,fair_data,phrase,strong,,FAIR Principles,
+"findable, accessible, interoperable",fair_data,phrase,strong,,FAIR Principles,
+metadata standard,fair_data,phrase,strong,,FAIR Principles,
+metadata standards,fair_data,phrase,strong,,FAIR Principles,
+common data elements,fair_data,phrase,strong,,FAIR Principles,
+common data model,fair_data,phrase,strong,,FAIR Principles,
+ontology,fair_data,phrase,strong,,FAIR Principles,
+ontologies,fair_data,phrase,strong,,FAIR Principles,
+controlled vocabulary,fair_data,phrase,strong,,FAIR Principles,
+controlled vocabularies,fair_data,phrase,strong,,FAIR Principles,
+persistent identifier,fair_data,phrase,strong,,FAIR Principles,
+persistent identifiers,fair_data,phrase,strong,,FAIR Principles,
+data standards,fair_data,phrase,strong,,FAIR Principles,
+interoperability,fair_data,phrase,strong,,FAIR Principles,
+interoperable,fair_data,phrase,strong,,FAIR Principles,
+linked data,fair_data,phrase,strong,,FAIR Principles,
+machine-readable,fair_data,phrase,strong,,FAIR Principles,
+data provenance,fair_data,phrase,strong,,FAIR Principles,
+OMOP,fair_data,phrase,strong,,FAIR Principles,
+HL7,fair_data,phrase,strong,,FAIR Principles,
+FHIR,fair_data,acronym,strong,,FAIR Principles,
+CDEs,fair_data,acronym,strong,,FAIR Principles,
+DOI,fair_data,acronym,strong,,FAIR Principles,
+metadata,fair_data,phrase,weak,,FAIR Principles,
+data quality,fair_data,phrase,weak,,FAIR Principles,
+schema,fair_data,phrase,weak,,FAIR Principles,
+data documentation,fair_data,phrase,weak,,FAIR Principles,
+data sharing,data_management_sharing,phrase,strong,,FAIR Principles,
+data management and sharing,data_management_sharing,phrase,strong,,FAIR Principles,
+data management plan,data_management_sharing,phrase,strong,,FAIR Principles,
+data sharing plan,data_management_sharing,phrase,strong,,FAIR Principles,
+data curation,data_management_sharing,phrase,strong,,FAIR Principles,
+data stewardship,data_management_sharing,phrase,strong,,FAIR Principles,
+open data,data_management_sharing,phrase,strong,,FAIR Principles,
+open science,data_management_sharing,phrase,strong,,FAIR Principles,
+open access data,data_management_sharing,phrase,strong,,FAIR Principles,
+share data,data_management_sharing,phrase,strong,,FAIR Principles,
+shared resource,data_management_sharing,phrase,strong,,FAIR Principles,
+public release,data_management_sharing,phrase,strong,,FAIR Principles,
+data dissemination,data_management_sharing,phrase,strong,,FAIR Principles,
+real-world data,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+real world data,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+privacy-preserving record linkage,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+record linkage,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+data linkage,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+linked records,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+TEFCA,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+health information exchange,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+data access request,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+exposome,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+PPRL,human_data_linkage,acronym,strong,,new,
+RWD,human_data_linkage,acronym,strong,,new,
+algorithmic bias,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+algorithmic fairness,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+fairness in AI,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+AI fairness,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+bias mitigation,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+model bias,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+health equity in AI,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+equitable AI,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+bias in AI,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+bias,fairness_bias,phrase,weak,,Data Ethics,Very common in biomedical text; needs a second term
+fairness,fairness_bias,phrase,weak,,Data Ethics,Very common in biomedical text; needs a second term
+equity,fairness_bias,phrase,weak,,Data Ethics,Very common in biomedical text; needs a second term
+differential privacy,privacy_security,phrase,strong,,Data Ethics; Trending,
+privacy-preserving,privacy_security,phrase,strong,,Data Ethics; Trending,
+privacy preserving,privacy_security,phrase,strong,,Data Ethics; Trending,
+de-identification,privacy_security,phrase,strong,,Data Ethics; Trending,
+deidentification,privacy_security,phrase,strong,,Data Ethics; Trending,
+anonymization,privacy_security,phrase,strong,,Data Ethics; Trending,
+data security,privacy_security,phrase,strong,,Data Ethics; Trending,
+secure computation,privacy_security,phrase,strong,,Data Ethics; Trending,
+homomorphic encryption,privacy_security,phrase,strong,,Data Ethics; Trending,
+federated analysis,privacy_security,phrase,strong,,Data Ethics; Trending,
+synthetic data,privacy_security,phrase,strong,,Data Ethics; Trending,
+privacy,privacy_security,phrase,weak,,Data Ethics,
+confidentiality,privacy_security,phrase,weak,,Data Ethics,
+informed consent,privacy_security,phrase,weak,,Data Ethics,
+data governance,privacy_security,phrase,weak,,Data Ethics,
+explainable AI,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+explainable artificial intelligence,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+interpretable machine learning,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+model interpretability,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+explainability,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+SHAP values,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+Shapley,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+model transparency,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+reproducibility of computational,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+computational reproducibility,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+benchmark dataset,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+benchmarking,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+model reporting,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+model cards,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+trustworthy AI,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+responsible AI,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+AI ethics,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+AI governance,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+ethical AI,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+trust in AI,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+AI safety,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+model validation,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+XAI,transparency_reproducibility,acronym,strong,,Trending,
+transparency,transparency_reproducibility,phrase,weak,,Data Ethics,
+accountability,transparency_reproducibility,phrase,weak,,Data Ethics,
+reproducibility,transparency_reproducibility,phrase,weak,,Data Ethics,
+validation,transparency_reproducibility,phrase,weak,,Data Ethics,
+data science training,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+training in data science,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+AI training,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+training in artificial intelligence,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+bioinformatics training,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+computational training,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+curriculum,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+curricula,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+bootcamp,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+summer school,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+short course,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+training program,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+training programs,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+workforce development,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+research education,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+mentoring,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+mentorship,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+trainees,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+predoctoral,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+postdoctoral training,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+career development,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+workshop,training_education,phrase,weak,,new,
+workshops,training_education,phrase,weak,,new,
+course,training_education,phrase,weak,,new,
+courses,training_education,phrase,weak,,new,
+education,training_education,phrase,weak,,new,
+hackathon,community_capacity,phrase,strong,,new,
+hackathons,community_capacity,phrase,strong,,new,
+community of practice,community_capacity,phrase,strong,,new,
+capacity building,community_capacity,phrase,strong,,new,
+research capacity,community_capacity,phrase,strong,,new,
+minority-serving institution,community_capacity,phrase,strong,,new,
+institutional capacity,community_capacity,phrase,strong,,new,
+data science community,community_capacity,phrase,strong,,new,
+consortium,community_capacity,phrase,weak,,new,
+community,community_capacity,phrase,weak,,new,
+medical imaging,medical_imaging,phrase,strong,,Biomedical,
+medical images,medical_imaging,phrase,strong,,Biomedical,
+radiology,medical_imaging,phrase,strong,,Biomedical,
+radiological,medical_imaging,phrase,strong,,Biomedical,
+MRI,medical_imaging,phrase,strong,,Biomedical,
+magnetic resonance imaging,medical_imaging,phrase,strong,,Biomedical,
+CT scan,medical_imaging,phrase,strong,,Biomedical,
+computed tomography,medical_imaging,phrase,strong,,Biomedical,
+PET imaging,medical_imaging,phrase,strong,,Biomedical,
+ultrasound,medical_imaging,phrase,strong,,Biomedical,
+mammography,medical_imaging,phrase,strong,,Biomedical,
+histopathology,medical_imaging,phrase,strong,,Biomedical,
+whole slide image,medical_imaging,phrase,strong,,Biomedical,
+whole-slide images,medical_imaging,phrase,strong,,Biomedical,
+pathology images,medical_imaging,phrase,strong,,Biomedical,
+microscopy,medical_imaging,phrase,strong,,Biomedical,
+retinal images,medical_imaging,phrase,strong,,Biomedical,
+optical coherence tomography,medical_imaging,phrase,strong,,Biomedical,
+echocardiography,medical_imaging,phrase,strong,,Biomedical,
+X-ray,medical_imaging,phrase,strong,,Biomedical,
+genomics,omics,phrase,strong,,Biomedical,
+genomic,omics,phrase,strong,,Biomedical,
+transcriptomics,omics,phrase,strong,,Biomedical,
+transcriptomic,omics,phrase,strong,,Biomedical,
+proteomics,omics,phrase,strong,,Biomedical,
+proteomic,omics,phrase,strong,,Biomedical,
+metabolomics,omics,phrase,strong,,Biomedical,
+epigenomics,omics,phrase,strong,,Biomedical,
+single-cell,omics,phrase,strong,,Biomedical,
+single cell RNA,omics,phrase,strong,,Biomedical,
+RNA-seq,omics,phrase,strong,,Biomedical,
+whole genome sequencing,omics,phrase,strong,,Biomedical,
+GWAS,omics,phrase,strong,,Biomedical,
+genome-wide association,omics,phrase,strong,,Biomedical,
+multi-omics,omics,phrase,strong,,Biomedical,
+multiomics,omics,phrase,strong,,Biomedical,
+polygenic risk,omics,phrase,strong,,Biomedical,
+bioinformatics,omics,phrase,strong,,Biomedical,
+computational biology,omics,phrase,strong,,Biomedical,
+systems biology,omics,phrase,strong,,Biomedical,
+molecular modeling,omics,phrase,strong,,Biomedical,
+electronic health record,clinical_care,phrase,strong,,Biomedical,
+electronic health records,clinical_care,phrase,strong,,Biomedical,
+electronic medical record,clinical_care,phrase,strong,,Biomedical,
+clinical decision support,clinical_care,phrase,strong,,Biomedical,
+clinical notes,clinical_care,phrase,strong,,Biomedical,
+clinical data,clinical_care,phrase,strong,,Biomedical,
+diagnosis,clinical_care,phrase,strong,,Biomedical,
+diagnostic,clinical_care,phrase,strong,,Biomedical,
+prognosis,clinical_care,phrase,strong,,Biomedical,
+prognostic,clinical_care,phrase,strong,,Biomedical,
+risk prediction,clinical_care,phrase,strong,,Biomedical,
+intensive care,clinical_care,phrase,strong,,Biomedical,
+emergency department,clinical_care,phrase,strong,,Biomedical,
+patient outcomes,clinical_care,phrase,strong,,Biomedical,
+clinical workflow,clinical_care,phrase,strong,,Biomedical,
+point of care,clinical_care,phrase,strong,,Biomedical,
+EHR,clinical_care,acronym,strong,,Biomedical,
+EHRs,clinical_care,acronym,strong,,Biomedical,
+EMR,clinical_care,acronym,strong,,Biomedical,
+ICU,clinical_care,acronym,strong,,Biomedical,
+drug discovery,drug_discovery,phrase,strong,,Biomedical,
+drug development,drug_discovery,phrase,strong,,Biomedical,
+drug repurposing,drug_discovery,phrase,strong,,Biomedical,
+drug repositioning,drug_discovery,phrase,strong,,Biomedical,
+virtual screening,drug_discovery,phrase,strong,,Biomedical,
+molecular docking,drug_discovery,phrase,strong,,Biomedical,
+target identification,drug_discovery,phrase,strong,,Biomedical,
+lead optimization,drug_discovery,phrase,strong,,Biomedical,
+compound screening,drug_discovery,phrase,strong,,Biomedical,
+de novo drug design,drug_discovery,phrase,strong,,Biomedical,
+protein structure prediction,drug_discovery,phrase,strong,,Biomedical,
+AlphaFold,drug_discovery,phrase,strong,,Biomedical,
+pharmacogenomics,drug_discovery,phrase,strong,,Biomedical,
+epidemiology,population_health,phrase,strong,,Biomedical,
+epidemiological,population_health,phrase,strong,,Biomedical,
+public health,population_health,phrase,strong,,Biomedical,
+population health,population_health,phrase,strong,,Biomedical,
+surveillance,population_health,phrase,strong,,Biomedical,
+social determinants of health,population_health,phrase,strong,,Biomedical,
+health disparities,population_health,phrase,strong,,Biomedical,
+environmental exposure,population_health,phrase,strong,,Biomedical,
+exposome,population_health,phrase,strong,,Biomedical,
+geospatial,population_health,phrase,strong,,Biomedical,
+community health,population_health,phrase,strong,,Biomedical,
+health equity,population_health,phrase,strong,,Biomedical,
+mental health,mental_behavioral,phrase,strong,,new,
+psychiatric,mental_behavioral,phrase,strong,,new,
+psychiatry,mental_behavioral,phrase,strong,,new,
+depression,mental_behavioral,phrase,strong,,new,
+anxiety,mental_behavioral,phrase,strong,,new,
+schizophrenia,mental_behavioral,phrase,strong,,new,
+substance use,mental_behavioral,phrase,strong,,new,
+opioid use disorder,mental_behavioral,phrase,strong,,new,
+suicide,mental_behavioral,phrase,strong,,new,
+behavioral health,mental_behavioral,phrase,strong,,new,
+addiction,mental_behavioral,phrase,strong,,new,
+autism,mental_behavioral,phrase,strong,,new,
+neuroscience,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+neuroimaging,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+brain imaging,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+fMRI,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+EEG,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+neural circuits,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+neurodegenerative,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+Alzheimer,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+Parkinson,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+connectome,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+brain activity,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+wearable,sensors_wearables,phrase,strong,,Biomedical; new,
+wearables,sensors_wearables,phrase,strong,,Biomedical; new,
+wearable sensor,sensors_wearables,phrase,strong,,Biomedical; new,
+mobile health,sensors_wearables,phrase,strong,,Biomedical; new,
+mHealth,sensors_wearables,phrase,strong,,Biomedical; new,
+smartphone,sensors_wearables,phrase,strong,,Biomedical; new,
+accelerometer,sensors_wearables,phrase,strong,,Biomedical; new,
+continuous glucose monitor,sensors_wearables,phrase,strong,,Biomedical; new,
+ECG,sensors_wearables,phrase,strong,,Biomedical; new,
+electrocardiogram,sensors_wearables,phrase,strong,,Biomedical; new,
+physiological signals,sensors_wearables,phrase,strong,,Biomedical; new,
+remote monitoring,sensors_wearables,phrase,strong,,Biomedical; new,
+digital biomarker,sensors_wearables,phrase,strong,,Biomedical; new,
+digital biomarkers,sensors_wearables,phrase,strong,,Biomedical; new,
+biomedical signal processing,sensors_wearables,phrase,strong,,Biomedical; new,
