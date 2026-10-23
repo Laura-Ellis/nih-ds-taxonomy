@@ -2,7 +2,7 @@
 
 A taxonomy for classifying NIH-funded projects by the data science methods they use (statistics and analytics, computational modeling, and AI), the software and infrastructure they build, how they manage data and use AI responsibly, the workforce they train, and the biomedical area they apply it to.
 
-**Status:** draft v0.1.0. Categories are being tested on a sample of NIH projects; terms will change.
+**Status:** draft v0.2.0, tested on 749 NIH projects (FY2019, FY2022, FY2025). Keyword AI labels find 98% of projects in NIH's RCDC AI category; hand review is next. See [`reports/sample_review_v0.2.md`](reports/sample_review_v0.2.md).
 
 **Portfolio page:** https://laura-ellis.github.io/skills/nlp-llms.html
 
@@ -12,11 +12,11 @@ Where does data science show up across NIH projects, how much of it is AI, and w
 
 ## Structure
 
-Eight dimensions and 39 categories: seven assigned by keywords (35 categories) and one assigned by LLM review (role of AI, 4 categories). A project can have several categories. Definitions are in [`taxonomy/categories.yaml`](taxonomy/categories.yaml); terms are in [`taxonomy/terms.csv`](taxonomy/terms.csv).
+Eight dimensions and 40 categories: seven assigned by keywords (36 categories) and one assigned by LLM review (role of AI, 4 categories). A project can have several categories. Definitions are in [`taxonomy/categories.yaml`](taxonomy/categories.yaml); terms are in [`taxonomy/terms.csv`](taxonomy/terms.csv).
 
 | Dimension | Categories | Aligns with |
 |---|---|---|
-| Data science methods: statistics and analytics | Statistical methods development · Data preparation and exploration · Data visualization · Network and graph analysis | Strategic Plan Goal 3 |
+| Data science methods: statistics and analytics | Data science (general) · Statistical methods development · Data preparation and exploration · Data visualization · Network and graph analysis | Strategic Plan Goal 3 |
 | Data science methods: computational modeling | Computational and simulation modeling (including digital twins) | Strategic Plan Goal 3 |
 | Data science methods: artificial intelligence | Machine learning · Deep learning · NLP · Computer vision · Generative AI and LLMs · Other AI | Strategic Plan Goal 3 |
 | Software and tools | Research software development · ML frameworks · Analysis and workflow platforms · Visualization tools | Strategic Plan Goal 3 |
@@ -40,7 +40,9 @@ Keyword baseline (`src/taxonomy.py`):
 - Acronyms are case-sensitive; some have exclusions (for example, "AI" next to "AI/AN" or "American Indian" is ignored, and "GPT" near "transaminase" is ignored)
 - Routine statistics (t-tests, regression, p-values) do not count; statistical methods count when the project develops or uses advanced methods
 - Application areas count only when the project has a methods, software, infrastructure, or data sharing label, since nearly every NIH project has a biomedical area
-- Two summary flags: `data_science_related` (any methods, software, infrastructure, or data sharing label) and `ai_related` (any method in the artificial intelligence group)
+- Singular and plural forms count as one term
+- Training and career activity codes (T, F, K, D43, R25) add training and education even without training words
+- Three summary flags: `data_science_related` (any methods, software, infrastructure, or data sharing label), `ai_related` (any method in the artificial intelligence group), and `ds_workforce` (training plus data science)
 
 The keyword baseline is the comparison point for LLM labeling, and both are checked against a hand-coded sample and the RCDC category "Machine Learning and Artificial Intelligence."
 
@@ -57,7 +59,7 @@ Agreement measures:
 
 ## Changes from the 2024 term lists
 
-This revises the term lists in [Laura-Ellis/NIH](https://github.com/Laura-Ellis/NIH) (`01 Term lists.ipynb`): 16 lists and 415 terms. 238 terms were kept and assigned to categories; 177 were dropped with a reason in [`taxonomy/dropped_terms.csv`](taxonomy/dropped_terms.csv). The revised taxonomy has 684 terms. Main changes:
+This revises the term lists in [Laura-Ellis/NIH](https://github.com/Laura-Ellis/NIH) (`01 Term lists.ipynb`): 16 lists and 415 terms. 237 terms were kept and assigned to categories; 178 were dropped with a reason in [`taxonomy/dropped_terms.csv`](taxonomy/dropped_terms.csv). The revised taxonomy has 691 term entries. Main changes:
 
 - Lists organized into dimensions that follow the NIH Strategic Plan for Data Science, 2025–2030
 - Software and tools separated into its own dimension

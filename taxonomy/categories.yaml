@@ -1,7 +1,7 @@
 taxonomy:
   name: NIH Data Science Taxonomy
-  version: 0.1.0
-  status: draft
+  version: 0.2.0
+  status: draft, tested on 749 NIH projects
   updated: 2026-10-23
   author: Laura Ellis
   description: >
@@ -48,6 +48,10 @@ dimensions:
       - id: artificial_intelligence
         label: Artificial intelligence
     categories:
+      - id: data_science_general
+        group: statistics_analytics
+        label: Data science (general)
+        definition: The project names data science, data analytics, informatics, or computational methods without naming a more specific method.
       - id: statistical_methods
         group: statistics_analytics
         label: Statistical methods development
@@ -171,7 +175,10 @@ dimensions:
         label: Community and capacity building
         definition: Hackathons, communities of practice, and capacity building at institutions new to data science.
     activity_codes:
-      note: Training and career mechanisms; used with training terms to flag workforce projects.
+      note: >
+        Training and career mechanisms. Projects with these activity codes get
+        training_education even without training terms. A data science workforce
+        project = training_education plus any data science label.
       prefixes: [T, F, K, D43]
       codes: [R25]
 

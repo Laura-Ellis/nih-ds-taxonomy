@@ -55,9 +55,9 @@ feature importance,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Co
 dimensionality reduction,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
 decision tree,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
 decision trees,machine_learning,phrase,weak,,ML; Supervised; Unsupervised,Common in non-ML biomedical text; needs a second term
+neural network,deep_learning,phrase,strong,nervous system|neurons?\b|brain|cortex|cortical|synap|circuit|enteric|spinal|hippocamp,Deep Learning; Neural Network,Excludes biological neural networks
+neural networks,deep_learning,phrase,strong,nervous system|neurons?\b|brain|cortex|cortical|synap|circuit|enteric|spinal|hippocamp,Deep Learning; Neural Network,Excludes biological neural networks
 deep learning,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
-neural network,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
-neural networks,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
 artificial neural network,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
 convolutional neural network,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
 convolutional neural networks,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
@@ -125,9 +125,9 @@ pathology image analysis,computer_vision,phrase,strong,,AI; Biomedical; Generati
 computational pathology,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
 radiomics,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
 digital pathology,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
-super-resolution,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
 image synthesis,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
 image registration,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+super-resolution,computer_vision,phrase,strong,microscop|fluoresc|single[- ]molecule|STED|STORM|PALM,Generative AI,Excludes super-resolution microscopy
 generative AI,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
 generative artificial intelligence,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
 generative model,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
@@ -174,6 +174,19 @@ rule-based system,other_ai,phrase,strong,,AI; Trending,'artificial intelligence'
 semantic web,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
 quantum machine learning,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
 AI,other_ai,acronym,strong,\bAI/AN\b|American Indian|Alaska Native|adequate intake|aromatase inhibitor|apical infundibulum,AI,Excludes AI/AN (American Indian/Alaska Native) and other abbreviations
+data science,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+data scientist,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+data scientists,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+data analytics,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+big data analytics,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+computational methods,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+computational approaches,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+computational analysis,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+quantitative methods,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+informatics,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+data-driven,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+analytics,data_science_general,phrase,weak,,Data Science,
+computational,data_science_general,phrase,weak,,Data Science,
 statistical methods development,statistical_methods,phrase,strong,,Statistical Analysis; new,
 novel statistical methods,statistical_methods,phrase,strong,,Statistical Analysis; new,
 new statistical methods,statistical_methods,phrase,strong,,Statistical Analysis; new,
@@ -304,12 +317,10 @@ research software,research_software,phrase,strong,,new,
 toolkit,research_software,phrase,strong,,new,
 user-friendly software,research_software,phrase,strong,,new,
 command-line tool,research_software,phrase,strong,,new,
-software,research_software,phrase,weak,,AI (algorithms),Too common alone
-pipeline,research_software,phrase,weak,,AI (algorithms),Too common alone
-workflow,research_software,phrase,weak,,AI (algorithms),Too common alone
-GitHub,research_software,phrase,weak,,AI (algorithms),Too common alone
-algorithm,research_software,phrase,weak,,AI (algorithms),Too common alone
-algorithms,research_software,phrase,weak,,AI (algorithms),Too common alone
+software,research_software,phrase,weak,,new,Too common alone
+pipeline,research_software,phrase,weak,,new,Too common alone
+workflow,research_software,phrase,weak,,new,Too common alone
+GitHub,research_software,phrase,weak,,new,Too common alone
 PyTorch,ml_frameworks,acronym,strong,,Deep Learning,
 TensorFlow,ml_frameworks,acronym,strong,,Deep Learning,
 Keras,ml_frameworks,acronym,strong,,Deep Learning,
@@ -545,10 +556,8 @@ predoctoral,training_education,phrase,strong,,new,Counts toward workforce; combi
 postdoctoral training,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
 career development,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
 workshop,training_education,phrase,weak,,new,
-workshops,training_education,phrase,weak,,new,
-course,training_education,phrase,weak,,new,
-courses,training_education,phrase,weak,,new,
-education,training_education,phrase,weak,,new,
+hands-on training,training_education,phrase,weak,,new,
+coursework,training_education,phrase,weak,,new,
 hackathon,community_capacity,phrase,strong,,new,
 hackathons,community_capacity,phrase,strong,,new,
 community of practice,community_capacity,phrase,strong,,new,
@@ -557,8 +566,6 @@ research capacity,community_capacity,phrase,strong,,new,
 minority-serving institution,community_capacity,phrase,strong,,new,
 institutional capacity,community_capacity,phrase,strong,,new,
 data science community,community_capacity,phrase,strong,,new,
-consortium,community_capacity,phrase,weak,,new,
-community,community_capacity,phrase,weak,,new,
 medical imaging,medical_imaging,phrase,strong,,Biomedical,
 medical images,medical_imaging,phrase,strong,,Biomedical,
 radiology,medical_imaging,phrase,strong,,Biomedical,

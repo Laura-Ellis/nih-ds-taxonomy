@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[1] if "__file__" in globals() else Path.
 sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "config"))
 import taxonomy as tx  # noqa: E402
+from review_workbook import format_review_workbook  # noqa: E402
 
 RAW, PROCESSED, REPORTS = ROOT / "data" / "raw", ROOT / "data" / "processed", ROOT / "reports"
 PROCESSED.mkdir(parents=True, exist_ok=True)
@@ -52,6 +53,7 @@ ct
 
 # %%
 cats = tx.load_categories()
+cats = cats[cats.method != "llm"]  # role of AI comes from LLM review, not keywords
 long = labeled[["appl_id", "stratum", "categories"]].explode("categories").dropna()
 share = (long.groupby(["categories", "stratum"]).appl_id.nunique()
          .div(labeled.groupby("stratum").appl_id.nunique(), level="stratum")
@@ -63,7 +65,7 @@ share.sort_values("ai_search").plot.barh(ax=ax, color=["#596D69", "#CDC4B7", "#B
 ax.set_xlabel("Share of sampled projects with the category")
 ax.set_ylabel("")
 ax.xaxis.set_major_formatter(lambda v, _: f"{v:.0%}")
-ax.set_title("Most categories fire in the AI search stratum, few in general projects", loc="left")
+ax.set_title("Categories fire mostly in AI search hits; workforce in training projects", loc="left")
 ax.legend(title="Stratum", frameon=False)
 fig.tight_layout()
 fig.savefig(REPORTS / "category_share_by_stratum.png", dpi=200)
@@ -72,9 +74,9 @@ plt.show()
 # %% [markdown]
 # ## Review workbook
 #
-# A random 150 projects (50 per stratum). For each, read the abstract and fill in:
-# `my_ds_related` (Y/N), `my_ai_related` (Y/N), `my_categories` (category IDs, separated by ;), `missed_terms`,
-# `false_positive_terms`, and `notes`. These become the hand-coded validation set.
+# A random 150 projects (50 per stratum) to hand-code. The workbook opens on an
+# Instructions sheet that defines every field; the columns to fill are highlighted.
+# `my_ds_related` and `my_ai_related` use Y (substantive) / M (mention only) / N.
 
 # %%
 review = pd.concat(g.sample(min(50, len(g)), random_state=20261023)
@@ -88,5 +90,6 @@ for col in ["my_ds_related", "my_ai_related", "my_categories", "missed_terms", "
 
 with pd.ExcelWriter(REPORTS / "taxonomy_review_sample.xlsx") as xw:
     review.to_excel(xw, sheet_name="Review", index=False)
-    cats.to_excel(xw, sheet_name="Category IDs", index=False)
+    tx.load_categories().to_excel(xw, sheet_name="Category IDs", index=False)
+format_review_workbook(REPORTS / "taxonomy_review_sample.xlsx")
 print(f"Saved {len(review)} projects to reports/taxonomy_review_sample.xlsx")

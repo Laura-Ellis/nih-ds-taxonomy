@@ -84,3 +84,27 @@ def test_lymph_nodes_not_network_analysis():
 def test_microscopy_visualization_not_data_visualization():
     r = label("Confocal microscopy will visualize mitochondria; visualization uses fluorescent dyes.")
     assert "data_visualization" not in r.categories
+
+
+def test_biological_neural_network_excluded():
+    r = label("The enteric nervous system is a complex neural network embedded in the gut wall.")
+    assert "deep_learning" not in r.categories
+
+
+def test_super_resolution_microscopy_excluded():
+    r = label("Single-molecule fluorescence and super-resolution microscopy of synapses.")
+    assert "computer_vision" not in r.categories
+
+
+def test_data_science_umbrella_term():
+    r = label("Building a data science workforce to improve rehabilitation research.")
+    assert "data_science_general" in r.categories
+    assert r.data_science_related
+
+
+def test_training_activity_code_flags_workforce():
+    df = pd.DataFrame({"project_title": [""], "abstract_text": ["Mechanisms of T cell exhaustion."],
+                       "activity_code": ["F31"]})
+    r = tx.label_projects(df).iloc[0]
+    assert "training_education" in r.categories
+    assert not r.ds_workforce

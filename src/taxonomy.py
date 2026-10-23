@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
+from functools import lru_cache
 from pathlib import Path
 
 import pandas as pd
@@ -72,7 +73,9 @@ def match_terms(text: str, terms: list[Term]) -> dict[str, dict[str, set[str]]]:
                 window = text[max(0, m.start() - EXCLUDE_WINDOW): m.end() + EXCLUDE_WINDOW]
                 if t.exclude.search(window):
                     continue
-            found.setdefault(t.category_id, {"strong": set(), "weak": set()})[t.strength].add(t.term.lower())
+            # Singular and plural forms count as one term
+            key = re.sub(r"s$", "", t.term.lower())
+            found.setdefault(t.category_id, {"strong": set(), "weak": set()})[t.strength].add(key)
             break
     return found
 
@@ -82,6 +85,18 @@ def assign(found: dict, strong_required: int = 1, weak_required: int = 2) -> lis
         cat for cat, hits in found.items()
         if len(hits["strong"]) >= strong_required or len(hits["weak"]) >= weak_required
     )
+
+
+@lru_cache(maxsize=1)
+def _training_codes() -> tuple[tuple[str, ...], tuple[str, ...]]:
+    spec = yaml.safe_load((TAXONOMY_DIR / "categories.yaml").read_text(encoding="utf-8"))
+    ac = next(d for d in spec["dimensions"] if d["id"] == "workforce")["activity_codes"]
+    return tuple(ac["codes"]), tuple(ac["prefixes"])
+
+
+def _is_training_code(code: str) -> bool:
+    codes, prefixes = _training_codes()
+    return code in codes or code.startswith(prefixes)
 
 
 def label_projects(df: pd.DataFrame, text_cols=("project_title", "abstract_text")) -> pd.DataFrame:
@@ -94,6 +109,10 @@ def label_projects(df: pd.DataFrame, text_cols=("project_title", "abstract_text"
     found = text.map(lambda s: match_terms(s, terms))
     out = df.copy()
     out["categories"] = found.map(assign)
+    if "activity_code" in out:
+        training = out["activity_code"].fillna("").map(_is_training_code)
+        out["categories"] = [sorted(set(cs) | {"training_education"}) if t else cs
+                             for cs, t in zip(out.categories, training)]
     out["matched_terms"] = found.map(
         lambda f: "; ".join(f"{c}: {', '.join(sorted(h['strong'] | h['weak']))}" for c, h in sorted(f.items()))
     )
@@ -101,6 +120,7 @@ def label_projects(df: pd.DataFrame, text_cols=("project_title", "abstract_text"
         out[f"dim_{dim}"] = out.categories.map(lambda cs, d=dim: any(dim_of.get(c) == d for c in cs))
     ai_cats = set(cats.loc[cats.group == "artificial_intelligence", "category_id"])
     out["ai_related"] = out.categories.map(lambda cs: any(c in ai_cats for c in cs))
+    out["ds_workforce"] = out["dim_workforce"]  # refined below once data_science_related is set
     out["data_science_related"] = out[[f"dim_{d}" for d in
                                        ("methods", "software_tools", "data_infrastructure", "data_sharing")]].any(axis=1)
     # Application areas only count for data science projects
@@ -110,4 +130,5 @@ def label_projects(df: pd.DataFrame, text_cols=("project_title", "abstract_text"
         for cs, ds in zip(out.categories, out.data_science_related)
     ]
     out["dim_application_area"] &= out["data_science_related"]
+    out["ds_workforce"] = out["dim_workforce"] & out["data_science_related"]
     return out
