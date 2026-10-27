@@ -1,0 +1,54 @@
+#######################################
+# REQUIREMENTS TEMPLATE
+#######################################
+
+# CORE
+numpy
+pandas
+pyarrow
+anthropic
+jupyter
+ipykernel
+python-dotenv
+tqdm
+
+# VISUALIZATION
+matplotlib
+seaborn
+plotly
+
+# ML / MODELING
+scikit-learn
+networkx            # co-PI network (analyses/ds_pis/networks.py)
+# scikit-survival   # optional, random survival forest in analyses/ds_pis/training.py; on Windows:
+#                   # pip install --no-deps scikit-survival; pip install osqp numexpr
+
+# TEXT / NLP
+nltk
+spacy
+
+# TIME SERIES
+statsmodels
+pmdarima
+
+# DATA I/O
+openpyxl
+
+# OPTIONAL EXTRAS
+# requests
+# transformers
+# bokeh
+# altair
+# gensim
+
+# THIS PROJECT
+pyyaml
+requests
+openai
+openpyxl
+pytest
+
+# API (api/main.py)
+fastapi
+uvicorn
+httpx

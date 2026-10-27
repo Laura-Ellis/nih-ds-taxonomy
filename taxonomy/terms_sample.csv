@@ -1,0 +1,109 @@
+term,category_id,match_type,strength,exclude_pattern,source_list,notes
+machine learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+supervised learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+unsupervised learning,machine_learning,phrase,strong,,ML; Supervised; Unsupervised; Trending,
+neural network,deep_learning,phrase,strong,nervous system|neurons?\b|brain|cortex|cortical|synap|circuit|enteric|spinal|hippocamp,Deep Learning; Neural Network,Excludes biological neural networks
+neural networks,deep_learning,phrase,strong,nervous system|neurons?\b|brain|cortex|cortical|synap|circuit|enteric|spinal|hippocamp,Deep Learning; Neural Network,Excludes biological neural networks
+deep learning,deep_learning,phrase,strong,,Deep Learning; Neural Network; Trending,
+natural language processing,nlp,phrase,strong,,AI,
+natural language understanding,nlp,phrase,strong,,AI,
+text mining,nlp,phrase,strong,,AI,
+computer vision,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+image segmentation,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+semantic segmentation,computer_vision,phrase,strong,,AI; Biomedical; Generative AI,
+generative AI,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+generative artificial intelligence,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+generative model,generative_ai,phrase,strong,,Generative AI; Trending; AI,AI agents also relate to other_ai; kept here for the LLM era
+artificial intelligence,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+reinforcement learning,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+knowledge graph,other_ai,phrase,strong,,AI; Trending,'artificial intelligence' is broad; projects with only this term get other_ai
+data science,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+data scientist,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+data scientists,data_science_general,phrase,strong,,Data Science,Umbrella terms when no specific method is named
+statistical methods development,statistical_methods,phrase,strong,,Statistical Analysis; new,
+novel statistical methods,statistical_methods,phrase,strong,,Statistical Analysis; new,
+new statistical methods,statistical_methods,phrase,strong,,Statistical Analysis; new,
+exploratory data analysis,data_exploration,phrase,strong,,Data Exploration; Data Science,
+data cleaning,data_exploration,phrase,strong,,Data Exploration; Data Science,
+data wrangling,data_exploration,phrase,strong,,Data Exploration; Data Science,
+data visualization,data_visualization,phrase,strong,,Data Visualization; Data Science,
+interactive visualization,data_visualization,phrase,strong,,Data Visualization; Data Science,
+visual analytics,data_visualization,phrase,strong,,Data Visualization; Data Science,
+network analysis,network_analysis,phrase,strong,,new,Supports Gephi network plots
+social network analysis,network_analysis,phrase,strong,,new,Supports Gephi network plots
+network science,network_analysis,phrase,strong,,new,Supports Gephi network plots
+computational modeling,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+computational model,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+computational models,computational_modeling,phrase,strong,,Biomedical; new,2025-2030 plan names digital twins and hybrid theory- and data-driven modeling
+open-source software,research_software,phrase,strong,,new,
+open source software,research_software,phrase,strong,,new,
+software package,research_software,phrase,strong,,new,
+PyTorch,ml_frameworks,acronym,strong,,Deep Learning,
+TensorFlow,ml_frameworks,acronym,strong,,Deep Learning,
+Keras,ml_frameworks,acronym,strong,,Deep Learning,
+Jupyter,analysis_platforms,phrase,strong,,new,
+Jupyter notebook,analysis_platforms,phrase,strong,,new,
+Galaxy platform,analysis_platforms,phrase,strong,,new,
+Tableau,visualization_tools,phrase,strong,,Data Visualization,
+Plotly,visualization_tools,phrase,strong,,Data Visualization,
+D3.js,visualization_tools,phrase,strong,,Data Visualization,
+cloud computing,cloud_computing,phrase,strong,,Big Data; Data Science,
+cloud-based,cloud_computing,phrase,strong,,Big Data; Data Science,
+cloud platform,cloud_computing,phrase,strong,,Big Data; Data Science,
+high-performance computing,hpc_compute,phrase,strong,,Big Data,
+high performance computing,hpc_compute,phrase,strong,,Big Data,
+supercomputer,hpc_compute,phrase,strong,,Big Data,
+data commons,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data repository,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data repositories,data_platforms,phrase,strong,,Big Data; FAIR,"Named NIH platforms from the 2025-2030 plan, Goal 4"
+data integration,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+data pipeline,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+data pipelines,data_engineering,phrase,strong,,Big Data; Data Science,"Fixes merged term 'ETL""Extract, Transform, Load' in original list"
+FAIR data,fair_data,phrase,strong,,FAIR Principles,
+FAIR principles,fair_data,phrase,strong,,FAIR Principles,
+FAIR-compliant,fair_data,phrase,strong,,FAIR Principles,
+data sharing,data_management_sharing,phrase,strong,,FAIR Principles,
+data management and sharing,data_management_sharing,phrase,strong,,FAIR Principles,
+data management plan,data_management_sharing,phrase,strong,,FAIR Principles,
+real-world data,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+real world data,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+privacy-preserving record linkage,human_data_linkage,phrase,strong,,new,Goal 2 of the 2025-2030 plan
+algorithmic bias,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+algorithmic fairness,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+fairness in AI,fairness_bias,phrase,strong,,Data Ethics; Biomedical,
+differential privacy,privacy_security,phrase,strong,,Data Ethics; Trending,
+privacy-preserving,privacy_security,phrase,strong,,Data Ethics; Trending,
+privacy preserving,privacy_security,phrase,strong,,Data Ethics; Trending,
+explainable AI,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+explainable artificial intelligence,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+interpretable machine learning,transparency_reproducibility,phrase,strong,,Data Ethics; Trending; AI,
+data science training,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+training in data science,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+AI training,training_education,phrase,strong,,new,Counts toward workforce; combine with methods labels to find AI training
+hackathon,community_capacity,phrase,strong,,new,
+hackathons,community_capacity,phrase,strong,,new,
+community of practice,community_capacity,phrase,strong,,new,
+medical imaging,medical_imaging,phrase,strong,,Biomedical,
+medical images,medical_imaging,phrase,strong,,Biomedical,
+radiology,medical_imaging,phrase,strong,,Biomedical,
+genomics,omics,phrase,strong,,Biomedical,
+genomic,omics,phrase,strong,,Biomedical,
+transcriptomics,omics,phrase,strong,,Biomedical,
+electronic health record,clinical_care,phrase,strong,,Biomedical,
+electronic health records,clinical_care,phrase,strong,,Biomedical,
+electronic medical record,clinical_care,phrase,strong,,Biomedical,
+drug discovery,drug_discovery,phrase,strong,,Biomedical,
+drug development,drug_discovery,phrase,strong,,Biomedical,
+drug repurposing,drug_discovery,phrase,strong,,Biomedical,
+epidemiology,population_health,phrase,strong,,Biomedical,
+epidemiological,population_health,phrase,strong,,Biomedical,
+public health,population_health,phrase,strong,,Biomedical,
+mental health,mental_behavioral,phrase,strong,,new,
+psychiatric,mental_behavioral,phrase,strong,,new,
+psychiatry,mental_behavioral,phrase,strong,,new,
+neuroscience,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+neuroimaging,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+brain imaging,neuroscience,phrase,strong,,new,"'neural network' is a methods term, not neuroscience"
+wearable,sensors_wearables,phrase,strong,,Biomedical; new,
+wearables,sensors_wearables,phrase,strong,,Biomedical; new,
+wearable sensor,sensors_wearables,phrase,strong,,Biomedical; new,

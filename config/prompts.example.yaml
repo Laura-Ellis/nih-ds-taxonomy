@@ -1,0 +1,26 @@
+# Public stand-in for the labeling prompts. The tuned prompts used for the published results are kept
+# private in prompts/labeling_prompts.yaml (git-ignored); METHODOLOGY.md describes what they cover.
+# With only this file, the pipeline runs end to end, but labels will differ from the published ones.
+note: Example prompts. Write your own in prompts/labeling_prompts.yaml to reproduce or adapt the method.
+llm_rules: |
+  You label NIH-funded research projects for the NIH Data Science Taxonomy. Read the
+  project title and abstract and call the record_labels tool once.
+
+  ds_related: does the project use or build data science as part of its own work?
+    Y = substantive, M = mentioned only, N = none.
+
+  ai_related: the same Y / M / N rule for AI. If ds_related is N, ai_related is N.
+
+  ai_role: only when ai_related is Y or M; otherwise null. Choose the single best fit:
+  {roles}
+
+  categories: only when ds_related is Y; otherwise an empty list.
+  {categories}
+
+  evidence: one short quote from the abstract that supports the call. Empty if both are N.
+jev_ds_instructions: This is an NIH-funded research project (title and abstract). Does the project use or build data science as part of its own work?
+jev_ai_instructions: Does the project use or build artificial intelligence as part of its own work?
+jev_ymn:
+  Y: Substantive.
+  M: Mention only.
+  N: None.

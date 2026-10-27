@@ -1,0 +1,16 @@
+# How taxonomy categories roll up for reporting (notebooks 13 and 16, the API, and the dashboard).
+# Kept separate from categories.yaml so regrouping doesn't change the keyword or model labels.
+# 7 groups; Data infrastructure has 2 subgroups. A record in either subgroup counts once in the parent.
+groups:
+  - {id: statistics_analytics,   label: Statistics and analytics,  from: "methods: statistics_analytics"}
+  - {id: computational_modeling, label: Computational modeling,    from: "methods: computational_modeling"}
+  - {id: artificial_intelligence, label: Artificial intelligence,  from: "methods: artificial_intelligence"}
+  - {id: software_tools,         label: Software and tools,        from: "dimension software_tools"}
+  - id: data_infrastructure
+    label: Data infrastructure
+    plan_goals: "Goals 1, 2, and 4"
+    subgroups:
+      - {id: computing_platforms, label: Computing and platforms, from: "dimension data_infrastructure", plan_goal: "Goal 4"}
+      - {id: data_sharing, label: Data management and sharing, from: "dimension data_sharing", plan_goal: "Goals 1 and 2"}
+  - {id: responsible_ai,         label: Responsible AI,            from: "dimension responsible_ai"}
+  - {id: workforce,              label: Workforce,                 from: "dimension workforce"}

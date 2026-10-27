@@ -1,0 +1,65 @@
+# Environments
+.venv/
+venv/
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data (keep folders, not contents; data/DATA_SOURCES.md says how to rebuild)
+data/raw/*
+data/processed/*
+data/interim/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/interim/.gitkeep
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ---- Personal setup (not shared) ----
+# Local overrides of config/settings.yaml (Laura: ExPORTER abstracts and publication links)
+config/local.yaml
+# ExPORTER bulk-file workflow and its manifest (the shared process uses the RePORTER API)
+notebooks/00_build_exporter_parquet.py
+notebooks/00b_pull_reporter_api.py
+config/exporter_update_dates.csv
+# Internal analyses, not for publishing
+notebooks/I01_niaid_vs_nih.py
+reports/internal/
+_to_delete/
+*.csv
+# Deck build script and Claude Slides files (published as an artifact, not shared in the repo)
+deck/
+
+# ---- Core method: documented in METHODOLOGY.md, not shipped ----
+# Full term list and dropped-term reasons (public sample: taxonomy/terms_sample.csv)
+taxonomy/terms.csv
+taxonomy/dropped_terms.csv
+# Tuned labeling prompts (public stand-in: config/prompts.example.yaml)
+prompts/
+# Hand-coded validation sets (agreement results stay public in reports/agreement_*.csv and *_review*.md)
+reports/*_coded.xlsx
+reports/taxonomy_review_sample.xlsx
+reports/taxonomy_spot_check*.xlsx
+
+# Secrets (keys live in C:\Users\Laura\KEYS.md, outside the repo)
+*.key
+secrets*
+
+# Private companion repo (same folder, separate history; see PRIVATE_REPO.md, which is itself private)
+.git-private/
+PRIVATE_REPO.md
+.git-old-history/
+
+# Local run log (machine paths)
+notebooks/run_log.txt

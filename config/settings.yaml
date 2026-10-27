@@ -1,0 +1,39 @@
+# Shared settings for the NIH Data Science Taxonomy pipeline.
+# Personal overrides go in config/local.yaml (git-ignored); any key there replaces the one here.
+# Relative paths are relative to the repository root.
+
+# NIH fiscal years run October to September.
+fiscal_years: [2016, 2026]   # years analyzed (first and last, inclusive)
+pull_years: [2016, 2027]     # years pulled and kept up to date; FY2027 (started Oct 2026) is pulled, not analyzed
+
+# FY2026 closed on Sept 30, 2026, but NIH is still adding and revising its records. Results label it
+# "FY2026 (preliminary, as of <pull date>)" and every results table has a `preliminary` column.
+# Set to null once the year's records have settled.
+preliminary_fy: 2026
+
+# Administration periods by fiscal year. A fiscal year goes to the administration in office for most
+# of it (8 of 12 months): FY2017 starts Trump's first term (Jan 2017), FY2021 Biden's (Jan 2021), and
+# FY2025 Trump's second (Jan 2025). Trends and projections compare within and across these periods.
+admin_periods:
+  - {name: "Obama (end of term)", first_fy: 2016, last_fy: 2016}
+  - {name: "Trump, first term", first_fy: 2017, last_fy: 2020}
+  - {name: "Biden", first_fy: 2021, last_fy: 2024}
+  - {name: "Trump, second term", first_fy: 2025, last_fy: 2028}
+
+# Where each table lives: one parquet file per fiscal year (FY<year>.parquet), ExPORTER column names.
+# The shared process builds all three from the RePORTER API (notebooks/00_update_reporter.py).
+sources:
+  projects: data/raw/reporter_api/projects
+  abstracts: data/raw/reporter_api/abstracts
+  pub_links: data/raw/reporter_api/pub_links
+  # ExPORTER link tables (Patents.csv, ClinicalStudies.csv) for notebook 12; the RePORTER API has no
+  # equivalent. Download them from https://reporter.nih.gov/exporter into this folder.
+  link_tables: data/raw/exporter_links
+
+# Incremental updates (notebooks/00_update_reporter.py)
+update:
+  open_years: 3               # always re-pull the latest N pulled fiscal years (FY2025–FY2027); NIH still revises them
+  link_refresh_years: 6       # re-pull publication links for projects active in the last N years
+  pull_links: true            # false = use another source for publication links (see sources.pub_links)
+
+# focus_ic: institute to highlight in charts and previews (set it in config/local.yaml; none by default)

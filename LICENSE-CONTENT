@@ -1,0 +1,11 @@
+Copyright (c) 2026 Laura Ellis
+
+The NIH Data Science Taxonomy (taxonomy/), documentation (*.md), figures, and results in this repository are
+licensed under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0):
+https://creativecommons.org/licenses/by-nc/4.0/
+
+You may share and adapt this material for non-commercial purposes with credit to Laura Ellis and a link to
+https://github.com/Laura-Ellis/nih-ds-taxonomy. Code (*.py) is licensed separately under the MIT License (LICENSE).
+
+The full term list and the tuned labeling prompts are not included in this repository. Contact Laura Ellis
+(https://www.linkedin.com/in/laura-ellis-profile/) to collaborate on or license them.

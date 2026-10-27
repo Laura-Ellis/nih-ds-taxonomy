@@ -1,0 +1,19 @@
+dataset,column,type,description,units_or_values,source,example,notes
+terms,term,string,Word or phrase matched in project text,,taxonomy/terms.csv,convolutional neural network,
+terms,category_id,string,Category the term counts toward,IDs in categories.yaml,taxonomy/terms.csv,deep_learning,
+terms,match_type,string,How the term is matched,phrase (case-insensitive) | acronym (case-sensitive),taxonomy/terms.csv,phrase,Hyphens and spaces are interchangeable
+terms,strength,string,Whether one match is enough,strong | weak,taxonomy/terms.csv,strong,Weak terms need a second weak term from the same category
+terms,exclude_pattern,regex,Ignore the match if this pattern appears within 60 characters,,taxonomy/terms.csv,American Indian,
+terms,source_list,string,2024 term list the term came from,list names or new,taxonomy/terms.csv,Deep Learning,
+reporter_sample,appl_id,integer,NIH application ID; unique per project application,,NIH RePORTER API,10012345,Primary key
+reporter_sample,project_num,string,Full project number,,NIH RePORTER API,5R01CA123456-03,
+reporter_sample,fiscal_year,integer,NIH fiscal year (October to September),,NIH RePORTER API,2025,
+reporter_sample,activity_code,string,Funding mechanism,,NIH RePORTER API,R01,
+reporter_sample,ic,string,Administering NIH Institute or Center,,NIH RePORTER API,NCI,
+reporter_sample,award_amount,integer,Total award for the fiscal year,USD,NIH RePORTER API,512345,
+reporter_sample,rcdc_categories,string,RCDC spending categories,semicolon-separated,NIH RePORTER API,Machine Learning and Artificial Intelligence; Cancer,
+reporter_sample,rcdc_ml_ai,boolean,RCDC includes Machine Learning and Artificial Intelligence,True | False,derived,True,
+reporter_sample,stratum,string,Sampling stratum,ai_search | general | training,derived,ai_search,
+labeled,categories,list,Taxonomy categories assigned by the keyword baseline,category IDs,src/taxonomy.py,deep_learning; medical_imaging,
+labeled,data_science_related,boolean,Has any methods; software and tools; data infrastructure; or data sharing category,True | False,src/taxonomy.py,True,
+labeled,ai_related,boolean,Has any methods category in the artificial intelligence group,True | False,src/taxonomy.py,True,
