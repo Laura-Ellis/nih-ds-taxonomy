@@ -42,6 +42,14 @@ from progress import say, start  # noqa: E402  # pyright: ignore[reportMissingIm
 PROCESSED, OUT = ROOT / "data" / "processed", ROOT / "reports" / "results"
 OUT.mkdir(parents=True, exist_ok=True)
 
+# One-institute mode (internal): with the environment variable ONLY_IC set (for example ONLY_IC=NIAID), the same
+# tables are built for that administering institute only and written to reports/internal/ic_<name>/ instead.
+import os  # noqa: E402
+ONLY_IC = os.environ.get("ONLY_IC")
+if ONLY_IC:
+    OUT = ROOT / "reports" / "internal" / f"ic_{ONLY_IC.lower()}"
+    OUT.mkdir(parents=True, exist_ok=True)
+
 # Reporting units: 7 groups, plus 2 subgroups inside Data infrastructure. A record in either subgroup
 # counts once in the parent. `level` says which is which; filter on it so a record isn't counted twice.
 GROUP_LABELS = {
@@ -78,6 +86,13 @@ key = ["core_project_number", "subproject_id"]
 NIH_ICS = {"CA", "HL", "AI", "GM", "AG", "NS", "MH", "DK", "HD", "DA", "AA", "ES", "EY", "DC", "DE", "AR", "EB", "HG",
            "LM", "MD", "NR", "AT", "TR", "TW", "OD", "RR", "CL", "RM"}  # NIH only; drops CDC, AHRQ, FDA, NIOSH, VA
 apps = apps[apps.administering_ic.isin(NIH_ICS)]
+if ONLY_IC:
+    _CODE = {"NCI": "CA", "NHLBI": "HL", "NIAID": "AI", "NIGMS": "GM", "NIA": "AG", "NINDS": "NS", "NIMH": "MH",
+             "NIDDK": "DK", "NICHD": "HD", "NIDA": "DA", "NIAAA": "AA", "NIEHS": "ES", "NEI": "EY", "NIDCD": "DC",
+             "NIDCR": "DE", "NIAMS": "AR", "NIBIB": "EB", "NHGRI": "HG", "NLM": "LM", "NIMHD": "MD", "NINR": "NR",
+             "NCCIH": "AT", "NCATS": "TR", "FIC": "TW"}
+    apps = apps[apps.administering_ic == _CODE.get(ONLY_IC, ONLY_IC)]
+    print(f"One-institute mode: {ONLY_IC}, {len(apps):,} applications")
 core = core.merge(apps[key].drop_duplicates(), on=key)
 ds = core[core.ds_label == "Y"].copy()
 ds["categories"] = ds.model_categories.fillna("").str.split("; ").map(lambda c: sorted(x for x in c if x in group_of))
@@ -164,7 +179,7 @@ nofo_cols = ["nofos"] if "nofos" in ds.columns else []
 projects = ds[key + ["ds_label", "ai_label", "ai_role", "groups", "categories", *nofo_cols]].merge(latest, on=key)
 projects["groups"] = projects.groups.str.join("; ")
 projects["categories"] = projects.categories.str.join("; ")
-projects.to_parquet(PROCESSED / "ds_projects.parquet", index=False)
+projects.to_parquet((OUT if ONLY_IC else PROCESSED) / "ds_projects.parquet", index=False)  # one-institute mode must not overwrite the full file
 print(f"{len(projects):,} records saved for the API")
 projects.head()
 _stop()

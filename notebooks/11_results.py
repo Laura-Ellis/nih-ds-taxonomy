@@ -34,6 +34,14 @@ from settings import FISCAL_YEARS, PRELIMINARY_FY, admin_period, source  # noqa:
 
 PROCESSED, OUT = ROOT / "data" / "processed", ROOT / "reports" / "results"
 OUT.mkdir(parents=True, exist_ok=True)
+
+# One-institute mode (internal): with the environment variable ONLY_IC set (for example ONLY_IC=NIAID), the same
+# tables are built for that administering institute only and written to reports/internal/ic_<name>/ instead.
+import os  # noqa: E402
+ONLY_IC = os.environ.get("ONLY_IC")
+if ONLY_IC:
+    OUT = ROOT / "reports" / "internal" / f"ic_{ONLY_IC.lower()}"
+    OUT.mkdir(parents=True, exist_ok=True)
 # Latest complete fiscal year: snapshot comparisons use it, so a preliminary year doesn't skew shares
 LATEST_FULL_FY = FISCAL_YEARS[-1] - 1 if PRELIMINARY_FY == FISCAL_YEARS[-1] else FISCAL_YEARS[-1]
 
@@ -57,6 +65,9 @@ key = ["core_project_number", "subproject_id"]
 non_nih = ~apps.administering_ic.isin(NIH_ICS)
 print(f"Dropping {non_nih.sum():,} non-NIH applications ({sorted(apps.loc[non_nih, 'administering_ic'].dropna().unique())})")
 apps = apps[~non_nih]
+if ONLY_IC:
+    apps = apps[apps.administering_ic.map(IC_NAMES) == ONLY_IC]
+    print(f"One-institute mode: {ONLY_IC}, {len(apps):,} applications")
 core = core.merge(apps[key].drop_duplicates(), on=key)  # keep NIH records only
 apps = apps.merge(core[key + ["ds_label", "ai_label", "ai_role", "model_categories"]], on=key, how="left")
 apps["record"] = apps.core_project_number + "|" + apps.subproject_id
@@ -114,25 +125,27 @@ trend[["fy", "projects", "ds_share", "ai_substantive", "ai_share", "ai_cost", "a
 
 # %% [markdown]
 # ## By institute (extramural, all fiscal years; snapshot columns use the latest complete fiscal year)
+# In one-institute mode the rows are activity codes instead (column still named `ic` so readers work unchanged).
 
 # %%
+UNIT = "activity" if ONLY_IC else "ic"
 ic = pd.DataFrame({
-    "ai_cost": ext[ext.ai_label == "Y"].groupby("ic").attributed_cost.sum(),
-    "extramural_cost": ext.groupby("ic").attributed_cost.sum(),
-    "ai_projects": ext[ext.ai_label == "Y"].groupby("ic").record.nunique(),
-    "ai_cost_latest": ext[(ext.ai_label == "Y") & (ext.fy == LATEST_FULL_FY)].groupby("ic").attributed_cost.sum(),
-    "extramural_cost_latest": ext[ext.fy == LATEST_FULL_FY].groupby("ic").attributed_cost.sum(),
+    "ai_cost": ext[ext.ai_label == "Y"].groupby(UNIT).attributed_cost.sum(),
+    "extramural_cost": ext.groupby(UNIT).attributed_cost.sum(),
+    "ai_projects": ext[ext.ai_label == "Y"].groupby(UNIT).record.nunique(),
+    "ai_cost_latest": ext[(ext.ai_label == "Y") & (ext.fy == LATEST_FULL_FY)].groupby(UNIT).attributed_cost.sum(),
+    "extramural_cost_latest": ext[ext.fy == LATEST_FULL_FY].groupby(UNIT).attributed_cost.sum(),
 }).fillna(0)
 # Develops AI: projects building new AI methods, the subset of AI most tied to NIH's AI goals
 dev = ext[(ext.ai_label == "Y") & (ext.ai_role == "develops_ai")]
-ic["develops_ai_cost"] = dev.groupby("ic").attributed_cost.sum()
-ic["develops_ai_projects"] = dev.groupby("ic").record.nunique()
+ic["develops_ai_cost"] = dev.groupby(UNIT).attributed_cost.sum()
+ic["develops_ai_projects"] = dev.groupby(UNIT).record.nunique()
 ic = ic.fillna(0)
 ic["develops_share_of_ai_cost"] = ic.develops_ai_cost / ic.ai_cost
 ic["ai_share"] = ic.ai_cost / ic.extramural_cost
 ic["ai_share_latest"] = ic.ai_cost_latest / ic.extramural_cost_latest
 ic["latest_full_fy"] = LATEST_FULL_FY
-ic = ic.sort_values("ai_cost", ascending=False).reset_index()
+ic = ic.sort_values("ai_cost", ascending=False).reset_index().rename(columns={UNIT: "ic"})
 ic.to_csv(OUT / "ai_by_institute.csv", index=False)
 ic.head(10).round(3)
 
@@ -238,5 +251,5 @@ for scope, (flag, treated_label, comp_label) in SCOPES.items():
     saved.append(m[["core_project_number", "treated", "stratum", "weight", "pubs"]].assign(scope=scope))
 outputs = pd.DataFrame(rows)
 outputs.to_csv(OUT / "outputs_matched.csv", index=False)
-pd.concat(saved).to_parquet(PROCESSED / "matched_projects.parquet", index=False)
+pd.concat(saved).to_parquet((OUT if ONLY_IC else PROCESSED) / "matched_projects.parquet", index=False)  # one-institute mode must not overwrite the full file
 outputs.round(3)
