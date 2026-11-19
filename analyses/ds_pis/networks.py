@@ -63,7 +63,7 @@ FIG.mkdir(parents=True, exist_ok=True)
 SUPPRESS, SEED, MAX_PIS, SPLIT_FY = 11, 26, 10, 2021
 GROUP_COLORS = {"AI developer PIs": pal.ROLE_COLORS["develops_ai"], "Infrastructure builder PIs": pal.PROJECTS,
                 "Other data science PIs": pal.DATA_SCIENCE, "Other PIs": pal.NEUTRAL}
-FOCUS = SETTINGS.get("focus_ic")  # highlight one IC if set in config/local.yaml; otherwise none
+FOCUS = None  # public page: no institute is highlighted (focus_ic in config/local.yaml is for internal previews only)
 pal.use_style()
 
 

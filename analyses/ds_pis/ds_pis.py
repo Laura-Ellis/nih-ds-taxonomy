@@ -46,7 +46,7 @@ PROCESSED, INTERIM = ROOT / "data" / "processed", ROOT / "data" / "interim"
 OUT, FIG = ROOT / "reports" / "results", ROOT / "reports" / "figures" / "ds_pis"
 FIG.mkdir(parents=True, exist_ok=True)
 SUPPRESS = 11
-FOCUS_IC = SETTINGS.get("focus_ic")  # highlight one IC if set (Laura's local config); otherwise none
+FOCUS_IC = None  # public page: no institute is highlighted (focus_ic in config/local.yaml is for internal previews only)
 pal.use_style()
 
 
