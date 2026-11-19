@@ -64,4 +64,5 @@ PRIVATE_REPO.md
 # Local run log (machine paths)
 notebooks/run_log.txt
 notebooks/I02_niaid_kpis.py
+notebooks/I03_niaid_fair_compare.py
 notebooks/13_ds_groups.py

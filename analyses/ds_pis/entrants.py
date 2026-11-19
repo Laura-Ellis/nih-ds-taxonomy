@@ -240,6 +240,9 @@ order = eg.group.value_counts().index
 mat = mat.reindex(columns=order).fillna(0)
 all_row = eg.group.value_counts().reindex(order) / eg.pi.nunique()
 mat.to_csv(OUT / "ds_entrants_area_to_group.csv")
+all_row.rename("share_of_moved_in_pis").to_csv(OUT / "ds_entrants_group_at_entry.csv")
+print("Data science groups at entry, all moved-in PIs:")
+print(all_row.round(3).to_string())
 
 fig, ax = plt.subplots(figsize=(10.5, 5.8))
 fig.subplots_adjust(left=0.24, right=0.97, top=0.72, bottom=0.17)

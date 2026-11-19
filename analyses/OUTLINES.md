@@ -19,19 +19,19 @@ Six pieces of work, each with a site page (md), a script (py), and a deck. Each 
 
 **Question:** Who does data science at NIH, how do they get there, and who do they work with?
 
-**Bottom line so far:** About 1 in 12 active NIH PIs does mostly data science (6,530 PIs, 5.3% of all PIs). People with data science career awards go on to data science research about twice as often as other awardees. AI developers publish fewer papers than similar data science PIs but more of them in software and data journals.
+**Bottom line:** About 1 in 12 active NIH PIs does mostly data science, up from 1 in 16 in FY2016 and flat since FY2022. Data science K awardees reach data science research 3.1 times as fast as other K awardees and reach an R01 at the same pace. Data science PIs team up across institutes, and infrastructure builders connect the most research communities; AI developers publish fewer papers but more in software and data journals.
 
 ### Sections
 
 1. **Who counts** (drafted): PI groups and definitions (data science PI, AI developer, infrastructure builder, contributor); cutoff check.
 2. **Growth and where** (drafted): share of active PIs by year; share by institute; cross-institute PIs and common IC pairs.
 3. **Builders and credit** (drafted): AI mix; papers vs. matched data science PIs; software and data journal share; Strategic Plan and NOT-OD-26-087 context; outputs-beyond-papers pilot (`pilot_outputs_beyond_papers.md`).
-4. **How they get there** (training drafted; models planned):
+4. **How they get there** (done; entrants in `entrants.md`):
     - Training pipeline: F, K, R00 trainees; T, R25 program directors, plus survival models and R01 benchmarks (`training.py`, section 4 of `pi_analysis.md`). Networks in `networks.py`, section 5.
     - Time to data science research: Kaplan-Meier curves, Cox regression, random survival forest.
     - Effect check: propensity score matching of data science vs. other K awardees on institute, field, and start year.
     - Benchmarks (undecided): R01-equivalent outcome with 5- and 7-year windows against published K-to-R01 rates.
-5. **Who they work with** (planned):
+5. **Who they work with** (done, `networks.py`):
     - PI network from shared projects; communities (Louvain or Leiden clustering); whether builders sit between communities (betweenness centrality).
     - Link prediction for new collaborations: common-neighbors baseline vs. logistic regression on network features vs. graph embeddings (node2vec).
 
@@ -43,15 +43,16 @@ RePORTER applications and PI IDs; taxonomy labels and categories; ExPORTER publi
 
 Cutoff grid · share by year · share by institute · AI mix · papers by portfolio size · builders vs. matched · trainee outcomes · survival curves · network map (aggregate, by institute or group).
 
-### Deck (7 slides, for approval)
+### Deck (8 slides, approved November 18, 2026)
 
-1. Title: "About 1 in 12 NIH PIs now does mostly data science"
-2. Who counts: definitions table and cutoff grid
-3. Growth: 6.3% to 8.4%, flat since FY2022
-4. Where: institutes and cross-institute pairs
-5. Builders: AI mix and papers vs. matched PIs, software and data journals, credit context
-6. How they get there: training pipeline and time to data science research
-7. So what and next: credit for software and data, the flat share, the outputs pilot, networks
+1. About 1 in 12 NIH PIs now does mostly data science (cover)
+2. A data science PI leads mostly data science projects: definitions, PI groups, cutoff grid
+3. The share grew from 6.3% to 8.4%, then leveled off after FY2022: share by year, FY2026 preliminary
+4. Every institute has data science PIs, led by NLM and NHGRI: share by institute
+5. AI developers publish fewer papers but build tools others use: AI mix, papers vs. matched PIs, software and data journals, Strategic Plan and NOT-OD-26-087
+6. Data science K awardees reach data science research 3 times as fast: Kaplan-Meier (46% vs. 18%), same R01 pace, Conte and Omary benchmark; 1 in 5 new PIs moved in from data-heavy fields
+7. Data science PIs team up across institutes, and infrastructure builders connect the most groups: institute network, 46% cross-institute ties, co-PI choice 4 to 6 times chance, communities reached; link prediction in notes
+8. Credit, training and connectors are where NIH can act: credit for software and data, the flat share, outputs pilot; next steps
 
 ---
 

@@ -21,9 +21,9 @@ Part of [Who does data science at NIH, how they get there, and who they work wit
 
 ## Most new data science PIs started there
 
-Of 3,519 new data science PIs from FY2018 to FY2026, 742 (21%) moved in from other research. The share was steady at about 1 in 5 each year from FY2018 to FY2022. For those who moved in, the median gap between their first record and their first data science record was three years.
+Of 3,490 new data science PIs from FY2018 to FY2026, 706 (20%) moved in from other research. The share was steady at about 1 in 5 each year from FY2018 to FY2022. For those who moved in, the median gap between their first record and their first data science record was three years.
 
-Counts fall after FY2022 because a PI needs at least two records to count as a data science PI, and recent entrants have had little time to get a second one. Read the recent years as incomplete, not as a decline.
+Counts fall after FY2022 because a PI needs at least two data science projects to count as a data science PI, and recent entrants have had little time to get a second one. Read the recent years as incomplete, not as a decline.
 
 ![New data science PIs by entry year](../../reports/figures/ds_entrants/01_entrants_by_year.png)
 
@@ -37,13 +37,13 @@ Their earlier awards were mostly research grants: 60% had an earlier R award, 23
 
 ## How they entered data science
 
-Whatever their earlier area, 80% of moved-in PIs' first data science records include statistics and analytics, 44% artificial intelligence, 42% data infrastructure, and 38% each computational modeling and software and tools. The earlier area shapes the rest. PIs from bioengineering entered through AI (58%), computational modeling (49%), and software (47%) more than others. PIs from genetics and prevention research entered through data infrastructure (50% and 48%), and PIs from cancer research through software (41%) and data infrastructure (47%).
+Whatever their earlier area, 80% of moved-in PIs' first data science records include statistics and analytics, 43% artificial intelligence, 41% data infrastructure, 38% computational modeling, and 37% software and tools. The earlier area shapes the rest. PIs from bioengineering entered through AI (58%), computational modeling (49%), and software (47%) more than others. PIs from genetics and prevention research entered through data infrastructure (50% and 48%), and PIs from cancer research through software (41%) and data infrastructure (47%).
 
 ![Data science groups at entry, by earlier research area](../../reports/figures/ds_entrants/03_area_to_group.png)
 
 ## Same institute or a new one
 
-About half (54%) of moved-in PIs did their first data science project at the same institute as most of their earlier work. NCI, NIMH, NEI, NIDA, and NIEHS kept the most (68% to 70%). PIs whose earlier work was at NIDDK (32%) or NIBIB (38%) were the most likely to enter data science at a different institute. For an institute, that means some of the data science capacity it builds ends up working on other institutes' problems.
+About half (55%) of moved-in PIs did their first data science project at the same institute as most of their earlier work. NCI, NIMH, NEI, NIDA, and NIEHS kept the most (68% to 70%). PIs whose earlier work was at NIDDK (32%) or NIBIB (38%) were the most likely to enter data science at a different institute. For an institute, that means some of the data science capacity it builds ends up working on other institutes' problems.
 
 ## What this means
 
@@ -55,7 +55,7 @@ Most growth in data science PIs comes from people who start their NIH careers do
 - Code: `analyses/ds_pis/entrants.py`. Outputs in `reports/results/ds_entrants_*.csv` and `reports/figures/ds_entrants/`.
 - Privacy: results are aggregate only; groups smaller than 11 PIs are suppressed.
 - Limits: - Work before FY2016 isn't visible, so "started in data science" includes some PIs who had earlier NIH projects that ended before FY2016.
-    - Recent entry years are undercounted because a data science PI needs at least two records.
+    - Recent entry years are undercounted because a data science PI needs at least two data science projects.
     - RCDC categories are missing on about 18% of records, mostly subprojects and some contracts.
     - Moved-in PIs' earlier work covers a few years; other PIs' records cover up to 11. Comparing shares of records, not shares of PIs, keeps the comparison fair.
     - Taxonomy groups come from titles and abstracts, not from what a project actually built or used.

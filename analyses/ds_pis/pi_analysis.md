@@ -91,7 +91,7 @@ People who run data science training programs also lead data science research: 4
 
 ### Moving in from other research
 
-Most new data science PIs start there: of 3,519 who first did data science in FY2018 or later, 21% moved in from other NIH research. Those who moved in came mostly from clinical research, and from imaging and genome research about twice as often as other PIs. See [New data science PIs: where they came from](entrants.md).
+Most new data science PIs start there: of 3,490 who first did data science in FY2018 or later, 20% moved in from other NIH research. Those who moved in came mostly from clinical research, and from imaging and genome research about twice as often as other PIs. See [New data science PIs: where they came from](entrants.md).
 
 ### Time to data science research and to an R01
 
@@ -137,7 +137,7 @@ For the typical institute, about half of its data science PIs' ties stay inside 
 
 ### Builders as bridges
 
-Data science PIs pick other data science PIs as co-PIs far more often than chance. If partners were random, about 8% of co-PIs would be data science PIs. Instead it is 34% for other data science PIs, 45% for infrastructure builders, and 50% for AI developers.
+Data science PIs pick other data science PIs as co-PIs far more often than chance. If partners were random, about 8% of co-PIs would be data science PIs. Instead it is 34% for other data science PIs, 44% for infrastructure builders, and 50% for AI developers, about 4 to 6 times what chance would give.
 
 To see who connects separate groups, I split the network into communities: groups of PIs who share awards with each other much more than with everyone else (Louvain method). Infrastructure builders are the most likely to have co-PIs in three or more communities (12%, vs. 10% for other data science PIs and 7% for other PIs), and they sit on more of the shortest paths between other PIs (betweenness). Part of this is that builders have more co-PIs (a median of 3 vs. 2 for other PIs). Among PIs with nine or more co-PIs, builders still reach the most communities (3.1 on average, vs. 2.9 for other data science PIs and 2.7 for other PIs). AI developers are the least connected: 5% reach three or more communities, and 37% have no co-PI at all.
 
@@ -153,8 +153,8 @@ I compared four ways to predict which pairs of PIs who had never shared an award
 |---|---|---:|---:|
 | Adamic-Adar score (baseline) | Shared co-PIs, counting shared co-PIs with few ties more | 0.54 | 0.54 |
 | Graph embedding + logistic regression | Each PI's position in the network compressed to 32 numbers | 0.57 | 0.61 |
-| Gradient boosting | Network measures plus same institute, same community, and data science status | 0.81 | 0.83 |
-| Logistic regression | Same features as gradient boosting | 0.81 | 0.83 |
+| Gradient boosting | Network measures plus same institute, same community, and data science status | 0.82 | 0.83 |
+| Logistic regression | Same features as gradient boosting | 0.82 | 0.84 |
 
 AUC = area under the ROC curve (0.5 = chance, 1.0 = perfect). Shared co-PIs barely predict new ties, because most new partners had no co-PIs in common. Being at the same institute was the strongest single predictor, followed by how many co-PIs each PI already had. The simple logistic regression did as well as gradient boosting. Non-ties are random pairs, so the scores are higher than they would be in real use; compare the models with each other.
 
