@@ -43,46 +43,20 @@ RePORTER applications and PI IDs; taxonomy labels and categories; ExPORTER publi
 
 Cutoff grid · share by year · share by institute · AI mix · papers by portfolio size · builders vs. matched · trainee outcomes · survival curves · network map (aggregate, by institute or group).
 
-### Deck (8 slides, approved November 18, 2026)
+### Deck (8 slides, built November 19, 2026: "What Data Science at NIH Works On", files in `deck/topics/`)
 
-1. About 1 in 12 NIH PIs now does mostly data science (cover)
-2. A data science PI leads mostly data science projects: definitions, PI groups, cutoff grid
-3. The share grew from 6.3% to 8.4%, then leveled off after FY2022: share by year, FY2026 preliminary
-4. Every institute has data science PIs, led by NLM and NHGRI: share by institute
-5. AI developers publish fewer papers but build tools others use: AI mix, papers vs. matched PIs, software and data journals, Strategic Plan and NOT-OD-26-087
-6. Data science K awardees reach data science research 3 times as fast: Kaplan-Meier (46% vs. 18%), same R01 pace, Conte and Omary benchmark; 1 in 5 new PIs moved in from data-heavy fields
-7. Data science PIs team up across institutes, and infrastructure builders connect the most groups: institute network, 46% cross-institute ties, co-PI choice 4 to 6 times chance, communities reached; link prediction in notes
-8. Credit, training and connectors are where NIH can act: credit for software and data, the flat share, outputs pilot; next steps
+1. Data science at NIH follows NIH's priorities, with one method spreading on its own (cover)
+2. Topics sort data science by disease; the taxonomy sorts it by method
+3. Dementia, opioids, and cancer immunotherapy rise with their institutes, while single-cell omics rises everywhere
+4. Musculoskeletal, respiratory, and heart disease get the least data science for their burden, and NIH funds them lightly overall
+5. Funding opportunities that ask for data science fund more of it
+6. Plain word matching beats newer language models at finding a project's funding opportunity
+7. Research area predicts trials and patents more than data science method does
+8. Where NIH could draw data science in next (links slides 4 and 5)
 
----
+Code: `analyses/topics/` (topics.py, topic_themes.py, gaps.py, nofo_match.py, impact_models.py).
 
-## B. Topics, opportunities, and areas
-
-**Question:** What is data science at NIH working on, where is it growing, where is it thin relative to need, and what draws it in?
-
-### Sections
-
-1. **Emerging topics:** compare three ways to find topics on data science abstracts: LDA (word-count topics), BERTopic (embeddings plus clustering), and the taxonomy's own categories. Track topic shares by fiscal year; flag fast risers (growth rate and a simple trend test).
-2. **Where data science is thin relative to need:** map projects to RCDC categories (already in the data); add disease burden (for example Global Burden of Disease estimates for U.S. disability-adjusted life years); compare data science funding share with burden share; rank gaps. Embedding similarity between abstracts and RCDC definitions as a check on RCDC coverage.
-3. **What draws data science in:** funding opportunities (9,135 NOFOs); text similarity between NOFO text and data science abstracts, comparing TF-IDF, sentence embeddings, and a cross-encoder; which NOFOs fund the most data science; topics with no matching NOFO.
-4. **What goes with high-impact outputs:** predict citation rate, patents, and trials from labels, categories, AI role, institute, activity code, cost, and team size; compare logistic regression, random forest, and gradient boosting; explain with SHAP values (each feature's contribution); then a causal check (matching or doubly robust estimation) for the one or two strongest features.
-
-### Data
-
-Data science abstracts (40,826 records); RCDC categories; NOFO numbers and NOFO text (NIH Guide); outputs; outside disease burden data.
-
-### Charts
-
-Topic trend lines (small multiples) · fastest-rising topics · data science share vs. burden share (scatter with gap labels) · NOFOs by data science projects · SHAP summary · model comparison table.
-
-### Deck (6 slides, for approval)
-
-1. Title: finding to come from the topic results
-2. What data science works on: top topics and how the three methods agree
-3. What's rising: fastest-growing topics since FY2016
-4. Where it's thin: data science share vs. disease burden
-5. What draws it in: NOFOs and gaps; what goes with high-impact outputs
-6. So what and next
+Inputs from Laura's machine: GBD export of U.S. DALYs (`data/raw/gbd/`) and NOFO text (`src/nofo_pull.py`). Everything runs locally; no paid API calls.
 
 ---
 

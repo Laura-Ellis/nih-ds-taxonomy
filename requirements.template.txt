@@ -20,6 +20,10 @@ plotly
 # ML / MODELING
 scikit-learn
 networkx            # co-PI network (analyses/ds_pis/networks.py)
+scipy
+sentence-transformers  # topics (analyses/topics/topics.py); local, free
+bertopic               # topics; pulls in umap-learn and hdbscan
+shap                   # impact drivers (analyses/topics/impact_models.py); optional
 # scikit-survival   # optional, random survival forest in analyses/ds_pis/training.py; on Windows:
 #                   # pip install --no-deps scikit-survival; pip install osqp numexpr
 
