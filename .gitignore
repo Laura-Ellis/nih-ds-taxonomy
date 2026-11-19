@@ -34,6 +34,8 @@ notebooks/00_build_exporter_parquet.py
 notebooks/00b_pull_reporter_api.py
 config/exporter_update_dates.csv
 # Internal analyses, not for publishing
+# Internal notebooks (NIAID and peers): private repo only
+notebooks/I[0-9]*.py
 notebooks/I01_niaid_vs_nih.py
 reports/internal/
 _to_delete/
