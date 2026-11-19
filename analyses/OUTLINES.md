@@ -7,7 +7,7 @@ Six pieces of work, each with a site page (md), a script (py), and a deck. Each 
 | | Analysis | Folder | Status |
 |---|---|---|---|
 | A | PI analysis: who does data science, how they get there, who they work with | `analyses/ds_pis/` | Parts 1 to 5 drafted; one page (`pi_analysis.md`) |
-| B | Topics, opportunities, and areas | `analyses/topics/` | Planned |
+| B | Topics, opportunities, and areas | `analyses/topics/` | Done ([page](topics/topics_analysis.md)) |
 | C | Methods deck: how the taxonomy and dataset were built | `analyses/methods/` | Planned |
 | D | Global research: NIH data science at foreign institutions | `analyses/global/` | Planned; first numbers in hand |
 | E | Data science programs (DS-I Africa first) | `analyses/programs/` | Planned |

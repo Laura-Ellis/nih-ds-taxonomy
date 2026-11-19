@@ -84,7 +84,7 @@ Combines the data science PI analysis and the training pipeline.
 - Time to data science research (ML roadmap 7): survival analysis comparing models: Kaplan-Meier curves, Cox regression, and a random survival forest; plus propensity score matching to compare data science and other K awardees with similar institute, field, and start year.
 - Collaboration networks (ML roadmap 6): PI networks from shared projects; community detection; centrality of builders; link prediction comparing a heuristic baseline (common neighbors), logistic regression on network features, and a graph embedding model.
 
-### B. Topic, opportunity, and area analysis (`analyses/topics/`, planned)
+### B. Topic, opportunity, and area analysis (`analyses/topics/`, done: [topics_analysis.md](analyses/topics/topics_analysis.md))
 
 - Emerging topics (ML roadmap 2): compare topic models: LDA (word-count topics), BERTopic (embeddings plus clustering), and the taxonomy's own categories; track topics by fiscal year and flag fast risers.
 - Where data science is thin relative to need (ML roadmap 3): embedding similarity between projects and RCDC categories, compared with disease burden data; rank gaps.
