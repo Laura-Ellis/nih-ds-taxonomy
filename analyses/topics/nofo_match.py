@@ -139,8 +139,8 @@ print(by_kind.round(3).to_string(index=False))
 print(top.head(10).to_string(index=False))
 
 # %%
-fig, ax = plt.subplots(figsize=(9, 4.8))
-fig.subplots_adjust(left=0.27, top=0.82, bottom=0.26)
+fig, ax = plt.subplots(figsize=(9, 5.2))
+fig.subplots_adjust(left=0.27, top=0.78, bottom=0.26)
 kinds = ["Targeted (RFA)", "Targeted (PAR)", "Parent and other PA"]
 yy = np.arange(len(kinds))
 for off, ask, col, lab_ in [(0.2, True, pal.PROJECTS, "Asks for data science"), (-0.2, False, pal.NEUTRAL, "Does not")]:
@@ -151,7 +151,7 @@ for off, ask, col, lab_ in [(0.2, True, pal.PROJECTS, "Asks for data science"), 
 ax.set_yticks(yy, kinds)
 ax.invert_yaxis()
 ax.set_xlabel("Median share of a NOFO's funded records that are data science (%)")
-ax.legend(frameon=False, loc="lower right")
+ax.legend(frameon=False, loc="lower left", bbox_to_anchor=(0, 1.0), ncol=2, reverse=True)
 title(fig, "Funding opportunities that ask for data science fund more of it")
 note(fig, f"NOFOs with at least {MIN_RECORDS} funded records. Asks for data science = taxonomy keyword rules find a data science\n"
           "category in the NOFO's Section I.\n" + SOURCE)

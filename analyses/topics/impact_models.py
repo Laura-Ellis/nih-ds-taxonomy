@@ -269,7 +269,7 @@ for o in OUTCOMES.values():
 # %%
 fig, axes = plt.subplots(1, len(OUTCOMES), figsize=(5.3 * len(OUTCOMES), 6.2))
 axes = np.atleast_1d(axes)
-fig.subplots_adjust(left=0.13, wspace=1.05, top=0.84, bottom=0.2)
+fig.subplots_adjust(left=0.13, wspace=1.05, top=0.78, bottom=0.2)
 for ax, o in zip(axes, OUTCOMES.values()):
     t = imp[imp.outcome == o].nlargest(10, "importance")[::-1]
     col = [pal.PROJECTS if k != "Structure" else pal.NEUTRAL for k in t.kind]
@@ -281,8 +281,15 @@ for ax, o in zip(axes, OUTCOMES.values()):
     ax.set_title(o, loc="left", fontsize=pal.SIZES["label"], color=pal.HEADING)
     ax.set_xlabel("Mean |SHAP| (log-odds)" if HAVE_SHAP else "Permutation importance (AUC drop)")
 title(fig, "What goes with highly cited papers, patents, and trials")
-note(fig, "Gradient boosting on data science projects that started FY2016–FY2020. Dark = taxonomy or theme trait; light = project\n"
-          "structure (institute, type, size, cost). ↑ / ↓ = higher values push the prediction up / down.\n" + SOURCE)
+from matplotlib.lines import Line2D  # noqa: E402
+from matplotlib.patches import Patch  # noqa: E402
+fig.legend(handles=[Patch(color=pal.PROJECTS, label="Taxonomy or research theme"),
+                    Patch(color=pal.NEUTRAL, label="Project structure (institute, type, size, cost)"),
+                    Line2D([], [], ls="", marker="$↑$", ms=10, color=pal.INK, label="Higher value raises the chance"),
+                    Line2D([], [], ls="", marker="$↓$", ms=10, color=pal.INK, label="Higher value lowers the chance")],
+           loc="upper left", bbox_to_anchor=(0.02, 0.935), ncol=4, frameon=False, fontsize=pal.SIZES["axis"], handlelength=1.2)
+note(fig, "Gradient boosting on data science projects that started FY2016–FY2020. Bar length = mean absolute SHAP value: how much\n"
+          "the trait moves the predicted log-odds of the outcome, on average.\n" + SOURCE)
 save(fig, "14_impact_drivers")
 
 fig, ax = plt.subplots(figsize=(8, 4.2))
