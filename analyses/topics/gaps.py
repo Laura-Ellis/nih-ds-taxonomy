@@ -168,15 +168,36 @@ print(us[us.gbd_level == 3].sort_values("ds_lag")[cols].head(12).round(3).to_str
 
 # %%
 def scatter(d, lvl, name, label_n=None):
+    """Numbered dots with a key to the right, so long cause names never overlap."""
     s = d[(d.gbd_level == lvl) & d.burden_share.gt(0) & d.ds_funding_share.gt(0)]
-    fig, ax = plt.subplots(figsize=(10, 7.5))
-    fig.subplots_adjust(left=0.12, top=0.88, bottom=0.18)
-    ax.scatter(s.burden_share * 100, s.ds_funding_share * 100, s=50,
-               color=[pal.NEUTRAL if u else pal.PROJECTS for u in s.uncertain_match], edgecolor=pal.MUTED, lw=0.5, zorder=3)
+    lab = s if label_n is None else pd.concat([s.nsmallest(label_n, "gap_ratio"), s.nlargest(4, "gap_ratio")])
+    lab = lab.sort_values("gap_ratio").reset_index(drop=True)
+    fig = plt.figure(figsize=(13, 7.8))
+    ax = fig.add_axes([0.08, 0.2, 0.52, 0.66])
+    col = lambda u: pal.NEUTRAL if u else pal.PROJECTS  # noqa: E731
+    rest = s[~s.gbd_cause.isin(lab.gbd_cause)]
+    ax.scatter(rest.burden_share * 100, rest.ds_funding_share * 100, s=40, color=[col(u) for u in rest.uncertain_match],
+               edgecolor=pal.MUTED, lw=0.5, zorder=3)
+    placed = []
+    for i, r in lab.iterrows():
+        x0, y0 = r.burden_share * 100, r.ds_funding_share * 100
+        x, y = x0, y0
+        for _ in range(6):   # nudge a numbered dot off any it would cover; a thin line shows where it really sits
+            near = [(px, py) for px, py in placed if abs(np.log10(x / px)) < 0.07 and abs(np.log10(y / py)) < 0.07]
+            if not near:
+                break
+            y *= 10 ** -0.09 if y <= near[0][1] else 10 ** 0.09
+        placed.append((x, y))
+        if (x, y) != (x0, y0):
+            ax.plot([x0, x], [y0, y], color=pal.MUTED, lw=0.7, zorder=3)
+            ax.scatter([x0], [y0], s=12, color=pal.MUTED, zorder=3)
+        ax.scatter([x], [y], s=210, color=col(r.uncertain_match), edgecolor=pal.MUTED, lw=0.5, zorder=4)
+        ax.text(x, y, str(i + 1), ha="center", va="center", fontsize=8,
+                fontweight="bold", color="white" if not r.uncertain_match else pal.INK, zorder=5)
     lim = [min(s.burden_share.min(), s.ds_funding_share.min()) * 100 * 0.6, max(s.burden_share.max(), s.ds_funding_share.max()) * 100 * 1.6]
     ax.plot(lim, lim, color=pal.MUTED, lw=1, ls=":")
-    ax.text(lim[1] * 0.12, lim[1] * 0.135, "funding share = burden share", color=pal.MUTED, fontsize=pal.SIZES["axis"],
-            rotation=38, rotation_mode="anchor")
+    ax.text(lim[0] * 3, lim[0] * 1.9, "funding share = burden share", color=pal.MUTED, fontsize=pal.SIZES["axis"],
+            rotation=45, rotation_mode="anchor", transform_rotates_text=True)
     ax.set_xscale("log")
     ax.set_yscale("log")
     ax.set_xlim(lim)
@@ -185,21 +206,23 @@ def scatter(d, lvl, name, label_n=None):
     for axis in (ax.xaxis, ax.yaxis):
         axis.set_major_formatter(fmt)
         axis.set_minor_formatter(plt.NullFormatter())
-    lab = s if label_n is None else pd.concat([s.nsmallest(label_n, "gap_ratio"), s.nlargest(4, "gap_ratio")])
-    placed = []
-    for r in lab.sort_values("ds_funding_share", ascending=False).itertuples():
-        x, y = r.burden_share * 100, r.ds_funding_share * 100
-        dy = 3
-        for px, py, pdy in placed:   # push a label down if it would sit on a nearby one
-            if abs(np.log10(x / px)) < 0.35 and abs(np.log10(y / py)) < 0.05 and pdy == dy:
-                dy -= 12
-        placed.append((x, y, dy))
-        ax.annotate(r.gbd_cause, (x, y), xytext=(6, dy), textcoords="offset points", fontsize=9, color=pal.INK)
     ax.set_xlabel("Share of U.S. disease burden (% of DALYs, log scale)")
     ax.set_ylabel("Share of NIH data science funding (%, log scale)")
+    # key: number, name, gap ratio
+    kx, ky, step = 0.63, 0.86, min(0.66 / max(len(lab), 1), 0.045)
+    fig.text(kx, ky + 0.02, "Gap ratio = funding share ÷ burden share", fontsize=pal.SIZES["axis"], color=pal.MUTED, fontweight="bold")
+    for i, r in lab.iterrows():
+        y = ky - (i + 0.6) * step
+        fig.text(kx, y, f"{i + 1:>2}", fontsize=pal.SIZES["axis"], fontweight="bold", color=pal.INK, ha="right")
+        fig.text(kx + 0.012, y, f"{r.gbd_cause}  ({r.gap_ratio:.2f})", fontsize=pal.SIZES["axis"], color=pal.INK)
+    from matplotlib.lines import Line2D
+    ax.legend(handles=[Line2D([], [], ls="", marker="o", ms=9, color=pal.PROJECTS, mec=pal.MUTED, label="Confident RCDC match"),
+                       Line2D([], [], ls="", marker="o", ms=9, color=pal.NEUTRAL, mec=pal.MUTED, label="Uncertain RCDC match")],
+              loc="lower left", bbox_to_anchor=(0, 1.0), ncol=2, frameon=False, fontsize=pal.SIZES["axis"])
     title(fig, "Data science funding vs. disease burden" + (" (GBD level 2)" if lvl == 2 else " (GBD level 3)"))
+    shown = "" if label_n is None else f" Numbered: the {label_n} lowest and 4 highest gap ratios."
     note(fig, f"FY{FY_FIRST}–FY{FY_LAST_FULL} funding; U.S. DALYs averaged over {years[0]}–{years[-1]}. Below the line = less data science funding\n"
-              "than burden share. Light dots = uncertain RCDC match. Areas overlap, so shares don't sum to 100%.\n" + SOURCE)
+              f"than burden share. Areas overlap, so shares don't sum to 100%.{shown}\n" + SOURCE)
     save(fig, name)
 
 
@@ -212,8 +235,8 @@ fig, ax = plt.subplots(figsize=(10, 8))
 fig.subplots_adjust(left=0.38, top=0.9, bottom=0.14)
 ax.barh(show.gbd_cause[::-1], show.ds_lag[::-1], color=[pal.PROJECTS if v < 0 else pal.NEUTRAL for v in show.ds_lag[::-1]])
 for i, (v, x) in enumerate(zip(show.ds_lag[::-1], show.ds_intensity[::-1])):
-    ax.annotate(f"{x:.0%} data science", (v, i), xytext=(4 if v >= 0 else -4, 0), textcoords="offset points",
-                ha="left" if v >= 0 else "right", va="center", fontsize=8.5, color=pal.MUTED)
+    ax.annotate(f"{x:.0%} data science", (max(v, 0), i), xytext=(4, 0), textcoords="offset points",
+                ha="left", va="center", fontsize=8.5, color=pal.MUTED)
 ax.axvline(0, color=pal.MUTED, lw=1)
 ax.set_xlabel("Data science lag (log10 of data science vs. all-NIH funding relative to burden)")
 title(fig, "Where data science lags NIH's own investment in an area")
