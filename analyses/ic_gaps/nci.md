@@ -1,0 +1,29 @@
+# Where is data science thin at NCI?
+
+**Laura Ellis** · [LinkedIn](https://www.linkedin.com/in/laura-ellis-profile/) · FY2016 to FY2025 · [All 10 institutes](README.md) · [Institute profile](../institutes/nci.md)
+
+Data science projects got 26% of the National Cancer Institute's funding from FY2016 to FY2025. I looked for the places where data science is thin: compared with the rest of NIH, with NCI's own research areas, and with the burden of the diseases it funds.
+
+![Where data science is thin in NCI's largest research areas](../../reports/figures/ic_gaps/nci.png)
+
+## What I found
+
+- **Data science trails both NCI's own average and the rest of NIH in 16 of its research areas, including one of its five largest.** Which ones, and by how much, is in the report.
+- **Some of the highest-burden diseases NCI funds get less data science there than elsewhere at NIH.** The report names them and sets each against U.S. disability-adjusted life years.
+- **New NOFOs that ask for data science come before more data science projects, but not only because of the NOFO.** The report shows how much, and what else was going on.
+
+## Three ways to see a gap
+
+1. **Against the rest of NIH.** Does the institute use some data science methods much less often?
+2. **Against its own mission.** In which research areas is data science thinner than the institute's own average?
+3. **Against disease burden.** Which high-burden diseases get less data science here than at the rest of NIH?
+
+## The full report
+
+The full NCI report (13 slides) adds the methods gap, the disease-burden chart, how data science projects came in (targeted vs. broad NOFOs), whether new NOFOs draw projects in (an event study), and which levers go with more highly cited papers, patents, and clinical trials. It's internal; [message me on LinkedIn](https://www.linkedin.com/in/laura-ellis-profile/) if you'd like to see it.
+
+## How the methods work, in plain terms
+
+- **Gaps:** no model. The share of funding that goes to data science in an area or disease, compared with a benchmark.
+- **Disease burden:** each disease is matched to NIH's own categories, then compared with how much healthy life it costs Americans each year (GBD 2023).
+- **Data science labels:** keyword rules, then two large language models, decide whether data science is central to a project ([NIH Data Science Taxonomy](../../METHODOLOGY.md)).

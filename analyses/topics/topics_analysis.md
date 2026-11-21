@@ -4,7 +4,7 @@
 
 Most growth in NIH data science follows institute priorities: dementia at NIA, opioids at NIDA, cancer at NCI. The exception is single-cell and spatial omics, a method growing across many institutes at once.
 
-Compared with U.S. disease burden, data science is thinnest in musculoskeletal, chronic respiratory, and heart disease. NIH's overall funding is light in the same areas, and few targeted funding calls match their projects. Calls that ask for data science fund more of it. A project's size and type predict its patents and trials far better than any data science trait.
+Compared with U.S. disease burden, data science is thinnest in musculoskeletal, chronic respiratory, and heart disease. NIH's overall funding is light in the same areas, and few targeted NOFOs match their projects. NOFOs that ask for data science fund more of it. A project's size and type predict its patents and trials far better than any data science trait.
 
 Terms are defined in the [glossary](#glossary) at the end.
 
@@ -14,7 +14,7 @@ Terms are defined in the [glossary](#glossary) at the end.
 2. [What's rising](#2-whats-rising)
 3. [Where it's thin relative to need](#3-where-its-thin-relative-to-need)
 4. [What draws it in](#4-what-draws-it-in)
-5. [Matching projects to funding calls](#5-matching-projects-to-funding-calls)
+5. [Matching projects to NOFOs](#5-matching-projects-to-nofos)
 6. [What goes with patents, trials, and highly cited papers](#6-what-goes-with-patents-trials-and-highly-cited-papers)
 7. [What this means](#7-what-this-means)
 8. [Method, data, and limits](#8-method-data-and-limits)
@@ -69,9 +69,9 @@ Data science mostly follows NIH's own funding. Musculoskeletal disorders get 1.5
 
 ## 4. What draws it in
 
-NIH funds projects through notices of funding opportunity (NOFOs). Some are targeted calls for an area (RFAs and PARs); others are broad, such as the parent R01. I collected the text of the 2,913 NOFOs behind 95% of data science projects and flagged those that ask for data science.
+NIH funds projects through notices of funding opportunity (NOFOs). Some are targeted NOFOs (RFAs and PARs) that ask for an area; others are broad, such as the parent R01. I collected the text of the 2,913 NOFOs behind 95% of data science projects and flagged those that ask for data science.
 
-Calls that ask for data science fund more of it. The typical share of data science projects:
+NOFOs that ask for data science fund more of it. The typical share of data science projects:
 
 - RFAs: 23% when they ask, 19% when they don't.
 - PARs: 22% vs. 16%.
@@ -79,17 +79,17 @@ Calls that ask for data science fund more of it. The typical share of data scien
 
 Still, most data science comes in through broad parent R01 announcements that never mention it. One of them (PA-20-185) funded 3,349 data science projects.
 
-Some topics have no matching targeted call. Few of their projects come through RFAs or PARs: heart disease (27%), hearing (33%), bone and joint (30%), retina and glaucoma (27%), stroke (30%), and anxiety and depression (27%). Heart and musculoskeletal disease are also thin relative to burden, so the same areas lack both funding and calls that ask for data science.
+Some topics have no matching targeted NOFO. Few of their projects come through RFAs or PARs: heart disease (27%), hearing (33%), bone and joint (30%), retina and glaucoma (27%), stroke (30%), and anxiety and depression (27%). Heart and musculoskeletal disease are also thin relative to burden, so the same areas lack both funding and NOFOs that ask for data science.
 
-![Data science share of funded projects, calls that ask vs. don't](../../reports/figures/topics/08_nofo_ds_share.png)
+![Data science share of funded projects, NOFOs that ask vs. don't](../../reports/figures/topics/08_nofo_ds_share.png)
 
-## 5. Matching projects to funding calls
+## 5. Matching projects to NOFOs
 
-A funding call is NIH's public request for grant proposals on a topic, like a job posting for research money (formally a NOFO). Every grant record names the call it answered, such as RFA-AI-24-001. I call that the project's **actual call**.
+A NOFO (notice of funding opportunity) is NIH's public request for grant proposals, like a job posting for research money. Targeted NOFOs (RFAs, PARs) ask for a topic; broad NOFOs (PAs, like the parent R01) let researchers pick the topic. Every grant record names the NOFO it answered, such as RFA-AI-24-001: the project's **actual NOFO**.
 
-Can a model read a project's summary and find its actual call? I hid the call for 2,000 projects and tested eight methods, plus two ways of combining the best two, each picking from all 2,482 targeted calls. "In top 10" means the actual call was among a method's 10 best guesses.
+Can a model read a project's summary and find its actual NOFO? I hid the NOFO for 2,000 projects and tested eight methods, plus two ways of combining the best two, each picking from all 2,482 targeted NOFOs. "In top 10" means the actual NOFO was among a method's 10 best guesses.
 
-| Method | Actual call ranked first | In top 5 | In top 10 | MRR |
+| Method | Actual NOFO ranked first | In top 5 | In top 10 | MRR |
 |---|---:|---:|---:|---:|
 | Tuned blend: 60% word matching + 40% PubMedBERT | 21% | 41% | 47% | 0.30 |
 | Word matching (TF-IDF) | 20% | 40% | 47% | 0.29 |
@@ -101,19 +101,19 @@ Can a model read a project's summary and find its actual call? I hid the call fo
 | MedCPT alone | 13% | 28% | 34% | 0.21 |
 | Web-search reranker | 11% | 25% | 32% | 0.18 |
 
-Plain word matching still beats every AI model on its own. An application and its call share exact terms, such as program names, required elements, and diseases. Biomedical models do better than general ones (PubMedBERT 40% vs. MiniLM 35% in the top 10), but they match on topic, and many calls share a topic. Reading longer text (BGE-M3) and reranking (MedCPT) didn't close the gap.
+Plain word matching still beats every AI model on its own. An application and its NOFO share exact terms, such as program names, required elements, and diseases. Biomedical models do better than general ones (PubMedBERT 40% vs. MiniLM 35% in the top 10), but they match on topic, and many NOFOs share a topic. Reading longer text (BGE-M3) and reranking (MedCPT) didn't close the gap.
 
-Combining helps a little, if the mix leans on word matching. An equal mix adds nothing. A blend of 60% word matching and 40% PubMedBERT ranks the actual call higher (MRR 0.274 to 0.291 on held-out projects, a 6% gain; 95% CI for the gain 0.008 to 0.026), but it doesn't find more calls: the top 10 stays at 47%. I picked the weight on a random half of the projects and checked it on the other half, so the gain isn't tuned to the projects it's reported on. Weights from 0.3 to 0.7 all beat word matching alone (`reports/results/nofo_hybrid_weights.csv`).
+Combining helps a little, if the mix leans on word matching. An equal mix adds nothing. A blend of 60% word matching and 40% PubMedBERT ranks the actual NOFO higher (MRR 0.274 to 0.291 on held-out projects, a 6% gain; 95% CI for the gain 0.008 to 0.026), but it doesn't find more NOFOs: the top 10 stays at 47%. I picked the weight on a random half of the projects and checked it on the other half, so the gain isn't tuned to the projects it's reported on. Weights from 0.3 to 0.7 all beat word matching alone (`reports/results/nofo_hybrid_weights.csv`).
 
-MRR (mean reciprocal rank) = average of 1 ÷ the rank of the actual call. Tuned blend = 0.6 × z(word-matching score) + 0.4 × z(PubMedBERT score), where z standardizes each score within a project. Equal rank fusion = 1 ÷ (60 + rank), summed.
+MRR (mean reciprocal rank) = average of 1 ÷ the rank of the actual NOFO. Tuned blend = 0.6 × z(word-matching score) + 0.4 × z(PubMedBERT score), where z standardizes each score within a project. Equal rank fusion = 1 ÷ (60 + rank), summed.
 
 ![Matching check](../../reports/figures/topics/09b_matching_bio.png)
 
 ### A better way: learning to rank
 
-Text alone has a ceiling. A model that also uses what NIH already knows about each application finds the actual call far more often.
+Text alone has a ceiling. A model that also uses what NIH already knows about each application finds the actual NOFO far more often.
 
-| Method | Inputs | Actual call ranked first | In top 5 | In top 10 | MRR |
+| Method | Inputs | Actual NOFO ranked first | In top 5 | In top 10 | MRR |
 |---|---|---:|---:|---:|---:|
 | Word matching (TF-IDF) | Text only | 20% | 40% | 47% | 0.29 |
 | Learning to rank | Text only | 22% | 42% | 48% | 0.31 |
@@ -123,34 +123,34 @@ Text alone has a ceiling. A model that also uses what NIH already knows about ea
 
 How it works (`analyses/topics/nofo_match_ltr.py`):
 
-1. **Text scores.** Seven scores for every project and call: TF-IDF on the whole call, on its best 200-word chunk, and with 1-3 word phrases; BM25 on the whole call and its best chunk; title-to-title match; and PubMedBERT similarity.
-2. **Project details.** Does the call allow the project's activity code? Does the project's institute issue or join the call? Was the call open in one of the project's funding years, and if not, how many years off? These come from the call's text and number (RFA-AI-24-001 is an NIAID call).
-3. **Candidates.** For each project, the 150 calls with the highest text scores, with calls that pass the activity code and institute filters first. The actual call is among them for 98.8% of projects.
-4. **Model.** LightGBM LambdaMART: gradient-boosted decision trees trained to put the actual call near the top of each project's list (it optimizes NDCG, a ranking score that rewards the top spots).
+1. **Text scores.** Seven scores for every project and NOFO: TF-IDF on the whole NOFO, on its best 200-word chunk, and with 1-3 word phrases; BM25 on the whole NOFO and its best chunk; title-to-title match; and PubMedBERT similarity.
+2. **Project details.** Does the NOFO allow the project's activity code? Does the project's institute issue or join the NOFO? Was the NOFO open in one of the project's funding years, and if not, how many years off? These come from the NOFO's text and number (RFA-AI-24-001 is an NIAID NOFO).
+3. **Candidates.** For each project, the 150 NOFOs with the highest text scores, with NOFOs that pass the activity code and institute filters first. The actual NOFO is among them for 98.8% of projects.
+4. **Model.** LightGBM LambdaMART: gradient-boosted decision trees trained to put the actual NOFO near the top of each project's list (it optimizes NDCG, a ranking score that rewards the top spots).
 5. **Test.** Five-fold cross-validation by project: every project is ranked by a model trained on the other 80%.
 
-The activity code does the most work (23% of the model's gain). It keeps the actual call for 98% of projects and rules out 85% of calls. The institute keeps 98% and rules out 85%. Funding years help as a hint, but as a hard filter they drop the actual call for 12% of projects (renewals and reissued calls), so the model uses them as a feature instead. Learning to rank on text alone barely beats word matching, so the gain comes from the project details, not the model alone.
+The activity code does the most work (23% of the model's gain). It keeps the actual NOFO for 98% of projects and rules out 85% of NOFOs. The institute keeps 98% and rules out 85%. Funding years help as a hint, but as a hard filter they drop the actual NOFO for 12% of projects (renewals and reissued NOFOs), so the model uses them as a feature instead. Learning to rank on text alone barely beats word matching, so the gain comes from the project details, not the model alone.
 
-One caveat: the activity code and institute filters leave about 65 calls per project, so part of the gain is a shorter list to choose from. That's a fair comparison for real use, since every application carries its activity code and institute.
+One caveat: the activity code and institute filters leave about 65 NOFOs per project, so part of the gain is a shorter list to choose from. That's a fair comparison for real use, since every application carries its activity code and institute.
 
 ![Learning to rank](../../reports/figures/topics/09c_matching_ltr.png)
 
-### Linking every project to a call
+### Linking every project to a NOFO
 
-With a model that finds the actual call 95% of the time, I linked the projects whose grant record doesn't name a targeted call (`analyses/topics/nofo_link_ltr.py`). The model was retrained on 6,000 projects that do name one, without PubMedBERT, and still finds the actual call in the top 10 for 94.5% of the 2,000 check projects.
+With a model that finds the actual NOFO 95% of the time, I linked the projects whose grant record doesn't name a targeted NOFO (`analyses/topics/nofo_link_ltr.py`). The model was retrained on 6,000 projects that do name one, without PubMedBERT, and still finds the actual NOFO in the top 10 for 94.5% of the 2,000 check projects.
 
-| Call on the grant record | Projects | Share | What the model did |
+| NOFO on the grant record | Projects | Share | What the model did |
 |---|---:|---:|---|
-| Targeted call (RFA or PAR) | 24,367 | 53% | Nothing to link |
-| Broad call only, such as the parent R01 | 18,937 | 41% | Found the targeted call each fits best |
-| No funding call by design (intramural, VA, contracts, other transactions) | 2,472 | 5% | Not linked: these never go through a call |
-| Grant with no call named | 27 | <1% | Found its likely call |
+| Targeted NOFO (RFA or PAR) | 24,367 | 53% | Nothing to link |
+| Researcher-initiated: broad NOFO only, such as the parent R01 | 18,937 | 41% | Found the targeted NOFO each fits best |
+| Not through a NOFO (intramural, VA, contracts, other transactions) | 2,472 | 5% | Not linked: these never go through a NOFO |
+| Grant with no NOFO named | 27 | <1% | Found its likely NOFO |
 
-For broad-call projects, the result is the best-fitting targeted call, not the call that funded them. A fit is **strong** when that call scores as high as a typical correct match (the median score of correct first picks in the check set), and **weak** otherwise. Only 1,902 broad-call projects (4% of all data science) have a strong fit; 17,035 (37%) don't. So more than a third of data science at NIH arrives with no close targeted call: investigators propose it without being asked.
+For researcher-initiated projects, the result is the best-fitting targeted NOFO, not the NOFO that funded them. A fit is **strong** when that NOFO scores as high as a typical correct match (the median score of correct first picks in the check set), and **weak** otherwise. Only 1,902 researcher-initiated projects (4% of all data science) have a strong fit; 17,035 (37%) don't. So more than a third of data science at NIH arrives with no close targeted NOFO: investigators propose it without being asked.
 
-By institute, the weak-fit share runs from 19% at NCI to 63% at NHLBI, which also has the lowest share of projects naming a targeted call (31%). That matches section 3 (heart disease is thin relative to burden) and section 4 (few targeted calls fit heart projects). By data science area, data infrastructure is 77% targeted, since NIH builds resources through calls; AI, statistics, and modeling are about 45% targeted and 44% weak fit.
+By institute, the weak-fit share runs from 19% at NCI to 63% at NHLBI, which also has the lowest share of projects naming a targeted NOFO (31%). That matches section 3 (heart disease is thin relative to burden) and section 4 (few targeted NOFOs fit heart projects). By data science area, data infrastructure is 77% targeted, since NIH builds resources through NOFOs; AI, statistics, and modeling are about 45% targeted and 44% weak fit.
 
-| Institute | Targeted call | Broad call, strong fit | Broad call, weak fit | No funding call |
+| Institute | Targeted NOFO | Broad NOFO, strong fit | Broad NOFO, weak fit | No NOFO |
 |---|---:|---:|---:|---:|
 | All NIH | 53% | 4% | 37% | 5% |
 | NHLBI | 31% | 2% | 63% | 3% |
@@ -161,9 +161,9 @@ By institute, the weak-fit share runs from 19% at NCI to 63% at NHLBI, which als
 | NIA | 62% | 5% | 31% | 2% |
 | NCI | 71% | 3% | 19% | 6% |
 
-Full tables: `reports/results/nofo_links.csv` (top 3 calls per project), `nofo_links_by_call.csv`, `nofo_links_by_institute.csv`, `nofo_links_by_area.csv`.
+Full tables: `reports/results/nofo_links.csv` (top 3 NOFOs per project), `nofo_links_by_call.csv`, `nofo_links_by_institute.csv`, `nofo_links_by_area.csv`.
 
-![Call links](../../reports/figures/topics/09d_call_links.png)
+![NOFO links](../../reports/figures/topics/09d_call_links.png)
 
 ## 6. What goes with patents, trials, and highly cited papers
 
@@ -186,9 +186,48 @@ To check the two strongest traits, I compared projects with and without each tra
 
 ![Adjusted differences](../../reports/figures/topics/16_impact_causal.png)
 
+### Outputs by institute
+
+For the 8 institutes with the most data science projects, I compared each institute's data science projects with similar data science projects at other institutes (made alike in size, grant type, years funded, team, and start year). Each cell shows the institute's share, then the gap in points; **bold** gaps hold up (the 95% range excludes zero).
+
+| Institute | Projects | Highly cited paper | Patent | Clinical trial |
+|---|---:|---:|---:|---:|
+| NIGMS | 2,348 | 18% (**−7.4**) | 12% (+0.1) | 2% (**−6.8**) |
+| NCI | 2,011 | 27% (+1.7) | 14% (**+4.0**) | 9% (+0.8) |
+| NHLBI | 1,426 | 23% (−0.4) | 10% (**+1.9**) | 9% (+1.7) |
+| NIMH | 1,284 | 32% (**+10.9**) | 4% (**−5.7**) | 10% (**+2.6**) |
+| NIAID | 1,167 | 21% (−2.6) | 12% (+1.2) | 4% (**−4.4**) |
+| NIA | 1,102 | 32% (**+9.6**) | 6% (**−4.4**) | 11% (+0.1) |
+| NINDS | 896 | 25% (+3.1) | 9% (+0.8) | 5% (**−2.3**) |
+| NIDDK | 766 | 31% (**+4.5**) | 12% (−0.6) | 20% (**+6.7**) |
+| All data science | 15,729 | 23% | 10% | 8% |
+
+Each institute's data science leads somewhere different: trials at NIDDK, cited papers at NIMH and NIA, patents at NCI. NIGMS funds basic research, which rarely leads to trials. These gaps reflect mission, not how well an institute runs data science. Code: `impact_models.py`, section "Outcomes by institute"; table in `reports/results/impact_by_ic.csv`.
+
+### What could increase outputs
+
+Which things an institute controls go with more outputs? Same projects and comparison, now with and without each feature, made alike in size, grant type, years funded, team, start year, and institute (`analyses/topics/impact_levers.py`).
+
+| Data science projects that… | Share | Highly cited paper | Patent | Clinical trial |
+|---|---:|---:|---:|---:|
+| Apply AI | 15% | **+3.0** | +0.7 | **+2.4** |
+| Are co-funded by 2+ institutes | 5% | +1.3 | **−2.7** | **+3.9** |
+| Answer a targeted NOFO (RFA, PAR) | 43% | +0.3 | −1.0 | **+1.7** |
+| Are at a large research organization | 57% | **+5.6** | +0.3 | +0.5 |
+| Have multiple PIs | 37% | −1.0 | −1.1 | −0.3 |
+| Have a PI with an earlier NIH project | 35% | +1.0 | −0.5 | −0.7 |
+
+Ways to increase outputs:
+
+- Fund projects that apply AI to research questions: more cited papers and trials.
+- Co-fund data science projects with other institutes: more trials.
+- Use targeted NOFOs for clinical goals: a modest lift in trials.
+
+Adding PIs, or PIs with earlier NIH projects, doesn't go with more outputs once projects are alike. A large research organization goes with more cited papers, but that's where funded investigators work, not something an institute changes directly. Renewed projects have more patents (+7.9), but success also earns renewal, so it isn't a lever. Other details add little to prediction: NIH's "Clinical Research" category raises trial prediction (AUC 0.83 to 0.88), but it only marks clinical projects. These are associations; they don't prove that changing one raises outputs.
+
 ## 7. What this means
 
-Target the thin areas. Heart, musculoskeletal, and chronic respiratory disease carry large shares of burden, small shares of data science funding, and few calls that ask for it. Calls written for these areas are the most direct lever, though most of the gap reflects NIH's overall funding.
+Target the thin areas. Heart, musculoskeletal, and chronic respiratory disease carry large shares of burden, small shares of data science funding, and few NOFOs that ask for it. NOFOs written for these areas are the most direct lever, though most of the gap reflects NIH's overall funding.
 
 Read rises by institute. Dementia, opioids, and cancer immunotherapy grow with NIA, NIDA, and NCI priorities. Single-cell and spatial omics is the one method growing across institutes; it is a candidate for shared infrastructure and training.
 
@@ -230,7 +269,7 @@ Judge outputs by area. Mental health projects are more likely to have a trial an
 | Embeddings | Numbers a language model gives each text so similar texts sit close together |
 | PubMedBERT, MedCPT, BGE-M3 | Language models trained on biomedical text or PubMed searches; BGE-M3 reads long text |
 | Gap ratio | Share of data science funding ÷ share of disease burden; 1 = in proportion, below 1 = thin |
-| NOFO | Notice of funding opportunity. RFA and PAR = targeted calls for an area; PA = broad, such as the parent R01 |
+| NOFO | Notice of funding opportunity. RFA and PAR = targeted NOFOs for an area; PA = broad, such as the parent R01 |
 | RCDC | NIH's research, condition, and disease categories, used to tag every project |
 | Relative Citation Ratio (RCR) | Citations per year compared with the field's norm; 1 = a typical NIH paper |
 | SHAP | How much each trait pushes a model's prediction up or down |
@@ -241,8 +280,8 @@ Judge outputs by area. Mental health projects are more likely to have a trial an
 - **Topic grouping (BERTopic, LDA).** Sorts project summaries into groups that share words or meaning, like sorting mail by subject when nothing is labeled. BERTopic groups by meaning; LDA groups by shared words.
 - **Word matching (TF-IDF, BM25).** Scores two texts by the words they share. Rare words, like a program name, count more than common ones like "research". BM25 is the version search engines use: it stops giving extra credit for a word repeated many times and adjusts for length.
 - **Language models (PubMedBERT, MedCPT, BGE-M3, MiniLM).** Turn each text into a list of numbers so texts that mean the same thing sit close together, even when they use different words. PubMedBERT and MedCPT learned from biomedical papers.
-- **Ranking model (LightGBM LambdaMART).** For each project, it looks at 150 candidate calls and sorts them so the actual call comes first. It's built from 300 small decision trees, each a short chain of yes-or-no questions ("Does the call allow this grant type?"). Each new tree fixes mistakes the earlier ones made, and it was trained to care most about the top of the list. It learned from projects whose call we know and was tested on projects it hadn't seen.
+- **Ranking model (LightGBM LambdaMART).** For each project, it looks at 150 candidate NOFOs and sorts them so the actual NOFO comes first. It's built from 300 small decision trees, each a short chain of yes-or-no questions ("Does the NOFO allow this grant type?"). Each new tree fixes mistakes the earlier ones made, and it was trained to care most about the top of the list. It learned from projects whose NOFO we know and was tested on projects it hadn't seen.
 - **Prediction models (gradient boosting, random forest, logistic regression).** Learn from past projects which traits go with a clinical trial, a patent, or highly cited papers. AUC grades them: 0.5 is a coin flip, 1 is perfect.
 - **SHAP.** Splits each prediction into how much each trait pushed it up or down, so we can see what a model relies on.
 - **Fair comparison (AIPW).** Compares projects with and without a trait after making the two groups alike on size, type, and institute, so the trait doesn't get credit for those differences.
-- **Simple ratios, no model.** Growth = a topic's share now ÷ its share in FY2016–18. Gap ratio = share of data science funding ÷ share of disease burden. A call "asks for data science" when the taxonomy's keyword rules find a data science term in its description.
+- **Simple ratios, no model.** Growth = a topic's share now ÷ its share in FY2016–18. Gap ratio = share of data science funding ÷ share of disease burden. A NOFO "asks for data science" when the taxonomy's keyword rules find a data science term in its description.

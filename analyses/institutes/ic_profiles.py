@@ -340,8 +340,8 @@ def pct(v, d=0):
 
 
 LINKS = ROOT / "reports" / "results" / "nofo_links_by_institute.csv"
-LINK_COLS = [("Targeted call on record", "Targeted call listed"), ("Broad call, strong fit", "Broad call: strong fit"),
-             ("Broad call, weak fit", "Broad call: weak fit"), ("No funding call (intramural, VA, contract)",
+LINK_COLS = [("Targeted NOFO (RFA, PAR)", "Targeted call listed"), ("Researcher-initiated, strong fit", "Broad call: strong fit"),
+             ("Researcher-initiated, weak fit", "Broad call: weak fit"), ("Not through a NOFO (intramural, VA, contract)",
                                                               "No funding call (intramural, VA, contract)")]
 
 
@@ -360,15 +360,15 @@ def call_links(ic):
     lk = pd.read_csv(ROOT / "reports" / "results" / "nofo_links.csv", usecols=["administering_ic", "fit", "call_1", "call_1_title"])
     top = lk[(lk.administering_ic == code) & (lk.fit == "Strong fit")].groupby(["call_1", "call_1_title"]).size()
     top = top[top >= 11].sort_values(ascending=False).head(3)
-    out = ["### Linking projects to calls", "",
-           "Every grant record names the funding call it answered. For projects that name only a broad call, a ranking model "
-           "found the targeted call each fits best ([how](../topics/topics_analysis.md#linking-every-project-to-a-call)). "
-           "Weak fit = no targeted call comes close, so that data science came in without a call that asked for it. "
+    out = ["### Linking projects to NOFOs", "",
+           "Every grant record names the NOFO (notice of funding opportunity) it answered. For researcher-initiated projects, which name only a broad NOFO such as the parent R01, a ranking model "
+           "found the targeted NOFO each fits best ([how](../topics/topics_analysis.md#linking-every-project-to-a-nofo)). "
+           "Weak fit = no targeted NOFO comes close, so that data science came in without a NOFO that asked for it. "
            "Shares of data science projects.", "",
-           f"| Call on the grant record | {ic} | All NIH |", "|---|---:|---:|",
+           f"| NOFO on the grant record | {ic} | All NIH |", "|---|---:|---:|",
            *[f"| {lab} | {pct(mine[c])} | {pct(alln[c])} |" for lab, c in LINK_COLS], ""]
     if len(top):
-        out += ["Targeted calls its broad-call projects fit best (strong fits, 11 or more projects): " +
+        out += ["Targeted NOFOs its researcher-initiated projects fit best (strong fits, 11 or more projects): " +
                 "; ".join(f"{c} ({str(tt)[:80]}, {n})" for (c, tt), n in top.items()) + ".", ""]
     return out
 
@@ -381,7 +381,7 @@ def page(ic, r, routes, acts, rising, themes, ar, cats, new):
     lines = [
         f"# Data science at the {NAME.get(ic, ic)} ({ic})", "",
         "**Laura Ellis** · [LinkedIn](https://www.linkedin.com/in/laura-ellis-profile/) · [GitHub](https://github.com/Laura-Ellis/nih-ds-taxonomy) · "
-        f"FY{FY_FIRST} to FY{FY_LAST}, administering IC · [All institutes](README.md)", "",
+        f"FY{FY_FIRST} to FY{FY_LAST}, administering IC · [All institutes](README.md) · [Presentation (PDF)](https://laura-ellis.github.io/pdf/data_science_at_each_nih_institute.pdf)", "",
         f"{ic} funded {r['ds_projects']:,} data science projects from FY{FY_FIRST} to FY{FY_LAST}. "
         f"In FY{LATE[0]} to FY{LATE[-1]}, {pct(r['ds_share_late'])} of its projects used data science, "
         f"compared with {pct(r['rest_ds_share_late'])} for the rest of NIH. By funding, data science was "
@@ -390,7 +390,7 @@ def page(ic, r, routes, acts, rising, themes, ar, cats, new):
         f"Its share grew {r['growth']:.1f} times since FY{EARLY[0]} to FY{EARLY[-1]}; the rest of NIH grew {r['rest_growth']:.1f} times.", "",
         "Terms are defined in the [glossary](#glossary) at the end.", "",
         f"![Data science at {ic}](../../reports/figures/institutes/{ic.lower()}.png)", "",
-        "## How data science came in", "", "Most projects answer a funding call. Targeted calls (RFAs and PARs) ask for work in an area; broad calls (PAs), such as the parent R01, don't.", "",
+        "## How data science came in", "", "Most projects answer a NOFO (notice of funding opportunity). Targeted NOFOs (RFAs and PARs) ask for work in an area; broad NOFOs (PAs), such as the parent R01, let the researcher pick the topic.", "",
         "| Route | " + ic + " | Rest of NIH |", "|---|---:|---:|",
         *[f"| {k} | {pct(routes.ic[k])} | {pct(routes.rest_of_nih[k])} |" for k in ROUTES], "",
         "| Activity group | " + ic + " | Rest of NIH |", "|---|---:|---:|",
@@ -427,7 +427,7 @@ def page(ic, r, routes, acts, rising, themes, ar, cats, new):
         "| Data science project | An NIH project whose aims or approach rely on data science, per the NIH Data Science Taxonomy |",
         "| Data science PI | A PI with 2 or more project records, more than half with substantive data science |",
         "| Growth | Data science share in FY2023–25 ÷ share in FY2016–18 |",
-        "| NOFO | Notice of funding opportunity. RFA and PAR = targeted calls for an area; PA = broad, such as the parent R01 |",
+        "| NOFO | Notice of funding opportunity: NIH's public request for grant proposals. RFA and PAR = targeted (NIH asks for a topic); PA = broad, such as the parent R01 (the researcher picks) |",
         "| PI | Principal investigator: a person who leads an NIH-funded project |",
         "| RCDC | NIH's research, condition, and disease categories, used to tag every project |",
         "| Rest of NIH | Every other NIH institute and center |", "",
@@ -440,9 +440,9 @@ def page(ic, r, routes, acts, rising, themes, ar, cats, new):
         "meaning, like sorting mail by subject when nothing is labeled.",
         "- **Area gaps.** For each research area, the institute's data science share of funding minus the rest of NIH's share in the same area. "
         "Negative means the institute does less data science there.",
-        "- **Call links.** A ranking model (LightGBM LambdaMART) looks at 150 candidate calls for each project and sorts them so the "
-        "best fit comes first. It's built from 300 small decision trees, each a short chain of yes-or-no questions (\"Does the call allow "
-        "this grant type?\"), and it finds a project's actual call in the top 10 for 95% of projects whose call we know.", ""]
+        "- **NOFO links.** A ranking model (LightGBM LambdaMART) looks at 150 candidate NOFOs for each project and sorts them so the "
+        "best fit comes first. It's built from 300 small decision trees, each a short chain of yes-or-no questions (\"Does the NOFO allow "
+        "this grant type?\"), and it finds a project's actual NOFO in the top 10 for 95% of projects whose NOFO we know.", ""]
     (PAGES / f"{ic.lower()}.md").write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -480,9 +480,10 @@ if not summary_path.exists():
 summ = pd.read_csv(summary_path).sort_values("ds_projects", ascending=False)
 idx = ["# Data science at each NIH institute", "",
        "**Laura Ellis** · [LinkedIn](https://www.linkedin.com/in/laura-ellis-profile/) · [GitHub](https://github.com/Laura-Ellis/nih-ds-taxonomy) · "
-       f"FY{FY_FIRST} to FY{FY_LAST}", "",
+       f"FY{FY_FIRST} to FY{FY_LAST} · [Presentation (PDF)](https://laura-ellis.github.io/pdf/data_science_at_each_nih_institute.pdf)", "",
        "For each NIH institute or center, how did data science grow, what brought it there, and where could it do more? "
-       f"Profiles cover institutes and centers with at least {MIN_DS} data science projects. Every profile uses the same layout.", "",
+       f"Profiles cover institutes and centers with at least {MIN_DS} data science projects. Every profile uses the same layout. "
+       "The findings across institutes, and how the methods work, are in [Across institutes](institutes_analysis.md).", "",
        "| Institute or center | Data science projects | Data science share, FY2023–25 | Growth since FY2016–18 |",
        "|---|---:|---:|---:|",
        *[f"| [{r.ic}]({r.ic.lower()}.md): {r.name} | {r.ds_projects:,} | {r.ds_share_late:.1%} | {r.growth:.1f}× |"

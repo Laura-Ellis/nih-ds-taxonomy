@@ -1,6 +1,6 @@
 # Data science at the National Cancer Institute (NCI)
 
-**Laura Ellis** · [LinkedIn](https://www.linkedin.com/in/laura-ellis-profile/) · [GitHub](https://github.com/Laura-Ellis/nih-ds-taxonomy) · FY2016 to FY2025, administering IC · [All institutes](README.md)
+**Laura Ellis** · [LinkedIn](https://www.linkedin.com/in/laura-ellis-profile/) · [GitHub](https://github.com/Laura-Ellis/nih-ds-taxonomy) · FY2016 to FY2025, administering IC · [All institutes](README.md) · [Presentation (PDF)](https://laura-ellis.github.io/pdf/data_science_at_each_nih_institute.pdf)
 
 NCI funded 7,121 data science projects from FY2016 to FY2025. In FY2023 to FY2025, 23% of its projects used data science, compared with 22% for the rest of NIH. By funding, data science was 25% of its dollars, compared with 30% for the rest of NIH. Funding shares run higher because data science projects tend to be larger awards.
 
@@ -12,7 +12,7 @@ Terms are defined in the [glossary](#glossary) at the end.
 
 ## How data science came in
 
-Most projects answer a funding call. Targeted calls (RFAs and PARs) ask for work in an area; broad calls (PAs), such as the parent R01, don't.
+Most projects answer a NOFO (notice of funding opportunity). Targeted NOFOs (RFAs and PARs) ask for work in an area; broad NOFOs (PAs), such as the parent R01, let the researcher pick the topic.
 
 | Route | NCI | Rest of NIH |
 |---|---:|---:|
@@ -29,18 +29,18 @@ Most projects answer a funding call. Targeted calls (RFAs and PARs) ask for work
 | Training (K, F, T) | 8% | 16% |
 | Other | 12% | 8% |
 
-### Linking projects to calls
+### Linking projects to NOFOs
 
-Every grant record names the funding call it answered. For projects that name only a broad call, a ranking model found the targeted call each fits best ([how](../topics/topics_analysis.md#linking-every-project-to-a-call)). Weak fit = no targeted call comes close, so that data science came in without a call that asked for it. Shares of data science projects.
+Every grant record names the NOFO (notice of funding opportunity) it answered. For researcher-initiated projects, which name only a broad NOFO such as the parent R01, a ranking model found the targeted NOFO each fits best ([how](../topics/topics_analysis.md#linking-every-project-to-a-nofo)). Weak fit = no targeted NOFO comes close, so that data science came in without a NOFO that asked for it. Shares of data science projects.
 
-| Call on the grant record | NCI | All NIH |
+| NOFO on the grant record | NCI | All NIH |
 |---|---:|---:|
-| Targeted call on record | 71% | 53% |
-| Broad call, strong fit | 3% | 4% |
-| Broad call, weak fit | 19% | 37% |
-| No funding call (intramural, VA, contract) | 6% | 5% |
+| Targeted NOFO (RFA, PAR) | 71% | 53% |
+| Researcher-initiated, strong fit | 3% | 4% |
+| Researcher-initiated, weak fit | 19% | 37% |
+| Not through a NOFO (intramural, VA, contract) | 6% | 5% |
 
-Targeted calls its broad-call projects fit best (strong fits, 11 or more projects): PAR-22-131 (Imaging, Biomarkers and Digital Pathomics for the Early Detection of Premetastat, 30); PAR-17-331 (Discovery of Small Molecule Immunomodulators for Cancer Therapy (R01), 29); PAR-21-290 (Integration of Imaging and Fluid-Based Tumor Monitoring in Cancer Therapy (R01 C, 16).
+Targeted NOFOs its researcher-initiated projects fit best (strong fits, 11 or more projects): PAR-22-131 (Imaging, Biomarkers and Digital Pathomics for the Early Detection of Premetastat, 30); PAR-17-331 (Discovery of Small Molecule Immunomodulators for Cancer Therapy (R01), 29); PAR-21-290 (Integration of Imaging and Fluid-Based Tumor Monitoring in Cancer Therapy (R01 C, 16).
 
 NCI is the main institute for 999 data science PIs. 14% had NIH projects before their first data science project. 42% have projects at more than one institute.
 
@@ -83,7 +83,7 @@ Projects are counted once per fiscal year they are active; the administering IC 
 | Data science project | An NIH project whose aims or approach rely on data science, per the NIH Data Science Taxonomy |
 | Data science PI | A PI with 2 or more project records, more than half with substantive data science |
 | Growth | Data science share in FY2023–25 ÷ share in FY2016–18 |
-| NOFO | Notice of funding opportunity. RFA and PAR = targeted calls for an area; PA = broad, such as the parent R01 |
+| NOFO | Notice of funding opportunity: NIH's public request for grant proposals. RFA and PAR = targeted (NIH asks for a topic); PA = broad, such as the parent R01 (the researcher picks) |
 | PI | Principal investigator: a person who leads an NIH-funded project |
 | RCDC | NIH's research, condition, and disease categories, used to tag every project |
 | Rest of NIH | Every other NIH institute and center |
@@ -94,4 +94,4 @@ Projects are counted once per fiscal year they are active; the administering IC 
 - **Data science labels.** Projects are tagged by the NIH Data Science Taxonomy: keyword rules first, then two large language models (AI systems that read text) that decide whether data science is central to the project.
 - **Themes and rising topics.** A topic-grouping method (BERTopic) sorts project summaries into groups that share meaning, like sorting mail by subject when nothing is labeled.
 - **Area gaps.** For each research area, the institute's data science share of funding minus the rest of NIH's share in the same area. Negative means the institute does less data science there.
-- **Call links.** A ranking model (LightGBM LambdaMART) looks at 150 candidate calls for each project and sorts them so the best fit comes first. It's built from 300 small decision trees, each a short chain of yes-or-no questions ("Does the call allow this grant type?"), and it finds a project's actual call in the top 10 for 95% of projects whose call we know.
+- **NOFO links.** A ranking model (LightGBM LambdaMART) looks at 150 candidate NOFOs for each project and sorts them so the best fit comes first. It's built from 300 small decision trees, each a short chain of yes-or-no questions ("Does the NOFO allow this grant type?"), and it finds a project's actual NOFO in the top 10 for 95% of projects whose NOFO we know.

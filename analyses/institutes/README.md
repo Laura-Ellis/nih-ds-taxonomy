@@ -1,8 +1,8 @@
 # Data science at each NIH institute
 
-**Laura Ellis** · [LinkedIn](https://www.linkedin.com/in/laura-ellis-profile/) · [GitHub](https://github.com/Laura-Ellis/nih-ds-taxonomy) · FY2016 to FY2025
+**Laura Ellis** · [LinkedIn](https://www.linkedin.com/in/laura-ellis-profile/) · [GitHub](https://github.com/Laura-Ellis/nih-ds-taxonomy) · FY2016 to FY2025 · [Presentation (PDF)](https://laura-ellis.github.io/pdf/data_science_at_each_nih_institute.pdf)
 
-For each NIH institute or center, how did data science grow, what brought it there, and where could it do more? Profiles cover institutes and centers with at least 500 data science projects. Every profile uses the same layout.
+For each NIH institute or center, how did data science grow, what brought it there, and where could it do more? Profiles cover institutes and centers with at least 500 data science projects. Every profile uses the same layout. The findings across institutes, and how the methods work, are in [Across institutes](institutes_analysis.md).
 
 | Institute or center | Data science projects | Data science share, FY2023–25 | Growth since FY2016–18 |
 |---|---:|---:|---:|
