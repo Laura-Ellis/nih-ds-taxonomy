@@ -110,7 +110,7 @@ Reference: the 150 coded projects (42 substantive AI, 52 substantive data scienc
 | **ChatGPT (GPT-6 Luna)** | **Uncertain AI or DS (~20,200)** | **~$9** | **~$21** | **0.92** | **0.86** |
 | *Claude alone, Batch API, every flagged record* | *All 50,481* | *~$242* | *n/a* | *0.94* | *0.84* |
 
-Costs: tokens measured on the coded sample × list price × 1.6 for longer texts. Claude ~$0.006 per abstract (standard), ChatGPT ~$0.00029, Gemini ~$0.00069, Jev ~$0.00014.
+Costs are estimates made before the full run: tokens measured on the coded sample × list price × 1.6 for longer texts. The actual full run cost about $24 through the Vercel AI Gateway (section 6), more than the ~$21 estimate because ChatGPT resolved more texts than expected. Claude ~$0.006 per abstract (standard), ChatGPT ~$0.00029, Gemini ~$0.00069, Jev ~$0.00014.
 
 **Why ChatGPT is the resolver.**
 - Accuracy: it comes within 0.02 κ of Claude on both labels (AI 0.92 vs. 0.94; data science 0.86 vs. 0.87), inside the sampling error of a 150-project sample, and finds every substantive AI project (recall 100%).
@@ -172,6 +172,12 @@ FY2026 is preliminary (RePORTER API pull, October 2026), so comparisons below ru
 **Publications, AI vs. matched projects** (`outputs_matched.csv`): extramural core projects starting FY2016–2020, with non-AI projects weighted to match AI projects on IC, activity code, first fiscal year, and size band (cost tercile within activity code). AI projects have a median of 12 linked papers vs. 8 for matched projects; 91% vs. 89% have at least one. Citation impact (RCR, FWCI), patents, and clinical trials come from `notebooks/12_link_outputs.py`.
 
 **Data science by group:** `notebooks/13_ds_groups.py` splits data science projects into the eight taxonomy groups by fiscal year and IC, for the dashboard, the Tableau extract, and the API (`api/main.py`).
+
+## 7. Method experiments (November 21, 2026)
+
+**A small, free labeling model** (`analyses/methods/small_model.py`). TF-IDF + logistic regression, trained on the pipeline's labels for keyword-flagged records (records holding a coded project dropped), applied after the keyword flag. On the 150 coded projects: AI κ 0.87 (precision 85%, recall 98%); data science κ 0.81 (precision 83%, recall 94%), vs. 0.92 and 0.86 for keywords → Jev → ChatGPT. No API cost. Candidate use: a free first screen that sends only its uncertain calls to the resolver.
+
+**Projecting the preliminary year** (`analyses/methods/fy_projection_backtest.py`). Back-test of extramural grants by institute × activity family, FY2021–FY2025, at 24 to 180 days after close. 98–99% of records and funding are in by day 24. Cell error (WAPE) at day 24: completeness 0.8%, gradient boosting 0.7%, quantile regression 0.7%; all-NIH totals within 0.3%. Quantile regression's 80% range covers 90% of cells; the completeness range covers 15%. Contracts and intramural records are not in the back-test.
 
 ## Limits
 

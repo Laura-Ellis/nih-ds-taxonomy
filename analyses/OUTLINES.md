@@ -8,7 +8,7 @@ Six pieces of work, each with a site page (md), a script (py), and a deck. Each 
 |---|---|---|---|
 | A | PI analysis: who does data science, how they get there, who they work with | `analyses/ds_pis/` | Parts 1 to 5 drafted; one page (`pi_analysis.md`) |
 | B | Topics, opportunities, and areas | `analyses/topics/` | Done ([page](topics/topics_analysis.md)) |
-| C | Methods deck: how the taxonomy and dataset were built | `analyses/methods/` | Planned |
+| C | Methods deck: how the taxonomy and dataset were built | `analyses/methods/`, `deck/methods/` | Deck built November 21, 2026 (10 slides) |
 | D | Global research: NIH data science at foreign institutions | `analyses/global/` | Planned; first numbers in hand |
 | E | Data science programs (DS-I Africa first) | `analyses/programs/` | Planned |
 | F | Institute profiles: one page per IC | `analyses/ic_profiles/` | Planned |
@@ -66,11 +66,11 @@ Inputs from Laura's machine: GBD export of U.S. DALYs (`data/raw/gbd/`) and NOFO
 
 ### Sections
 
-1. **Creating the taxonomy:** why it was needed (no shared view of data science and AI across NIH; RCDC has one AI category); sources it builds on (NIH Strategic Plan for Data Science 2025 to 2030 goals, NOT-OD-25-117 AI RFI, earlier term lists); structure (dimensions, 7 reporting groups, 36 categories, AI roles, application areas); term lists and weak vs. strong terms; dropped terms and why; testing on 749 sampled projects and 150 hand-coded ones; versions (0.1 to 0.5) and what changed.
+1. **Creating the taxonomy:** why it was needed (no shared view of data science and AI across NIH; RCDC has one AI category); sources it builds on (NIH Strategic Plan for Data Science 2025 to 2030 goals, NOT-OD-25-117 AI RFI, earlier term lists); structure (8 dimensions and 40 categories: 36 by keywords, 4 AI roles by model; 7 reporting groups; application areas); term lists and weak vs. strong terms; dropped terms and why; testing on 747 sampled projects and 150 hand-coded ones; versions (0.1 to 0.5) and what changed.
 2. **Data:** RePORTER API pull (FY2016 to FY2027; FY2026 preliminary; FY2027 not analyzed); records not in the API kept and marked; centers counted once (attributed cost); funding methods appendix.
 3. **Labeling pipeline:** keyword flags, then Jev, then ChatGPT for calls under 0.90 confidence; agreement with hand coding (κ = 0.86 data science, 0.92 AI); costs; caching.
-4. **A small, cheap labeling model:** compare TF-IDF plus logistic regression (baseline), a fine-tuned biomedical BERT model, and a small instruction-tuned model against Jev, ChatGPT, and the hand-coded set; accuracy, κ, and cost per 10,000 texts; model card.
-5. **Projecting the preliminary year:** current completeness method vs. gradient boosting and quantile regression on how fast RePORTER adds records, by institute and activity code; back-tests on FY2021 to FY2025; ranges.
+4. **A small, cheap labeling model** (done, `small_model.py`): TF-IDF + logistic regression trained on pipeline labels reaches κ 0.87 (AI) and 0.81 (data science) on the 150 coded projects vs. 0.92 and 0.86 for the pipeline, at no cost. Still to try: compare TF-IDF plus logistic regression (baseline), a fine-tuned biomedical BERT model, and a small instruction-tuned model against Jev, ChatGPT, and the hand-coded set; accuracy, κ, and cost per 10,000 texts; model card.
+5. **Projecting the preliminary year** (done, `fy_projection_backtest.py`): extramural grants are 98–99% in 24 days after close; completeness, gradient boosting, and quantile regression all project within about 0.5%; quantile regression's 80% range covers 90% of cells vs. 15% for the completeness range. Planned: current completeness method vs. gradient boosting and quantile regression on how fast RePORTER adds records, by institute and activity code; back-tests on FY2021 to FY2025; ranges.
 6. **Work so far:** dashboard, deck, site pages, API, Tableau extracts, analyses A to E.
 
 ### Deck (10 slides, for approval)
