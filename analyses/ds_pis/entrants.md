@@ -79,3 +79,9 @@ The 1 in 5 who move in come from data-heavy fields. Programs that want to bring 
 | RCDC | NIH's research, condition, and disease categories, used to tag every project |
 | Started in data science | A data science PI whose first project in the data already used data science |
 | Times as common | How much more often a field shows up in movers' earlier work than in other PIs' work; 1 = the same, 2 = twice as often |
+
+## How the methods work, in plain terms
+
+- **Data science labels.** Projects are tagged by the NIH Data Science Taxonomy: keyword rules first, then two large language models (AI systems that read text) that decide whether data science is central to the project.
+- **No prediction models.** Every number here is a count or a share.
+- **Times as common.** How often a research area shows up in movers' earlier projects compared with everyone else's projects. 2 means twice as often; 1 means the same.

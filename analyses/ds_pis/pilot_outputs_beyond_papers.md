@@ -78,3 +78,8 @@ The same groups as the main analysis (definitions in [pi_analysis.md](pi_analysi
 | Infrastructure builder PI | A data science PI whose projects mostly build software, platforms, or data resources |
 | NCBI | The National Center for Biotechnology Information, which hosts NIH's biological data repositories |
 | PI | Principal investigator: a person who leads an NIH-funded project |
+
+## How the methods work, in plain terms
+
+- **No models.** The pilot links records by award number: a dataset or software record in DataCite or NCBI that lists an NIH award number is credited to that project and its PIs.
+- **Coverage check.** For 50 builder PIs, a person looks up their repositories by hand and records what the automatic search found and missed, which shows how much the counts undercount.

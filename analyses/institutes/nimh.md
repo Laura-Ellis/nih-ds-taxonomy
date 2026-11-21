@@ -29,6 +29,19 @@ Most projects answer a funding call. Targeted calls (RFAs and PARs) ask for work
 | Training (K, F, T) | 20% | 14% |
 | Other | 6% | 9% |
 
+### Linking projects to calls
+
+Every grant record names the funding call it answered. For projects that name only a broad call, a ranking model found the targeted call each fits best ([how](../topics/topics_analysis.md#linking-every-project-to-a-call)). Weak fit = no targeted call comes close, so that data science came in without a call that asked for it. Shares of data science projects.
+
+| Call on the grant record | NIMH | All NIH |
+|---|---:|---:|
+| Targeted call on record | 43% | 53% |
+| Broad call, strong fit | 9% | 4% |
+| Broad call, weak fit | 46% | 37% |
+| No funding call (intramural, VA, contract) | 2% | 5% |
+
+Targeted calls its broad-call projects fit best (strong fits, 11 or more projects): PAR-16-136 (Using the NIMH Research Domain Criteria (RDoC) Approach to Understand Psychosis , 16); PAR-18-929 (High-Priority Areas for Research Leveraging EHR and Large-Scale Data (R01 Clinic, 15); RFA-MH-17-300 (The Neural Mechanisms of Multi-Dimensional Emotional and Social Representation (, 15).
+
 NIMH is the main institute for 536 data science PIs. 13% had NIH projects before their first data science project. 58% have projects at more than one institute.
 
 Data science PIs by when they started data science: FY2016–18 or earlier 302, FY2019–21 150, FY2022–25 82. FY2016 is the first year in the data, so earlier starts count there.
@@ -74,3 +87,11 @@ Projects are counted once per fiscal year they are active; the administering IC 
 | PI | Principal investigator: a person who leads an NIH-funded project |
 | RCDC | NIH's research, condition, and disease categories, used to tag every project |
 | Rest of NIH | Every other NIH institute and center |
+
+## How the methods work, in plain terms
+
+- **Counts and shares, no model.** Each project counts once in every year it's active, under the institute that manages it. Data science share = data science projects ÷ all projects; growth = share now ÷ share in FY2016–18.
+- **Data science labels.** Projects are tagged by the NIH Data Science Taxonomy: keyword rules first, then two large language models (AI systems that read text) that decide whether data science is central to the project.
+- **Themes and rising topics.** A topic-grouping method (BERTopic) sorts project summaries into groups that share meaning, like sorting mail by subject when nothing is labeled.
+- **Area gaps.** For each research area, the institute's data science share of funding minus the rest of NIH's share in the same area. Negative means the institute does less data science there.
+- **Call links.** A ranking model (LightGBM LambdaMART) looks at 150 candidate calls for each project and sorts them so the best fit comes first. It's built from 300 small decision trees, each a short chain of yes-or-no questions ("Does the call allow this grant type?"), and it finds a project's actual call in the top 10 for 95% of projects whose call we know.

@@ -19,6 +19,7 @@ Terms are defined in the [glossary](#glossary) at the end.
 7. [What this means](#7-what-this-means)
 8. [Method, data, and limits](#8-method-data-and-limits)
 9. [Glossary](#glossary)
+10. [How the methods work, in plain terms](#how-the-methods-work-in-plain-terms)
 
 ## 1. What data science works on
 
@@ -84,9 +85,11 @@ Some topics have no matching targeted call. Few of their projects come through R
 
 ## 5. Matching projects to funding calls
 
-Can a model read a project's abstract and find the call it was funded under? I tested eight methods, plus two ways of combining the best two, on 2,000 projects, each against all 2,482 targeted calls. The real funding link is the answer key.
+A funding call is NIH's public request for grant proposals on a topic, like a job posting for research money (formally a NOFO). Every grant record names the call it answered, such as RFA-AI-24-001. I call that the project's **actual call**.
 
-| Method | Right call ranked first | In top 5 | In top 10 | MRR |
+Can a model read a project's summary and find its actual call? I hid the call for 2,000 projects and tested eight methods, plus two ways of combining the best two, each picking from all 2,482 targeted calls. "In top 10" means the actual call was among a method's 10 best guesses.
+
+| Method | Actual call ranked first | In top 5 | In top 10 | MRR |
 |---|---:|---:|---:|---:|
 | Tuned blend: 60% word matching + 40% PubMedBERT | 21% | 41% | 47% | 0.30 |
 | Word matching (TF-IDF) | 20% | 40% | 47% | 0.29 |
@@ -100,11 +103,67 @@ Can a model read a project's abstract and find the call it was funded under? I t
 
 Plain word matching still beats every AI model on its own. An application and its call share exact terms, such as program names, required elements, and diseases. Biomedical models do better than general ones (PubMedBERT 40% vs. MiniLM 35% in the top 10), but they match on topic, and many calls share a topic. Reading longer text (BGE-M3) and reranking (MedCPT) didn't close the gap.
 
-Combining helps a little, if the mix leans on word matching. An equal mix adds nothing. A blend of 60% word matching and 40% PubMedBERT ranks the right call higher (MRR 0.274 to 0.291 on held-out projects, a 6% gain; 95% CI for the gain 0.008 to 0.026), but it doesn't find more calls: the top 10 stays at 47%. I picked the weight on a random half of the projects and checked it on the other half, so the gain isn't tuned to the projects it's reported on. Weights from 0.3 to 0.7 all beat word matching alone (`reports/results/nofo_hybrid_weights.csv`).
+Combining helps a little, if the mix leans on word matching. An equal mix adds nothing. A blend of 60% word matching and 40% PubMedBERT ranks the actual call higher (MRR 0.274 to 0.291 on held-out projects, a 6% gain; 95% CI for the gain 0.008 to 0.026), but it doesn't find more calls: the top 10 stays at 47%. I picked the weight on a random half of the projects and checked it on the other half, so the gain isn't tuned to the projects it's reported on. Weights from 0.3 to 0.7 all beat word matching alone (`reports/results/nofo_hybrid_weights.csv`).
 
-MRR (mean reciprocal rank) = average of 1 ÷ the rank of the right call. Tuned blend = 0.6 × z(word-matching score) + 0.4 × z(PubMedBERT score), where z standardizes each score within a project. Equal rank fusion = 1 ÷ (60 + rank), summed.
+MRR (mean reciprocal rank) = average of 1 ÷ the rank of the actual call. Tuned blend = 0.6 × z(word-matching score) + 0.4 × z(PubMedBERT score), where z standardizes each score within a project. Equal rank fusion = 1 ÷ (60 + rank), summed.
 
 ![Matching check](../../reports/figures/topics/09b_matching_bio.png)
+
+### A better way: learning to rank
+
+Text alone has a ceiling. A model that also uses what NIH already knows about each application finds the actual call far more often.
+
+| Method | Inputs | Actual call ranked first | In top 5 | In top 10 | MRR |
+|---|---|---:|---:|---:|---:|
+| Word matching (TF-IDF) | Text only | 20% | 40% | 47% | 0.29 |
+| Learning to rank | Text only | 22% | 42% | 48% | 0.31 |
+| Word matching (TF-IDF) | Activity code + institute filter | 28% | 58% | 70% | 0.42 |
+| Title match | Activity code + institute filter | 36% | 69% | 84% | 0.50 |
+| **Learning to rank** | **Text + project details** | **47%** | **89%** | **95%** | **0.65** |
+
+How it works (`analyses/topics/nofo_match_ltr.py`):
+
+1. **Text scores.** Seven scores for every project and call: TF-IDF on the whole call, on its best 200-word chunk, and with 1-3 word phrases; BM25 on the whole call and its best chunk; title-to-title match; and PubMedBERT similarity.
+2. **Project details.** Does the call allow the project's activity code? Does the project's institute issue or join the call? Was the call open in one of the project's funding years, and if not, how many years off? These come from the call's text and number (RFA-AI-24-001 is an NIAID call).
+3. **Candidates.** For each project, the 150 calls with the highest text scores, with calls that pass the activity code and institute filters first. The actual call is among them for 98.8% of projects.
+4. **Model.** LightGBM LambdaMART: gradient-boosted decision trees trained to put the actual call near the top of each project's list (it optimizes NDCG, a ranking score that rewards the top spots).
+5. **Test.** Five-fold cross-validation by project: every project is ranked by a model trained on the other 80%.
+
+The activity code does the most work (23% of the model's gain). It keeps the actual call for 98% of projects and rules out 85% of calls. The institute keeps 98% and rules out 85%. Funding years help as a hint, but as a hard filter they drop the actual call for 12% of projects (renewals and reissued calls), so the model uses them as a feature instead. Learning to rank on text alone barely beats word matching, so the gain comes from the project details, not the model alone.
+
+One caveat: the activity code and institute filters leave about 65 calls per project, so part of the gain is a shorter list to choose from. That's a fair comparison for real use, since every application carries its activity code and institute.
+
+![Learning to rank](../../reports/figures/topics/09c_matching_ltr.png)
+
+### Linking every project to a call
+
+With a model that finds the actual call 95% of the time, I linked the projects whose grant record doesn't name a targeted call (`analyses/topics/nofo_link_ltr.py`). The model was retrained on 6,000 projects that do name one, without PubMedBERT, and still finds the actual call in the top 10 for 94.5% of the 2,000 check projects.
+
+| Call on the grant record | Projects | Share | What the model did |
+|---|---:|---:|---|
+| Targeted call (RFA or PAR) | 24,367 | 53% | Nothing to link |
+| Broad call only, such as the parent R01 | 18,937 | 41% | Found the targeted call each fits best |
+| No funding call by design (intramural, VA, contracts, other transactions) | 2,472 | 5% | Not linked: these never go through a call |
+| Grant with no call named | 27 | <1% | Found its likely call |
+
+For broad-call projects, the result is the best-fitting targeted call, not the call that funded them. A fit is **strong** when that call scores as high as a typical correct match (the median score of correct first picks in the check set), and **weak** otherwise. Only 1,902 broad-call projects (4% of all data science) have a strong fit; 17,035 (37%) don't. So more than a third of data science at NIH arrives with no close targeted call: investigators propose it without being asked.
+
+By institute, the weak-fit share runs from 19% at NCI to 63% at NHLBI, which also has the lowest share of projects naming a targeted call (31%). That matches section 3 (heart disease is thin relative to burden) and section 4 (few targeted calls fit heart projects). By data science area, data infrastructure is 77% targeted, since NIH builds resources through calls; AI, statistics, and modeling are about 45% targeted and 44% weak fit.
+
+| Institute | Targeted call | Broad call, strong fit | Broad call, weak fit | No funding call |
+|---|---:|---:|---:|---:|
+| All NIH | 53% | 4% | 37% | 5% |
+| NHLBI | 31% | 2% | 63% | 3% |
+| NIMH | 43% | 9% | 46% | 2% |
+| NICHD | 45% | 5% | 46% | 4% |
+| NIAID | 48% | 7% | 42% | 3% |
+| NIGMS | 64% | 3% | 34% | 0% |
+| NIA | 62% | 5% | 31% | 2% |
+| NCI | 71% | 3% | 19% | 6% |
+
+Full tables: `reports/results/nofo_links.csv` (top 3 calls per project), `nofo_links_by_call.csv`, `nofo_links_by_institute.csv`, `nofo_links_by_area.csv`.
+
+![Call links](../../reports/figures/topics/09d_call_links.png)
 
 ## 6. What goes with patents, trials, and highly cited papers
 
@@ -176,3 +235,14 @@ Judge outputs by area. Mental health projects are more likely to have a trial an
 | Relative Citation Ratio (RCR) | Citations per year compared with the field's norm; 1 = a typical NIH paper |
 | SHAP | How much each trait pushes a model's prediction up or down |
 | TF-IDF | Word matching that gives more weight to words that are rare across documents |
+
+## How the methods work, in plain terms
+
+- **Topic grouping (BERTopic, LDA).** Sorts project summaries into groups that share words or meaning, like sorting mail by subject when nothing is labeled. BERTopic groups by meaning; LDA groups by shared words.
+- **Word matching (TF-IDF, BM25).** Scores two texts by the words they share. Rare words, like a program name, count more than common ones like "research". BM25 is the version search engines use: it stops giving extra credit for a word repeated many times and adjusts for length.
+- **Language models (PubMedBERT, MedCPT, BGE-M3, MiniLM).** Turn each text into a list of numbers so texts that mean the same thing sit close together, even when they use different words. PubMedBERT and MedCPT learned from biomedical papers.
+- **Ranking model (LightGBM LambdaMART).** For each project, it looks at 150 candidate calls and sorts them so the actual call comes first. It's built from 300 small decision trees, each a short chain of yes-or-no questions ("Does the call allow this grant type?"). Each new tree fixes mistakes the earlier ones made, and it was trained to care most about the top of the list. It learned from projects whose call we know and was tested on projects it hadn't seen.
+- **Prediction models (gradient boosting, random forest, logistic regression).** Learn from past projects which traits go with a clinical trial, a patent, or highly cited papers. AUC grades them: 0.5 is a coin flip, 1 is perfect.
+- **SHAP.** Splits each prediction into how much each trait pushed it up or down, so we can see what a model relies on.
+- **Fair comparison (AIPW).** Compares projects with and without a trait after making the two groups alike on size, type, and institute, so the trait doesn't get credit for those differences.
+- **Simple ratios, no model.** Growth = a topic's share now ÷ its share in FY2016–18. Gap ratio = share of data science funding ÷ share of disease burden. A call "asks for data science" when the taxonomy's keyword rules find a data science term in its description.

@@ -339,6 +339,40 @@ def pct(v, d=0):
     return "suppressed" if pd.isna(v) else f"{v * 100:.{d}f}%"
 
 
+LINKS = ROOT / "reports" / "results" / "nofo_links_by_institute.csv"
+LINK_COLS = [("Targeted call on record", "Targeted call listed"), ("Broad call, strong fit", "Broad call: strong fit"),
+             ("Broad call, weak fit", "Broad call: weak fit"), ("No funding call (intramural, VA, contract)",
+                                                              "No funding call (intramural, VA, contract)")]
+
+
+def call_links(ic):
+    """Call-link lines for the IC page, from analyses/topics/nofo_link_ltr.py (skipped if not run yet)."""
+    if not LINKS.exists():
+        return []
+    from nofo_rank import IC as IC_CODE  # pyright: ignore[reportMissingImports]
+    code = IC_CODE.get(ic, ic)
+    t = pd.read_csv(LINKS).set_index("administering_ic")
+    if code not in t.index:
+        return []
+    cols = [c for _, c in LINK_COLS]
+    mine, alln = t.loc[code, cols], t[cols].sum()
+    mine, alln = mine / mine.sum(), alln / alln.sum()
+    lk = pd.read_csv(ROOT / "reports" / "results" / "nofo_links.csv", usecols=["administering_ic", "fit", "call_1", "call_1_title"])
+    top = lk[(lk.administering_ic == code) & (lk.fit == "Strong fit")].groupby(["call_1", "call_1_title"]).size()
+    top = top[top >= 11].sort_values(ascending=False).head(3)
+    out = ["### Linking projects to calls", "",
+           "Every grant record names the funding call it answered. For projects that name only a broad call, a ranking model "
+           "found the targeted call each fits best ([how](../topics/topics_analysis.md#linking-every-project-to-a-call)). "
+           "Weak fit = no targeted call comes close, so that data science came in without a call that asked for it. "
+           "Shares of data science projects.", "",
+           f"| Call on the grant record | {ic} | All NIH |", "|---|---:|---:|",
+           *[f"| {lab} | {pct(mine[c])} | {pct(alln[c])} |" for lab, c in LINK_COLS], ""]
+    if len(top):
+        out += ["Targeted calls its broad-call projects fit best (strong fits, 11 or more projects): " +
+                "; ".join(f"{c} ({str(tt)[:80]}, {n})" for (c, tt), n in top.items()) + ".", ""]
+    return out
+
+
 def page(ic, r, routes, acts, rising, themes, ar, cats, new):
     trail = ar[ar.gap_points < 0].head(5)
     lead = ar.sort_values("gap_points", ascending=False).head(3)
@@ -361,6 +395,7 @@ def page(ic, r, routes, acts, rising, themes, ar, cats, new):
         *[f"| {k} | {pct(routes.ic[k])} | {pct(routes.rest_of_nih[k])} |" for k in ROUTES], "",
         "| Activity group | " + ic + " | Rest of NIH |", "|---|---:|---:|",
         *[f"| {k} | {pct(acts.ic[k])} | {pct(acts.rest_of_nih[k])} |" for k in ACTS], "",
+        *call_links(ic),
         f"{ic} is the main institute for {n_pis} data science PIs. "
         f"{pct(r['established_share'])} had NIH projects before their first data science project. "
         f"{pct(r['across_ics_share'])} have projects at more than one institute.", "",
@@ -395,7 +430,19 @@ def page(ic, r, routes, acts, rising, themes, ar, cats, new):
         "| NOFO | Notice of funding opportunity. RFA and PAR = targeted calls for an area; PA = broad, such as the parent R01 |",
         "| PI | Principal investigator: a person who leads an NIH-funded project |",
         "| RCDC | NIH's research, condition, and disease categories, used to tag every project |",
-        "| Rest of NIH | Every other NIH institute and center |", ""]
+        "| Rest of NIH | Every other NIH institute and center |", "",
+        "## How the methods work, in plain terms", "",
+        "- **Counts and shares, no model.** Each project counts once in every year it's active, under the institute that manages it. "
+        "Data science share = data science projects ÷ all projects; growth = share now ÷ share in FY2016–18.",
+        "- **Data science labels.** Projects are tagged by the NIH Data Science Taxonomy: keyword rules first, then two large "
+        "language models (AI systems that read text) that decide whether data science is central to the project.",
+        "- **Themes and rising topics.** A topic-grouping method (BERTopic) sorts project summaries into groups that share "
+        "meaning, like sorting mail by subject when nothing is labeled.",
+        "- **Area gaps.** For each research area, the institute's data science share of funding minus the rest of NIH's share in the same area. "
+        "Negative means the institute does less data science there.",
+        "- **Call links.** A ranking model (LightGBM LambdaMART) looks at 150 candidate calls for each project and sorts them so the "
+        "best fit comes first. It's built from 300 small decision trees, each a short chain of yes-or-no questions (\"Does the call allow "
+        "this grant type?\"), and it finds a project's actual call in the top 10 for 95% of projects whose call we know.", ""]
     (PAGES / f"{ic.lower()}.md").write_text("\n".join(lines), encoding="utf-8")
 
 

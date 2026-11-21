@@ -231,3 +231,16 @@ Non-ties are random pairs, so scores are higher than they would be in real use; 
 | Relative Citation Ratio (RCR) | Citations per year compared with the field's norm; 1 = a typical NIH paper |
 | Research community | A group of PIs who mostly work with each other, found from co-PI ties |
 | Substantive data science | Data science in a project's aims or stated approach, not just mentioned |
+
+## How the methods work, in plain terms
+
+- **Data science labels.** Each project is tagged by keyword rules first, then by two large language models (AI systems that read text) that decide whether data science is central to the project. Their tags agree with people's hand coding almost as well as people agree with each other (kappa 0.86 for data science, 0.92 for AI; 1 is perfect).
+- **Fair comparison groups (weighting and matching).** Builder PIs are compared with other data science PIs who have the same mix of portfolio size and start year, so differences aren't just because one group is bigger or older.
+- **Kaplan-Meier curves.** Show the share of people who reach a milestone (such as a first R01) by each year, while fairly counting people we've only been able to follow for a few years.
+- **Cox model.** Compares how fast two groups reach a milestone each year, holding grant type, institute, and start year steady. "3.1×" means three times as fast.
+- **Random survival forest.** A set of 300 decision trees that predicts the same milestone timing. It's a check on the Cox model: both predict about equally well.
+- **Propensity score matching.** Pairs each data science K awardee with a similar K awardee who isn't in data science (similar grant type, institute, and timing), then compares what happened to each pair.
+- **Bootstrap intervals.** Re-runs the analysis on 1,000 random resamples of the people to show how much a result could move by chance. The 95% interval is the middle 95% of those results.
+- **Research communities (Louvain method).** Finds groups of PIs who mostly work with each other, like friend circles in a social network.
+- **Bridges (betweenness).** Scores how often a PI sits on the shortest path between two others, so high scorers connect groups that wouldn't otherwise meet.
+- **Who teams up next (link prediction).** Models trained on partnerships through FY2021 guess which pairs of PIs will team up later, then are checked against the real new partnerships. The simplest one counts shared partners. The best ones (gradient boosting, a set of decision trees, and logistic regression, a weighted checklist) also use same institute, same community, and data science status. AUC grades them: 0.5 is a coin flip, 1 is perfect.

@@ -37,6 +37,7 @@
 # Needs `pip install shap` for SHAP (optional).
 
 # %%
+import os
 import sys
 import zipfile
 from pathlib import Path
@@ -365,3 +366,36 @@ note(fig, f"Adjusted for institute, project type, first FY, years funded, cost, 
 save(fig, "16_impact_causal")
 _stop()
 say("done")
+
+# %% [markdown]
+# ## Outcomes by institute
+#
+# For the institutes with the most data science projects in this cohort (NIAID always included): the share of each
+# institute's data science projects with each outcome, vs. data science projects at every other institute, and the
+# gap after making them alike in size, grant type, years funded, team, and start year (AIPW, as in the causal check,
+# without institute in the adjustment). 95% ranges from bootstrap samples. `IMPACT_IC_TOP` (default 8) and
+# `IMPACT_IC_BOOT` (default 100) change the number of institutes and samples.
+
+# %%
+stage("outcomes by institute")
+IC_TOP, IC_BOOT = int(os.environ.get("IMPACT_IC_TOP", 8)), int(os.environ.get("IMPACT_IC_BOOT", 100))
+ics = list(d.administering_ic.value_counts().head(IC_TOP).index)
+if "AI" not in ics:
+    ics.append("AI")
+Wn = pd.concat([d[STRUCT_NUM], pd.get_dummies(d["family"], prefix="type", dtype=int)], axis=1).astype(float).to_numpy()
+rows = []
+for k, ic in enumerate(ics):
+    rng_ic = np.random.default_rng(SEED + k)
+    t = d.administering_ic.eq(ic).astype(int).to_numpy()
+    for o in OUTCOMES:
+        y = d[o].to_numpy()
+        est = aipw(t, y, Wn)
+        boot = [aipw(t, y, Wn, rng_ic.integers(0, len(t), len(t))) for _ in range(IC_BOOT)]
+        rows.append({"ic": ic, "projects": int(t.sum()), "outcome": OUTCOMES[o], "ic_share": y[t == 1].mean(),
+                     "rest_share": y[t == 0].mean(), "aipw_gap": est,
+                     "low": np.percentile(boot, 2.5) if boot else np.nan, "high": np.percentile(boot, 97.5) if boot else np.nan})
+    say(f"  {ic} done")
+by_ic = pd.DataFrame(rows)
+by_ic.to_csv(OUT / "impact_by_ic.csv", index=False)
+print(by_ic.round(3).to_string(index=False))
+_stop()
