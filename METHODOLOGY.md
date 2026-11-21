@@ -4,7 +4,7 @@
 
 ## Bottom line
 
-The taxonomy classifies NIH projects in three stages. Keyword terms find every project that mentions data science or AI, at no cost and with almost no misses (AI recall 98–100%). Jev then labels each flagged project, and a resolver model relabels the calls where Jev is less than 90% confident. With Claude as the resolver, the pipeline matches Claude alone on AI (κ = 0.94) and beats it on data science (κ = 0.87 vs. 0.84) at about one-eighth of the cost. The pipeline uses ChatGPT (GPT-6 Luna) as the resolver: it comes within 0.02 of Claude on both labels and labels the full FY2016–2025 set for about $21 in total, compared with about $108 using Claude through the Batch API. Gemini Flash-Lite costs more than ChatGPT and falls short on data science.
+The taxonomy classifies NIH projects in three stages. Keyword terms find every project that mentions data science or AI, at no cost and with almost no misses (AI recall 98–100%). Jev then labels each flagged project, and a resolver model relabels the calls where Jev is less than 90% confident. With Claude as the resolver, the pipeline matches Claude alone on AI (κ = 0.94) and beats it on data science (κ = 0.87 vs. 0.84) at about one-eighth of the cost. The pipeline uses ChatGPT (GPT-6 Luna) as the resolver: it comes within 0.02 of Claude on both labels and labels the full FY2016–2026 set for about $24 in total, compared with about $108 using Claude through the Batch API. Gemini Flash-Lite costs more than ChatGPT and falls short on data science.
 
 ## 1. Sources and design
 
@@ -99,7 +99,7 @@ Reference: the 150 coded projects (42 substantive AI, 52 substantive data scienc
 
 **Choosing a resolver.** Agreement on the uncertain calls matters most, since those are the only calls a resolver makes. A cheaper resolver is worth using if its pipeline κ is within about 0.02 of Claude's; differences smaller than that are within sampling error on 150 projects. ChatGPT (GPT-6 Luna) meets that bar on both labels (AI 0.92 vs. 0.94; data science 0.86 vs. 0.87) at about one-twentieth of Claude's cost; Gemini Flash-Lite does not (0.89 and 0.81), mainly because it calls mentions substantive. All three models agree with the coding on every substantive AI project (recall 100%); they differ on mentions. Using a second model family also shows the labels do not depend on one vendor.
 
-**Cost at full scale.** The FY2016–2025 keyword run flagged 50,481 of 246,754 records; their combined texts average 1.6 times a single abstract. Jev's confidence falls below 0.90 on about 11% of AI calls and about 40% of AI or data science calls.
+**Cost at full scale.** The FY2016–2026 keyword run flagged 54,806 of 258,321 records; their combined texts average 1.7 times a single abstract. Jev's confidence falls below 0.90 on about 11% of AI calls and about 40% of AI or data science calls.
 
 | Resolver | Relabels | Resolver cost | Total with Jev (~$11) | Pipeline AI κ | Pipeline DS κ |
 |---|---|---|---|---|---|
@@ -119,7 +119,7 @@ Costs: tokens measured on the coded sample × list price × 1.6 for longer texts
 - Claude remains the reference model: it set the bar the other resolvers were tested against, labeled the 747-project term review, and is available through the Batch API (`src/claude_batch.py`) if a resolver change needs checking.
 
 **Pipeline**
-1. **Find candidates with keywords:** all ExPORTER projects, FY2016–2025, at no cost.
+1. **Find candidates with keywords:** all RePORTER projects, FY2016–2026 (FY2026 preliminary), at no cost.
 2. **Label candidates with Jev;** send AI or data science calls below 90% confidence to ChatGPT (GPT-6 Luna) (`notebooks/09_label_jev.py`, `notebooks/10_resolve_chatgpt.py`).
 3. **Check and tune** on samples each fiscal year: compare keyword, Jev, ChatGPT, and Claude labels, and review low-precision terms.
 
@@ -138,34 +138,36 @@ Full comparison: [`reports/method_comparison.md`](reports/method_comparison.md) 
 
 **Funding is counted once.** A parent award's total cost already includes its subprojects' costs, so adding both overstates funding. `attributed_cost` gives each subproject its own cost and the parent the remainder (parent total cost − subproject costs, in the same fiscal year), so it sums to the award total and can be split by flag without double counting. `award_total_cost` on the parent record keeps the full award amount for reference.
 
-## 6. Results, FY2016–2025
+## 6. Results, FY2016–2026
 
-**Bottom line:** AI went from 2.1% of NIH project records in FY2016 to 7.7% in FY2025, and from 2.2% to 8.5% of extramural funding ($626M to $3.2B). Data science as a whole rose from 12.5% to 20.7% of records. Most AI projects apply existing methods; about a fifth develop new ones. Generative AI projects doubled from FY2023 to FY2025.
+FY2026 is preliminary (RePORTER API pull, October 2026), so comparisons below run FY2016 to FY2025, the latest complete year, with FY2026 shown separately.
+
+**Bottom line:** AI went from 2.2% of NIH project records in FY2016 to 8.0% in FY2025, and from 2.6% to 9.5% of extramural funding ($671M to $3.5B). Data science as a whole rose from 14.8% to 23.0% of records. Most AI projects apply existing methods; about a fifth develop new ones. Generative AI projects grew 79% from FY2023 to FY2025, while AI overall grew 11%.
 
 **Scale of the run**
-- 246,754 records (parent projects and subprojects), FY2016–2025
-- 50,481 flagged by keywords; ChatGPT resolved 29,671 uncertain texts
-- Total model cost about $21
+- 258,321 records (parent projects and subprojects), FY2016–2026, from the RePORTER API
+- 54,806 flagged by keywords; ChatGPT resolved 32,221 uncertain texts
+- Total model cost about $24
 
 **Trend** (`reports/results/trend_by_fy.csv`)
 
-| Measure | FY2016 | FY2025 |
-|---|---|---|
-| Records | 68,198 | 72,210 |
-| Data science, share of records | 12.5% | 20.7% |
-| Data science, share of extramural funding | 17.1% | 24.4% |
-| AI, records | 1,412 | 5,572 |
-| AI, share of records | 2.1% | 7.7% |
-| AI, extramural funding | $626M | $3.2B |
-| AI, share of extramural funding | 2.2% | 8.5% |
+| Measure | FY2016 | FY2025 | FY2026 (preliminary) |
+|---|---|---|---|
+| Records | 63,511 | 68,794 | 63,926 |
+| Data science, share of records | 14.8% | 23.0% | 23.5% |
+| Data science, share of extramural funding | 21.2% | 27.4% | 27.6% |
+| AI, records | 1,414 | 5,489 | 5,545 |
+| AI, share of records | 2.2% | 8.0% | 8.7% |
+| AI, extramural funding | $671M | $3.5B | $3.7B |
+| AI, share of extramural funding | 2.6% | 9.5% | 10.1% |
 
-**AI role, FY2025:** applies AI 70%, develops AI 21%, supports AI 8%, and studies AI 1%.
+**AI role, FY2025:** applies AI 69%, develops AI 21%, supports AI 9%, and studies AI 1%.
 
-**By institute** (extramural, FY2016–2025, `ai_by_institute.csv`): NCI spends the most on AI ($2.1B, 4.4% of its extramural funding), followed by NIA ($1.9B, 6.6%), NIMH ($1.8B, 10.9%), NHLBI ($1.5B, 4.5%), and NIGMS ($1.4B, 4.9%). NHGRI (17.9%) and NIBIB (16.5%) put the largest shares into AI. NIAID has the largest extramural portfolio but one of the lowest AI shares (2.2%).
+**By institute** (extramural, FY2016–2026, `ai_by_institute.csv`): NCI spends the most on AI ($3.1B, 5.9% of its extramural funding), followed by NIAID ($2.3B, 4.3%), NIA ($2.3B, 7.1%), NHLBI ($2.3B, 6.2%), and NIMH ($2.1B, 11.7%). NLM (45.7%, on a small portfolio), NIBIB (19.2%), and NHGRI (18.7%) put the largest shares into AI. NIAID has the largest extramural portfolio ($53.6B) and, among the large institutes, the second lowest AI share after NIDDK (3.4%).
 
-**Methods and areas** (`ai_method_by_area.csv`): machine learning appears in every area. Computer vision clusters in imaging (2,485 projects), and language processing in clinical care and electronic health records (723).
+**Methods and areas** (`ai_method_by_area.csv`): machine learning appears in every area. Computer vision clusters in imaging (2,759 projects), and language processing in clinical care and electronic health records (740).
 
-**Generative AI** (`genai_by_fy.csv`, `genai_role_area.csv`): 149 projects in FY2023, 296 in FY2025, while AI overall grew 11%. Among generative AI projects active since FY2023, 52% develop AI and 40% apply it; imaging (31%) and clinical care (30%) are the most common areas.
+**Generative AI** (`genai_by_fy.csv`, `genai_role_area.csv`): 171 projects in FY2023, 306 in FY2025, and 409 in FY2026 so far. Among generative AI projects active since FY2023, 51% develop AI and 41% apply it; clinical care (32%) and imaging (29%) are the most common areas.
 
 **Publications, AI vs. matched projects** (`outputs_matched.csv`): extramural core projects starting FY2016–2020, with non-AI projects weighted to match AI projects on IC, activity code, first fiscal year, and size band (cost tercile within activity code). AI projects have a median of 12 linked papers vs. 8 for matched projects; 91% vs. 89% have at least one. Citation impact (RCR, FWCI), patents, and clinical trials come from `notebooks/12_link_outputs.py`.
 

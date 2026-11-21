@@ -24,6 +24,7 @@ scipy
 sentence-transformers  # topics (analyses/topics/topics.py); local, free
 bertopic               # topics; pulls in umap-learn and hdbscan
 shap                   # impact drivers (analyses/topics/impact_models.py); optional
+lightgbm               # NOFO matching, learning to rank (analyses/topics/nofo_match_ltr.py, nofo_link_ltr.py)
 # scikit-survival   # optional, random survival forest in analyses/ds_pis/training.py; on Windows:
 #                   # pip install --no-deps scikit-survival; pip install osqp numexpr
 

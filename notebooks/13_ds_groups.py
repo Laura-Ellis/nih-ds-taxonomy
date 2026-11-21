@@ -225,6 +225,23 @@ _stop()
 # for shares.
 
 # %%
+# NOFO route for the dashboard filter: targeted (RFA, PAR), researcher-initiated (PA, PAS), or not
+# through a NOFO (blank, OTA, intramural, contracts). nofo_fit comes from analyses/topics/nofo_link_ltr.py
+# and only applies to researcher-initiated projects: it is the best-fit NOFO, not the funding NOFO.
+def add_nofo_route(t):
+    n = t["nofo"].fillna("").astype(str) if "nofo" in t.columns else pd.Series("", index=t.index)
+    t["nofo_route"] = "Not through a NOFO"
+    t.loc[n.str.match(r"^(PA|PAS)-"), "nofo_route"] = "Researcher-initiated"
+    t.loc[n.str.match(r"^(RFA|PAR)-"), "nofo_route"] = "Targeted NOFO"
+    f = OUT / "nofo_links.csv"
+    if f.exists():
+        lk = pd.read_csv(f, usecols=["core_project_number", "subproject_id", "fit"])
+        lk["record"] = lk.core_project_number + "|" + lk.subproject_id.fillna("").astype(str)
+        t = t.merge(lk[["record", "fit"]].drop_duplicates("record").rename(columns={"fit": "nofo_fit"}), on="record", how="left")
+        t.loc[t.nofo_route != "Researcher-initiated", "nofo_fit"] = None
+    return t
+
+
 _stop = start("Tableau extract: filter by group, IC, fiscal year, activity code, state, and AI role")
 IC_NAMES = {"CA": "NCI", "HL": "NHLBI", "AI": "NIAID", "GM": "NIGMS", "AG": "NIA", "NS": "NINDS", "MH": "NIMH",
             "DK": "NIDDK", "HD": "NICHD", "DA": "NIDA", "AA": "NIAAA", "ES": "NIEHS", "EY": "NEI", "DC": "NIDCD",
@@ -243,6 +260,7 @@ tab = tab[["record", "fy", "ic", "activity", *extra, "ds_group", "group_label", 
            "extramural", "extramural_cost"]]
 tab["preliminary"] = tab.fy == PRELIMINARY_FY
 tab["admin_period"] = tab.fy.map(admin_period)
+tab = add_nofo_route(tab)
 tab.to_csv(OUT / "tableau_ds_groups.csv", index=False)
 
 all_apps = pd.read_parquet(PROCESSED / "exporter_applications.parquet",
