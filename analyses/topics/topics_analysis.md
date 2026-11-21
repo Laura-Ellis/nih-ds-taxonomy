@@ -84,17 +84,27 @@ Some topics have no matching targeted call. Few of their projects come through R
 
 ## 5. Matching projects to funding calls
 
-Can a model read a project's abstract and find the call it was funded under? I tested three methods on 2,000 projects, each against all 2,482 targeted calls. The real funding link is the answer key.
+Can a model read a project's abstract and find the call it was funded under? I tested eight methods, plus two ways of combining the best two, on 2,000 projects, each against all 2,482 targeted calls. The real funding link is the answer key.
 
-| Method | Right call ranked first | In top 5 | In top 10 |
-|---|---:|---:|---:|
-| Word matching (TF-IDF) | 20% | 40% | 47% |
-| Small language model (embeddings) | 13% | 28% | 35% |
-| Language model that rereads the top 20 (cross-encoder) | 11% | 25% | 32% |
+| Method | Right call ranked first | In top 5 | In top 10 | MRR |
+|---|---:|---:|---:|---:|
+| Tuned blend: 60% word matching + 40% PubMedBERT | 21% | 41% | 47% | 0.30 |
+| Word matching (TF-IDF) | 20% | 40% | 47% | 0.29 |
+| Equal rank fusion: word matching + PubMedBERT | 19% | 39% | 45% | 0.28 |
+| PubMedBERT (biomedical) | 16% | 33% | 40% | 0.24 |
+| MedCPT + its reranker (PubMed search) | 15% | 31% | 37% | 0.23 |
+| BGE-M3 (reads long text) | 15% | 30% | 36% | 0.22 |
+| Small general model (MiniLM) | 13% | 28% | 35% | 0.21 |
+| MedCPT alone | 13% | 28% | 34% | 0.21 |
+| Web-search reranker | 11% | 25% | 32% | 0.18 |
 
-Plain word matching wins. An application and its call share exact terms, such as program names, required elements, and diseases. The small language model reads only the start of each text, and the reranker was trained on web searches, not science. Larger biomedical models are the next test.
+Plain word matching still beats every AI model on its own. An application and its call share exact terms, such as program names, required elements, and diseases. Biomedical models do better than general ones (PubMedBERT 40% vs. MiniLM 35% in the top 10), but they match on topic, and many calls share a topic. Reading longer text (BGE-M3) and reranking (MedCPT) didn't close the gap.
 
-![Matching check](../../reports/figures/topics/09_matching_check.png)
+Combining helps a little, if the mix leans on word matching. An equal mix adds nothing. A blend of 60% word matching and 40% PubMedBERT ranks the right call higher (MRR 0.274 to 0.291 on held-out projects, a 6% gain; 95% CI for the gain 0.008 to 0.026), but it doesn't find more calls: the top 10 stays at 47%. I picked the weight on a random half of the projects and checked it on the other half, so the gain isn't tuned to the projects it's reported on. Weights from 0.3 to 0.7 all beat word matching alone (`reports/results/nofo_hybrid_weights.csv`).
+
+MRR (mean reciprocal rank) = average of 1 ÷ the rank of the right call. Tuned blend = 0.6 × z(word-matching score) + 0.4 × z(PubMedBERT score), where z standardizes each score within a project. Equal rank fusion = 1 ÷ (60 + rank), summed.
+
+![Matching check](../../reports/figures/topics/09b_matching_bio.png)
 
 ## 6. What goes with patents, trials, and highly cited papers
 
@@ -133,7 +143,7 @@ Judge outputs by area. Mental health projects are more likely to have a trial an
 
 **Burden:** GBD level 3 causes summed to level 2, matched to RCDC categories through [rcdc_gbd_crosswalk.csv](rcdc_gbd_crosswalk.csv). Funding share uses attributed cost of data science records whose RCDC categories match the cause.
 
-**Matching:** NOFO Section I split into ~200-word chunks and scored by the best chunk. Mean reciprocal rank: TF-IDF 0.29, embeddings 0.21, cross-encoder 0.18. A project can fit more than one NOFO, so these are lower bounds. Biomedical models (MedCPT, BGE-M3, PubMedBERT) are tested in `nofo_match_bio.py`.
+**Matching:** NOFO Section I split into ~200-word chunks and scored by the best chunk. Mean reciprocal rank: TF-IDF 0.29, embeddings 0.21, cross-encoder 0.18. Mean reciprocal rank: TF-IDF 0.29, hybrid 0.29, PubMedBERT 0.24, MedCPT + reranker 0.23, BGE-M3 0.22, MedCPT 0.21. A project can fit more than one NOFO, so these are lower bounds. Biomedical models: NeuML/pubmedbert-base-embeddings; ncbi/MedCPT-Article-Encoder and MedCPT-Cross-Encoder (reranks the top 20); BAAI/bge-m3 on ~1,000-word chunks up to 2,048 tokens. Hybrid = reciprocal rank fusion of TF-IDF and PubMedBERT (`nofo_match_bio.py`).
 
 **Impact:** highly cited = mean RCR in the top quarter of projects with papers (23% of projects); patent 10%; trial 8%. Five-fold cross-validated ROC AUC; logistic regression comes within 0.01 to 0.03 of random forest and gradient boosting. Drivers from SHAP values. Adjusted differences by augmented inverse probability weighting (AIPW, doubly robust), with 200 bootstrap samples.
 
@@ -159,6 +169,7 @@ Judge outputs by area. Mental health projects are more likely to have a trial an
 | DALY | Disability-adjusted life year: a year of healthy life lost to death or disability |
 | Data science project | An NIH project whose aims or approach rely on data science, per the NIH Data Science Taxonomy |
 | Embeddings | Numbers a language model gives each text so similar texts sit close together |
+| PubMedBERT, MedCPT, BGE-M3 | Language models trained on biomedical text or PubMed searches; BGE-M3 reads long text |
 | Gap ratio | Share of data science funding ÷ share of disease burden; 1 = in proportion, below 1 = thin |
 | NOFO | Notice of funding opportunity. RFA and PAR = targeted calls for an area; PA = broad, such as the parent R01 |
 | RCDC | NIH's research, condition, and disease categories, used to tag every project |

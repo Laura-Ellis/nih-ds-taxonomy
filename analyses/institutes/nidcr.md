@@ -2,7 +2,7 @@
 
 **Laura Ellis** · [LinkedIn](https://www.linkedin.com/in/laura-ellis-profile/) · [GitHub](https://github.com/Laura-Ellis/nih-ds-taxonomy) · FY2016 to FY2025, administering IC · [All institutes](README.md)
 
-NIDCR funded 515 data science projects from FY2016 to FY2025. In FY2023 to FY2025, 18% of its projects used data science, compared with 22% for the rest of NIH.
+NIDCR funded 515 data science projects from FY2016 to FY2025. In FY2023 to FY2025, 18% of its projects used data science, compared with 22% for the rest of NIH. By funding, data science was 20% of its dollars, compared with 29% for the rest of NIH. Funding shares run higher because data science projects tend to be larger awards.
 
 Its share grew 1.6 times since FY2016 to FY2018; the rest of NIH grew 1.4 times.
 
@@ -41,17 +41,17 @@ Fastest-rising topics: Head and neck cancer and HPV (4.5×); Chronic pain (2.7×
 
 ## Where it could do more
 
-These research areas are where NIDCR uses data science less than the rest of NIH does in the same area. Areas come from NIH's RCDC categories; each has at least 100 NIDCR applications.
+These research areas are where NIDCR puts a smaller share of its funding into data science than the rest of NIH does in the same area. Areas come from NIH's RCDC categories; each has at least 300 NIDCR applications.
 
-| Area | NIDCR data science share | Rest of NIH | Difference (points) |
+| Area | NIDCR data science share of funding | Rest of NIH | Difference (points) |
 |---|---:|---:|---:|
-| Bioengineering | 19% | 36% | -17.4 |
-| HIV/AIDS | 3% | 16% | -12.7 |
-| Aging | 11% | 19% | -7.9 |
-| Cancer Genomics | 26% | 34% | -7.8 |
-| Biotechnology | 12% | 20% | -7.5 |
+| Human Genome | 33% | 51% | -18.5 |
+| Dental, Oral, and Craniofacial Disease | 17% | 32% | -15.1 |
+| Infectious Diseases | 13% | 25% | -12.5 |
+| Neurosciences | 12% | 24% | -11.8 |
+| Cancer | 15% | 26% | -10.9 |
 
-Where it leads: Translational Research (+5.3); Health Services (+4.7); Health Disparities (+3.8).
+Where it leads: Digestive Diseases (+5.1); Rare Diseases (+-0.4); Pediatric (+-3.7).
 
 Kinds of data science NIDCR funds least often compared with the rest of NIH (1 = as often, 0.5 = half as often): community capacity (0.14); neuroscience (0.16); drug discovery (0.23); mental behavioral (0.23); cloud computing (0.36).
 

@@ -23,7 +23,8 @@
 #   Activity group: R01-type (R01, R37, RF1), other R, cooperative (U), centers (P), training (K, F, T), other.
 # - New data science PI = a PI whose first data science record is that FY. Established = had NIH records
 #   before their first data science record. Works across ICs = records at more than one IC.
-# - Area gap = IC data science share within an RCDC category − rest-of-NIH data science share in the same
+# - Area gap (methods and computing categories such as Data Science and NITRD left out) = IC data science FUNDING share
+#   (data science attributed cost ÷ all attributed cost) within an RCDC category − rest-of-NIH data science share in the same
 #   category, for categories with at least 100 IC applications. Negative = the IC does less data science in
 #   that area than the rest of NIH does.
 # - Category ratio = share of the IC's data science projects with a taxonomy category ÷ the same share for
@@ -66,7 +67,7 @@ for d in (OUT, FIG, PAGES):
 FY_FIRST, FY_LAST = 2016, 2025
 EARLY, LATE = [2016, 2017, 2018], [2023, 2024, 2025]
 MIN_DS = 500          # IC needs this many data science projects for a profile
-MIN_AREA = 100        # IC applications needed in an RCDC category for an area gap
+MIN_AREA = 300        # IC applications needed in an RCDC category for an area gap (funding shares are noisy in small areas)
 SUPPRESS = 11
 SOURCE = "Source: NIH RePORTER API and ExPORTER, FY2016 to FY2025; NIH Data Science Taxonomy."
 IC = {"CA": "NCI", "GM": "NIGMS", "AG": "NIA", "AI": "NIAID", "HL": "NHLBI", "MH": "NIMH", "NS": "NINDS",
@@ -88,6 +89,10 @@ NAME = {"NCI": "National Cancer Institute", "NIGMS": "National Institute of Gene
         "NIMHD": "National Institute on Minority Health and Health Disparities",
         "NIDCR": "National Institute of Dental and Craniofacial Research", "NINR": "National Institute of Nursing Research",
         "NCCIH": "National Center for Complementary and Integrative Health"}
+# RCDC categories that describe methods or computing, not a disease or research area; data science is part of
+# their definition, so comparing data science shares inside them says little about where an IC could do more
+METHOD_AREAS = {"Data Science", "Networking and Information Technology R&D (NITRD)", "Networking and Information Technology R&D",
+                "Machine Learning and Artificial Intelligence", "Bioengineering", "Biotechnology"}
 ROUTES = ["Targeted (RFA, PAR)", "Parent or other PA", "None listed"]
 ACTS = ["R01-type", "Other R", "Cooperative (U)", "Centers (P)", "Training (K, F, T)", "Other"]
 pal.use_style()
@@ -163,7 +168,13 @@ cat_long = cat_long[cat_long.cats.ne("")].drop_duplicates(["ic", "record", "cats
 # per IC and category: projects and data science projects (once per project)
 area = cat_long.groupby(["ic", "cats"]).agg(projects=("record", "nunique"),
                                             ds_projects=("ds", "sum")).reset_index()
-area_all = area.groupby("cats")[["projects", "ds_projects"]].sum()
+# funding: attributed cost of every application in the category (an application counts in each of its categories)
+cost_long = a[["ic", "ds", "cost", "cats"]].explode("cats")
+cost_long["cats"] = cost_long.cats.str.strip()
+cost_long = cost_long[cost_long.cats.ne("")]
+cost_long["ds_cost"] = cost_long.cost.where(cost_long.ds, 0)
+area = area.merge(cost_long.groupby(["ic", "cats"])[["cost", "ds_cost"]].sum().reset_index(), on=["ic", "cats"], how="left")
+area_all = area.groupby("cats")[["projects", "ds_projects", "cost", "ds_cost"]].sum()
 
 stage("taxonomy categories")
 dsp = a[a.ds].drop_duplicates("record")[["record", "ic", "categories"]]
@@ -230,9 +241,11 @@ def profile(ic):
     rising.to_csv(out / "rising_topics.csv", index=False)
 
     # 4. where to improve
-    ar = area[(area.ic == ic) & (area.projects >= MIN_AREA)].set_index("cats")
-    rest_area = area_all.loc[ar.index] - ar[["projects", "ds_projects"]]
-    ar = ar.assign(ic_ds_share=ar.ds_projects / ar.projects, rest_ds_share=rest_area.ds_projects / rest_area.projects)
+    ar = area[(area.ic == ic) & (area.projects >= MIN_AREA) & ~area.cats.isin(METHOD_AREAS)].set_index("cats")
+    rest_area = area_all.loc[ar.index] - ar[["projects", "ds_projects", "cost", "ds_cost"]]
+    # gaps use funding shares (data science dollars ÷ all dollars in the area); project shares kept for reference
+    ar = ar.assign(ic_ds_share=ar.ds_cost / ar.cost, rest_ds_share=rest_area.ds_cost / rest_area.cost,
+                   ic_ds_project_share=ar.ds_projects / ar.projects, rest_ds_project_share=rest_area.ds_projects / rest_area.projects)
     ar["gap_points"] = (ar.ic_ds_share - ar.rest_ds_share) * 100
     ar = ar.sort_values("gap_points")
     ar.assign(ds_projects=ar.ds_projects.map(sup)).to_csv(out / "area_gaps.csv")
@@ -246,6 +259,7 @@ def profile(ic):
 
     row = {"ic": ic, "name": NAME.get(ic, ic), "ds_projects": int(ds_by_ic[ic]),
            "ds_share_late": tr.loc[LATE, "ic_ds_share"].mean(), "rest_ds_share_late": tr.loc[LATE, "rest_ds_share"].mean(),
+           "rest_ds_cost_share_late": tr.loc[LATE, "rest_ds_cost_share"].mean(),
            "ds_cost_share_late": tr.loc[LATE, "ic_ds_cost_share"].mean(), "ai_share_late": tr.loc[LATE, "ic_ai_share"].mean(),
            "growth": g_ic, "rest_growth": g_rest,
            **{f"route: {k}": v for k, v in routes.ic.items()}, **{f"activity: {k}": v for k, v in acts.ic.items()},
@@ -270,12 +284,14 @@ def chart(ic, tr, routes, rising, ar):
     fig, axs = plt.subplots(2, 2, figsize=(13, 9))
     fig.subplots_adjust(left=0.2, right=0.97, top=0.88, bottom=0.12, wspace=0.75, hspace=0.55)
     ax = axs[0, 0]
-    ax.plot(tr.index, tr.ic_ds_share * 100, color=pal.PROJECTS, lw=2.2, label=ic)
-    ax.plot(tr.index, tr.rest_ds_share * 100, color=pal.NEUTRAL, lw=2.2, label="Rest of NIH")
-    ax.set_ylim(0, max(tr.ic_ds_share.max(), tr.rest_ds_share.max()) * 118)
+    ax.plot(tr.index, tr.ic_ds_share * 100, color=pal.PROJECTS, lw=2.2, label=f"{ic}, projects")
+    ax.plot(tr.index, tr.ic_ds_cost_share * 100, color=pal.PROJECTS, lw=2.2, ls="--", label=f"{ic}, funding")
+    ax.plot(tr.index, tr.rest_ds_share * 100, color=pal.NEUTRAL, lw=2.2, label="Rest of NIH, projects")
+    ax.plot(tr.index, tr.rest_ds_cost_share * 100, color=pal.NEUTRAL, lw=2.2, ls="--", label="Rest of NIH, funding")
+    ax.set_ylim(0, min(100, max(tr.ic_ds_share.max(), tr.rest_ds_share.max(), tr.ic_ds_cost_share.max(), tr.rest_ds_cost_share.max()) * 118))
     ax.set_ylabel("% of active projects")
-    ax.set_title("Data science share of projects", loc="left", fontsize=pal.SIZES["label"], color=pal.HEADING)
-    ax.legend(frameon=False, loc="lower right", fontsize=pal.SIZES["axis"])
+    ax.set_title("Data science share of projects and funding", loc="left", fontsize=pal.SIZES["label"], color=pal.HEADING)
+    ax.legend(frameon=False, loc="lower right", fontsize=pal.SIZES["axis"] - 1, ncol=2)
 
     ax = axs[0, 1]
     y = np.arange(len(ROUTES))
@@ -308,12 +324,12 @@ def chart(ic, tr, routes, rising, ar):
             ax.annotate(f"{s:.0%} here", (0, i), xytext=(4, 0), textcoords="offset points", va="center",
                         fontsize=pal.SIZES["axis"], color=pal.MUTED)
         ax.axvline(0, color=pal.MUTED, lw=0.8)
-    ax.set_xlabel("Data science share vs. rest of NIH (points)")
+    ax.set_xlabel("Data science funding share vs. rest of NIH (points)")
     ax.set_title("Areas where data science trails the rest of NIH", loc="left", fontsize=pal.SIZES["label"], color=pal.HEADING)
 
     fig.suptitle(f"Data science at {ic}", x=0.02, ha="left", fontsize=pal.SIZES["chart_title"], color=pal.HEADING, fontweight="bold")
     fig.text(0.02, 0.005, f"Administering IC. Areas = RCDC categories with at least {MIN_AREA} {ic} applications; "
-             "'% here' = data science share of the IC's projects in that area.\n" + SOURCE,
+             "'% here' = data science share of the IC's funding in that area.\n" + SOURCE,
              fontsize=pal.SIZES["source"], color=pal.SOURCE, linespacing=1.6, va="bottom")
     fig.savefig(FIG / f"{ic.lower()}.png", dpi=200, bbox_inches="tight")
     plt.close(fig)
@@ -334,7 +350,9 @@ def page(ic, r, routes, acts, rising, themes, ar, cats, new):
         f"FY{FY_FIRST} to FY{FY_LAST}, administering IC · [All institutes](README.md)", "",
         f"{ic} funded {r['ds_projects']:,} data science projects from FY{FY_FIRST} to FY{FY_LAST}. "
         f"In FY{LATE[0]} to FY{LATE[-1]}, {pct(r['ds_share_late'])} of its projects used data science, "
-        f"compared with {pct(r['rest_ds_share_late'])} for the rest of NIH.", "",
+        f"compared with {pct(r['rest_ds_share_late'])} for the rest of NIH. By funding, data science was "
+        f"{pct(r['ds_cost_share_late'])} of its dollars, compared with {pct(r['rest_ds_cost_share_late'])} for the rest of NIH. "
+        "Funding shares run higher because data science projects tend to be larger awards.", "",
         f"Its share grew {r['growth']:.1f} times since FY{EARLY[0]} to FY{EARLY[-1]}; the rest of NIH grew {r['rest_growth']:.1f} times.", "",
         "Terms are defined in the [glossary](#glossary) at the end.", "",
         f"![Data science at {ic}](../../reports/figures/institutes/{ic.lower()}.png)", "",
@@ -354,9 +372,9 @@ def page(ic, r, routes, acts, rising, themes, ar, cats, new):
         "; ".join(f"{t} ({v:.0%})" for t, v in themes.items()) + ".", "",
         "Fastest-rising topics: " + "; ".join(f"{t.name} ({t.growth:.1f}×)" for t in rising.itertuples()) + ".", "",
         "## Where it could do more", "",
-        f"These research areas are where {ic} uses data science less than the rest of NIH does in the same area. "
+        f"These research areas are where {ic} puts a smaller share of its funding into data science than the rest of NIH does in the same area. "
         f"Areas come from NIH's RCDC categories; each has at least {MIN_AREA} {ic} applications.", "",
-        "| Area | " + ic + " data science share | Rest of NIH | Difference (points) |", "|---|---:|---:|---:|",
+        "| Area | " + ic + " data science share of funding | Rest of NIH | Difference (points) |", "|---|---:|---:|---:|",
         *[f"| {k} | {pct(v.ic_ds_share)} | {pct(v.rest_ds_share)} | {v.gap_points:.1f} |" for k, v in trail.iterrows()], "",
         "Where it leads: " + "; ".join(f"{k} (+{v.gap_points:.1f})" for k, v in lead.iterrows()) + ".", "",
         f"Kinds of data science {ic} funds least often compared with the rest of NIH "

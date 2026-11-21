@@ -68,3 +68,5 @@ notebooks/run_log.txt
 notebooks/I02_niaid_kpis.py
 notebooks/I03_niaid_fair_compare.py
 notebooks/13_ds_groups.py
+/reports/figures
+/reports/figures

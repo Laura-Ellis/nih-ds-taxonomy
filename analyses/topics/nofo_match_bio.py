@@ -23,7 +23,8 @@
 #
 # Inputs: same as `nofo_match.py`. Embeddings are cached in `data/interim/` after each model, so a stopped
 # run picks up where it left off. Choose models with `NOFO_MODELS=medcpt,bge,pubmedbert` (default: all).
-# Outputs: `reports/results/nofo_matching_bio.csv`, `reports/figures/topics/09b_matching_bio.png`.
+# Outputs: `reports/results/nofo_matching_bio.csv`, `reports/results/nofo_hybrid_weights.csv`,
+# `reports/figures/topics/09b_matching_bio.png`.
 #
 # Runtime on a laptop CPU: roughly 30 minutes each for PubMedBERT and MedCPT, about an hour for the MedCPT
 # reranker, and 2 to 4 hours for BGE-M3. Run overnight.
@@ -238,6 +239,43 @@ tbl = tbl.sort_values("mrr", ascending=False)
 tbl.to_csv(OUT / "nofo_matching_bio.csv", index=False)
 print(tbl.round(3).to_string(index=False))
 
+# %% [markdown]
+# ## Hybrid weights
+#
+# Does a different mix of TF-IDF and the best model help? Two blends, with w = weight on TF-IDF:
+# - Rank fusion: w ÷ (60 + TF-IDF rank) + (1 − w) ÷ (60 + model rank). w = 0.5 is the hybrid above.
+# - Score blend: w × z(TF-IDF cosine) + (1 − w) × z(model cosine), z = standardized within each project's row.
+#
+# w is picked on a random half of the check set and scored on the other half, so the result isn't tuned on the
+# projects it's reported on. w = 1 is TF-IDF alone.
+
+# %%
+if best_model:
+    stage("hybrid weights")
+
+    def z(s):
+        return (s - s.mean(axis=1, keepdims=True)) / s.std(axis=1, keepdims=True)
+
+    rt, rm = rank_all(S["TF-IDF"]), rank_all(S[best_model])
+    zt, zm = z(S["TF-IDF"]), z(S[best_model])
+    blends = {"Rank fusion": lambda w: w / (60 + rt) + (1 - w) / (60 + rm),
+              "Score blend": lambda w: w * zt + (1 - w) * zm}
+    tune = np.random.default_rng(SEED).permutation(len(check)) < len(check) // 2
+    rows = []
+    for blend, f in blends.items():
+        for w in np.round(np.arange(0, 1.01, 0.1), 1):
+            r = ranks(f(w))
+            for half, m in [("tune", tune), ("test", ~tune), ("all", np.ones(len(r), bool))]:
+                rows.append({"blend": blend, "w_tfidf": w, "half": half, "hit_at_10": (r[m] <= 10).mean(),
+                             "mrr": (1 / r[m]).mean()})
+    sweep = pd.DataFrame(rows)
+    sweep.to_csv(OUT / "nofo_hybrid_weights.csv", index=False)
+    pick = sweep[sweep.half == "tune"].sort_values("mrr").groupby("blend").tail(1)[["blend", "w_tfidf"]]
+    test = sweep[sweep.half == "test"]
+    print("\nHybrid weights, scored on the held-out half (w = 1 is TF-IDF alone):")
+    print(pd.concat([test[test.w_tfidf == 1.0].head(1).assign(blend="TF-IDF alone"),
+                     test.merge(pick, on=["blend", "w_tfidf"])]).round(3).to_string(index=False))
+
 # %%
 fig, ax = plt.subplots(figsize=(10, 0.55 * len(tbl) + 2.2))
 fig.subplots_adjust(left=0.36, top=0.86, bottom=0.2)
@@ -258,4 +296,4 @@ fig.text(0.02, 0.005, f"{len(check):,} data science projects funded under target
 fig.savefig(FIG / "09b_matching_bio.png", dpi=200, bbox_inches="tight")
 plt.close(fig)
 _stop()
-say(f"done; best model: {best_model}")
+say(f"done; best overall: {tbl.method.iloc[0]}; best language model: {best_model}")
