@@ -70,3 +70,9 @@ notebooks/I03_niaid_fair_compare.py
 notebooks/13_ds_groups.py
 /reports/figures/*
 !/reports/figures/ic_gaps/
+!/reports/figures/global/
+
+# Internal institute analyses (NIAID-specific and OGR regions): private repo only
+analyses/global/ic_global.py
+analyses/global/niaid_global.py
+analyses/global/ogr_regions.py
