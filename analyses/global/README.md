@@ -17,4 +17,4 @@ For the 10 institutes in the [opportunity analysis](../ic_gaps/README.md), I tra
 | [NIMH](nimh.md) | National Institute of Mental Health | 69% |
 | [NINDS](ninds.md) | National Institute of Neurological Disorders and Stroke | 80% |
 
-Code: `direct_awards.py` and `subawards.py` (NIH-wide tables), `regions.py` (country lookup), `ic_global.py` (institute tables), `teasers.py` (these pages).
+Code: `direct_awards.py` and `subawards.py` (NIH-wide tables), `regions.py` (country lookup), `ic_global.py` (institute tables), `teasers.py` (these pages), `map_data.py` (data for the interactive map on the [site](https://laura-ellis.github.io/projects/nih-ds-global.html)).
