@@ -9,7 +9,7 @@
 # 1. How did data science grow at the IC, compared with the rest of NIH?
 # 2. What brought it there: funding opportunity types, activity codes, training awards, new data science PIs?
 # 3. What does the IC's data science work on, and what is rising?
-# 4. Where could it do more: research areas (RCDC) where its data science share trails the rest of NIH, and
+# 4. Where could it grow next: research areas (RCDC) where its data science share has room to grow toward the rest of NIH, and
 #    taxonomy categories it funds less often than the rest of NIH?
 #
 # **Definitions**
@@ -90,7 +90,7 @@ NAME = {"NCI": "National Cancer Institute", "NIGMS": "National Institute of Gene
         "NIDCR": "National Institute of Dental and Craniofacial Research", "NINR": "National Institute of Nursing Research",
         "NCCIH": "National Center for Complementary and Integrative Health"}
 # RCDC categories that describe methods or computing, not a disease or research area; data science is part of
-# their definition, so comparing data science shares inside them says little about where an IC could do more
+# their definition, so comparing data science shares inside them says little about where an IC can grow next
 METHOD_AREAS = {"Data Science", "Networking and Information Technology R&D (NITRD)", "Networking and Information Technology R&D",
                 "Machine Learning and Artificial Intelligence", "Bioengineering", "Biotechnology"}
 ROUTES = ["Targeted (RFA, PAR)", "Parent or other PA", "None listed"]
@@ -325,7 +325,7 @@ def chart(ic, tr, routes, rising, ar):
                         fontsize=pal.SIZES["axis"], color=pal.MUTED)
         ax.axvline(0, color=pal.MUTED, lw=0.8)
     ax.set_xlabel("Data science funding share vs. rest of NIH (points)")
-    ax.set_title("Areas where data science trails the rest of NIH", loc="left", fontsize=pal.SIZES["label"], color=pal.HEADING)
+    ax.set_title("Areas where data science can grow toward the rest of NIH", loc="left", fontsize=pal.SIZES["label"], color=pal.HEADING)
 
     fig.suptitle(f"Data science at {ic}", x=0.02, ha="left", fontsize=pal.SIZES["chart_title"], color=pal.HEADING, fontweight="bold")
     fig.text(0.02, 0.005, f"Administering IC. Areas = RCDC categories with at least {MIN_AREA} {ic} applications; "
@@ -406,7 +406,7 @@ def page(ic, r, routes, acts, rising, themes, ar, cats, new):
         "Largest themes, FY2023 to FY2025 (share of the IC's data science projects): " +
         "; ".join(f"{t} ({v:.0%})" for t, v in themes.items()) + ".", "",
         "Fastest-rising topics: " + "; ".join(f"{t.name} ({t.growth:.1f}×)" for t in rising.itertuples()) + ".", "",
-        "## Where it could do more", "",
+        "## Where it can grow next", "",
         f"These research areas are where {ic} puts a smaller share of its funding into data science than the rest of NIH does in the same area. "
         f"Areas come from NIH's RCDC categories; each has at least {MIN_AREA} {ic} applications.", "",
         "| Area | " + ic + " data science share of funding | Rest of NIH | Difference (points) |", "|---|---:|---:|---:|",
@@ -416,7 +416,7 @@ def page(ic, r, routes, acts, rising, themes, ar, cats, new):
         "(1 = as often, 0.5 = half as often): " + "; ".join(f"{k.replace('_', ' ')} ({v.ratio:.2f})" for k, v in rare.iterrows()) + ".", "",
         "## Method and limits", "",
         "Projects are counted once per fiscal year they are active; the administering IC gets the whole project. "
-        "Data science = the taxonomy's substantive data science label. RCDC categories overlap. Area gaps compare the "
+        "Data science = the taxonomy's substantive data science label. RCDC categories overlap. Area opportunities compare the "
         "IC with all other ICs in the same area and don't account for differences in mission. Counts under 11 are "
         f"suppressed. Code: `analyses/institutes/ic_profiles.py`; tables in `reports/results/institutes/{ic.lower()}/`.", "",
         "**Source:** NIH RePORTER API and ExPORTER, FY2016 to FY2025; NIH Data Science Taxonomy.", "",
@@ -438,8 +438,8 @@ def page(ic, r, routes, acts, rising, themes, ar, cats, new):
         "language models (AI systems that read text) that decide whether data science is central to the project.",
         "- **Themes and rising topics.** A topic-grouping method (BERTopic) sorts project summaries into groups that share "
         "meaning, like sorting mail by subject when nothing is labeled.",
-        "- **Area gaps.** For each research area, the institute's data science share of funding minus the rest of NIH's share in the same area. "
-        "Negative means the institute does less data science there.",
+        "- **Area opportunities.** For each research area, the institute's data science share of funding minus the rest of NIH's share in the same area. "
+        "Negative means room to grow there.",
         "- **NOFO links.** A ranking model (LightGBM LambdaMART) looks at 150 candidate NOFOs for each project and sorts them so the "
         "best fit comes first. It's built from 300 small decision trees, each a short chain of yes-or-no questions (\"Does the NOFO allow "
         "this grant type?\"), and it finds a project's actual NOFO in the top 10 for 95% of projects whose NOFO we know.", ""]

@@ -87,7 +87,7 @@ Combines the data science PI analysis and the training pipeline.
 ### B. Topic, opportunity, and area analysis (`analyses/topics/`, done: [topics_analysis.md](analyses/topics/topics_analysis.md))
 
 - Emerging topics (ML roadmap 2): compare topic models: LDA (word-count topics), BERTopic (embeddings plus clustering), and the taxonomy's own categories; track topics by fiscal year and flag fast risers.
-- Where data science is thin relative to need (ML roadmap 3): embedding similarity between projects and RCDC categories, compared with disease burden data; rank gaps.
+- Where data science can grow relative to need (ML roadmap 3): embedding similarity between projects and RCDC categories, compared with disease burden data; rank opportunities.
 - Funding opportunities that attract data science (ML roadmap 4): text similarity between NOFOs (9,135) and data science abstracts, comparing TF-IDF, sentence embeddings, and a cross-encoder; which NOFOs draw data science, and which areas have no matching NOFO.
 - What goes with high-impact outputs (ML roadmap 5): compare logistic regression, random forest, and gradient boosting with SHAP values on citation rate, patents, and trials; then a causal check (matching or doubly robust estimation) for the one or two features that matter most.
 
@@ -119,5 +119,5 @@ One page for each NIH institute and center, built from the same template so any 
 
 - Growth and entry: data science and AI projects, funding, and share of the IC's portfolio by fiscal year; when the IC's growth started; new data science PIs entering each year; first-time vs. returning data science PIs.
 - What got them there: activity codes, funding opportunities (NOFOs), and programs behind the IC's data science projects; training awards that fed its data science PIs (analysis A); PIs who moved into the IC's data science work from other ICs.
-- Where to improve: research areas (RCDC categories) where the IC's data science share trails the rest of NIH; taxonomy categories it rarely funds; builders and AI developers it funds vs. NIH overall; outputs vs. matched projects.
+- Where to grow next: research areas (RCDC categories) where the IC's data science share has room to grow toward the rest of NIH; taxonomy categories it rarely funds; builders and AI developers it funds vs. NIH overall; outputs vs. matched projects.
 - Build: a page template (md, matplotlib charts) filled by one script looped over ICs, plus a dashboard IC filter for the same views. Small ICs get suppressed cells (fewer than 11) and fewer charts.

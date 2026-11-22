@@ -49,7 +49,7 @@ About half (55%) of moved-in PIs did their first data science project at the sam
 
 Most growth in data science PIs comes from people who start their NIH careers doing it. That puts weight on training and early-career awards (see [How they get there](pi_analysis.md#4-how-they-get-there)).
 
-The 1 in 5 who move in come from data-heavy fields. Programs that want to bring in researchers from areas where data science is thinner, such as rare and infectious diseases, may need to reach them directly. Statistics and analytics is the common entry point, so that is where training for mid-career researchers would meet them.
+The 1 in 5 who move in come from data-heavy fields. Programs that want to bring in researchers from areas where data science has room to grow, such as rare and infectious diseases, may need to reach them directly. Statistics and analytics is the common entry point, so that is where training for mid-career researchers would meet them.
 
 ## Method, data, and limits
 

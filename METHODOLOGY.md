@@ -175,9 +175,11 @@ FY2026 is preliminary (RePORTER API pull, October 2026), so comparisons below ru
 
 ## 7. Method experiments (November 21, 2026)
 
-**A small, free labeling model** (`analyses/methods/small_model.py`). TF-IDF + logistic regression, trained on the pipeline's labels for keyword-flagged records (records holding a coded project dropped), applied after the keyword flag. On the 150 coded projects: AI κ 0.87 (precision 85%, recall 98%); data science κ 0.81 (precision 83%, recall 94%), vs. 0.92 and 0.86 for keywords → Jev → ChatGPT. No API cost. Candidate use: a free first screen that sends only its uncertain calls to the resolver.
+**A small, free labeling model** (`analyses/methods/small_model.py`). TF-IDF + logistic regression, trained on the pipeline's labels for keyword-flagged records (records holding a coded project dropped), applied after the keyword flag. On the 150 coded projects: AI κ 0.87 (95% CI 0.79–0.96; precision 85%, recall 98%); data science κ 0.81 (0.72–0.91; precision 83%, recall 94%), vs. 0.92 (0.85–0.99) and 0.86 (0.77–0.94) for keywords → Jev → ChatGPT. The intervals overlap: the free model is close to the pipeline, not clearly below it. κ CI = κ ± 1.96 × √(po(1−po) / (n(1−pe)²)). No API cost. Candidate use: a free first screen that sends only its uncertain calls to the resolver.
 
 **Projecting the preliminary year** (`analyses/methods/fy_projection_backtest.py`). Back-test of extramural grants by institute × activity family, FY2021–FY2025, at 24 to 180 days after close. 98–99% of records and funding are in by day 24. Cell error (WAPE) at day 24: completeness 0.8%, gradient boosting 0.7%, quantile regression 0.7%; all-NIH totals within 0.3%. Quantile regression's 80% range covers 90% of cells; the completeness range covers 15%. Contracts and intramural records are not in the back-test.
+
+**Building on RCDC's AI tag** (`analyses/methods/rcdc_compare.py`). NIH's RCDC category "Machine Learning and Artificial Intelligence" starts in FY2019. From FY2019 to FY2025, 8,014 project records carry the tag and the taxonomy identifies 10,863 AI records: 2,849 more (36%). 6,807 are AI in both; 4,056 are identified by the taxonomy only; 1,207 carry the tag but don't meet the taxonomy's bar for substantive AI (often a mention in background). On the 150 coded projects, the RCDC tag is right 92% of the time it tags a project (95% CI 80–97%) and tags 86% of substantive AI projects (72–93%).
 
 ## Limits
 

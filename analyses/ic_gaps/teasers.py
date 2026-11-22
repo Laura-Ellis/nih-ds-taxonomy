@@ -1,5 +1,5 @@
 # %% [markdown]
-# # Public one-page teasers for the institute gap reports
+# # Public one-page teasers for the institute opportunity reports
 #
 # One page per institute (`analyses/ic_gaps/<ic>.md`) and one figure (`reports/figures/ic_gaps/<ic>.png`), plus an index
 # (`analyses/ic_gaps/README.md`). The full reports stay private; the pages show the question, one chart without exact
@@ -47,7 +47,7 @@ def heatmap(ic, l2):
     ax.set_xticks([0.5], minor=True)
     ax.set_yticks([i + 0.5 for i in range(len(d) - 1)], minor=True)
     ax.grid(which="minor", color="white", linewidth=3)
-    fig.suptitle(f"Where is data science thin in {ic}'s largest research areas?", x=0.02, ha="left",
+    fig.suptitle(f"Where can data science grow in {ic}'s largest research areas?", x=0.02, ha="left",
                  fontsize=pal.SIZES["chart_title"], color=pal.HEADING, fontweight="bold")
     fig.text(0.02, 0.02, "Darker = further below (more than 2 or 5 points of data science funding share). Exact values in the full report.\n"
              "Source: NIH RePORTER and ExPORTER, FY2016–FY2025; NIH Data Science Taxonomy.", fontsize=9, color=pal.SOURCE)
@@ -61,35 +61,35 @@ def page(ic, t, l2):
     n_big = int(big.gap.sum())
     hooks = []
     if len(g):
-        hooks.append(f"**Data science trails both {ic}'s own average and the rest of NIH in {len(g)} of its research areas"
+        hooks.append(f"**Data science has room to grow compared with both {ic}'s own average and the rest of NIH in {len(g)} of its research areas"
                      + (f", including {NUM[n_big]} of its five largest.**" if n_big else ".**") + " Which ones, and by how much, is in the report.")
     l3 = pd.read_csv(R / ic.lower() / "lens3_burden.csv")
     if l3.empty:
         hooks.append(f"**{ic} funds mostly basic science, so no single disease is large enough for a burden comparison.** "
                      "The report looks at its research areas and NOFOs instead.")
     elif t["n_burden_gaps"]:
-        hooks.append(f"**Some of the highest-burden diseases {ic} funds get less data science there than elsewhere at NIH.** "
+        hooks.append(f"**Some of the highest-burden diseases {ic} funds have room for more data science, compared with elsewhere at NIH.** "
                      "The report names them and sets each against U.S. disability-adjusted life years.")
     else:
         hooks.append(f"**{ic}'s highest-burden diseases get as much data science as elsewhere at NIH.** The report shows where it runs ahead and behind.")
     hooks.append("**New NOFOs that ask for data science come before more data science projects, but not only because of the NOFO.** "
                  "The report shows how much, and what else was going on.")
-    lines = [f"# Where is data science thin at {ic}?", "",
+    lines = [f"# Where can data science grow at {ic}?", "",
              f"**Laura Ellis** · [LinkedIn]({LI}) · FY2016 to FY2025 · [All 10 institutes](README.md) · [Institute profile](../institutes/{ic.lower()}.md)", "",
-             f"Data science projects got {t['ds_funding_share']:.0%} of funding at the {t['name']} from FY2016 to FY2025. I looked for the places where data science is "
-             f"thin: compared with {ic}'s own research areas and with the burden of the diseases it funds.", "",
-             f"![Where data science is thin in {ic}'s largest research areas](../../reports/figures/ic_gaps/{ic.lower()}.png)", "",
+             f"Data science projects got {t['ds_funding_share']:.0%} of funding at the {t['name']} from FY2016 to FY2025. I looked for the places where data science "
+             f"has room to grow: compared with {ic}'s own research areas and with the burden of the diseases it funds.", "",
+             f"![Where data science can grow in {ic}'s largest research areas](../../reports/figures/ic_gaps/{ic.lower()}.png)", "",
              "## What I found", ""] + [f"- {h}" for h in hooks] + ["",
-             "## Two ways to see a gap", "",
-             "1. **Against its own research areas.** In which areas is data science thinner than the institute's own average, and thinner than at the rest of NIH?",
-             "2. **Against disease burden.** Which high-burden diseases get less data science here than at the rest of NIH?", "",
+             "## Two ways to see where data science can grow", "",
+             "1. **Against its own research areas.** In which areas does data science have room to grow compared with the institute's own average and the rest of NIH?",
+             "2. **Against disease burden.** Which high-burden diseases have room for more data science here, compared with the rest of NIH?", "",
              "## The full report", "",
              f"The full {ic} report (13 slides) names the areas and diseases, and adds how data science projects came in (targeted vs. broad NOFOs), "
              "whether new NOFOs draw projects in (an event study), which levers go with more highly cited papers, patents, and clinical trials, "
              "and an appendix on methods compared with the rest of NIH. "
              f"It's internal; [message me on LinkedIn]({LI}) if you'd like to see it.", "",
              "## How the methods work, in plain terms", "",
-             "- **Gaps:** no model. The share of funding that goes to data science in an area or disease, compared with a benchmark.",
+             "- **Opportunities:** no model. The share of funding that goes to data science in an area or disease, compared with a benchmark.",
              "- **Disease burden:** each disease is matched to NIH's own categories, then compared with how much healthy life it costs Americans each year (GBD 2023).",
              "- **Data science labels:** keyword rules, then two large language models, decide whether data science is central to a project "
              "([NIH Data Science Taxonomy](../../METHODOLOGY.md)).", ""]
@@ -110,11 +110,11 @@ for ic in ICS:
     print("wrote", ic)
 
 (PAGES / "README.md").write_text("\n".join([
-    "# Where is data science thin at NIH's 10 largest institutes?", "",
+    "# Where can data science grow at NIH's 10 largest institutes?", "",
     f"**Laura Ellis** · [LinkedIn]({LI}) · FY2016 to FY2025", "",
-    "For the 10 institutes with the most data science projects, I looked for the places where data science is thin: against each institute's "
+    "For the 10 institutes with the most data science projects, I looked for the places where data science has room to grow: against each institute's "
     "own research areas and against disease burden. Each page shows one chart and the headline findings. "
     "The full reports are internal.", "",
     "| Institute | Name | Data science share of funding |", "|---|---|---:|", *rows, "",
-    "Code: `ic_gaps.py` (gaps), `nofo_asks.py` and `nofo_panel.py` (NOFOs and projects), `ic_outputs.py` (outputs and levers), `teasers.py` (these pages).", ""]),
+    "Code: `ic_gaps.py` (opportunities), `nofo_asks.py` and `nofo_panel.py` (NOFOs and projects), `ic_outputs.py` (outputs and levers), `teasers.py` (these pages).", ""]),
     encoding="utf-8")

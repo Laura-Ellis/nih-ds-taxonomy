@@ -1,10 +1,10 @@
-# What data science at NIH works on, where it's growing, and where it's thin
+# What data science at NIH works on, where it's growing, and where it can grow next
 
 **Laura Ellis** · [LinkedIn](https://www.linkedin.com/in/laura-ellis-profile/) · [GitHub](https://github.com/Laura-Ellis/nih-ds-taxonomy) · Data FY2016 to FY2025 (NIH RePORTER API, as of October 24, 2026) · [Presentation (PDF)](https://laura-ellis.github.io/pdf/what_data_science_at_nih_works_on.pdf)
 
 Most growth in NIH data science follows institute priorities: dementia at NIA, opioids at NIDA, cancer at NCI. The exception is single-cell and spatial omics, a method growing across many institutes at once.
 
-Compared with U.S. disease burden, data science is thinnest in musculoskeletal, chronic respiratory, and heart disease. NIH's overall funding is light in the same areas, and few targeted NOFOs match their projects. NOFOs that ask for data science fund more of it. A project's size and type predict its patents and trials far better than any data science trait.
+Compared with U.S. disease burden, data science has the most room to grow in musculoskeletal, chronic respiratory, and heart disease. NIH's overall funding is also smaller in these areas, and few targeted NOFOs match their projects. NOFOs that ask for data science fund more of it. A project's size and type predict its patents and trials far better than any data science trait.
 
 Terms are defined in the [glossary](#glossary) at the end.
 
@@ -12,7 +12,7 @@ Terms are defined in the [glossary](#glossary) at the end.
 
 1. [What data science works on](#1-what-data-science-works-on)
 2. [What's rising](#2-whats-rising)
-3. [Where it's thin relative to need](#3-where-its-thin-relative-to-need)
+3. [Room to grow relative to need](#3-room-to-grow-relative-to-need)
 4. [What draws it in](#4-what-draws-it-in)
 5. [Matching projects to NOFOs](#5-matching-projects-to-nofos)
 6. [What goes with patents, trials, and highly cited papers](#6-what-goes-with-patents-trials-and-highly-cited-papers)
@@ -49,11 +49,11 @@ Single-cell and spatial omics (2.3×) is the exception. No institute holds more 
 
 Charts for every institute with at least 500 data science projects are in [reports/figures/topics/ic](../../reports/figures/topics/ic/).
 
-## 3. Where it's thin relative to need
+## 3. Room to grow relative to need
 
 I compared each disease group's share of U.S. disease burden with its share of NIH data science funding. Burden is measured in DALYs, years of healthy life lost (IHME Global Burden of Disease 2023).
 
-| Disease group | Share of burden | Share of data science funding | Gap ratio |
+| Disease group | Share of burden | Share of data science funding | Funding-to-burden ratio |
 |---|---:|---:|---:|
 | Musculoskeletal disorders | 9.7% | 1.3% | 0.13 |
 | Chronic respiratory diseases | 5.4% | 0.7% | 0.14 |
@@ -61,7 +61,7 @@ I compared each disease group's share of U.S. disease burden with its share of N
 | Respiratory infections and TB | 1.3% | 8% | 5.9 |
 | HIV/AIDS and STIs | 0.4% | 9% | 26 |
 
-A gap ratio of 1 means funding is in proportion to burden; below 1 means thin. Self-harm and violence, injuries, and skin disease are also low.
+A funding-to-burden ratio of 1 means funding is in proportion to burden; below 1 means room to grow. Self-harm and violence, injuries, and skin disease are also low.
 
 Data science mostly follows NIH's own funding. Musculoskeletal disorders get 1.5% of all NIH funding, and cardiovascular disease 6.5%. Even after accounting for that, data science lags most in chronic respiratory, skin, digestive, diabetes and kidney, and cardiovascular disease.
 
@@ -79,7 +79,7 @@ NOFOs that ask for data science fund more of it. The typical share of data scien
 
 Still, most data science comes in through broad parent R01 announcements that never mention it. One of them (PA-20-185) funded 3,349 data science projects.
 
-Some topics have no matching targeted NOFO. Few of their projects come through RFAs or PARs: heart disease (27%), hearing (33%), bone and joint (30%), retina and glaucoma (27%), stroke (30%), and anxiety and depression (27%). Heart and musculoskeletal disease are also thin relative to burden, so the same areas lack both funding and NOFOs that ask for data science.
+Some topics have no matching targeted NOFO. Few of their projects come through RFAs or PARs: heart disease (27%), hearing (33%), bone and joint (30%), retina and glaucoma (27%), stroke (30%), and anxiety and depression (27%). Heart and musculoskeletal disease also have room to grow relative to burden, so the same areas could benefit from both funding and NOFOs that ask for data science.
 
 ![Data science share of funded projects, NOFOs that ask vs. don't](../../reports/figures/topics/08_nofo_ds_share.png)
 
@@ -148,7 +148,7 @@ With a model that finds the actual NOFO 95% of the time, I linked the projects w
 
 For researcher-initiated projects, the result is the best-fitting targeted NOFO, not the NOFO that funded them. A fit is **strong** when that NOFO scores as high as a typical correct match (the median score of correct first picks in the check set), and **weak** otherwise. Only 1,902 researcher-initiated projects (4% of all data science) have a strong fit; 17,035 (37%) don't. So more than a third of data science at NIH arrives with no close targeted NOFO: investigators propose it without being asked.
 
-By institute, the weak-fit share runs from 19% at NCI to 63% at NHLBI, which also has the lowest share of projects naming a targeted NOFO (31%). That matches section 3 (heart disease is thin relative to burden) and section 4 (few targeted NOFOs fit heart projects). By data science area, data infrastructure is 77% targeted, since NIH builds resources through NOFOs; AI, statistics, and modeling are about 45% targeted and 44% weak fit.
+By institute, the weak-fit share runs from 19% at NCI to 63% at NHLBI, which also has the lowest share of projects naming a targeted NOFO (31%). That matches section 3 (heart disease has room to grow relative to burden) and section 4 (few targeted NOFOs fit heart projects). By data science area, data infrastructure is 77% targeted, since NIH builds resources through NOFOs; AI, statistics, and modeling are about 45% targeted and 44% weak fit.
 
 | Institute | Targeted NOFO | Broad NOFO, strong fit | Broad NOFO, weak fit | No NOFO |
 |---|---:|---:|---:|---:|
@@ -188,7 +188,7 @@ To check the two strongest traits, I compared projects with and without each tra
 
 ### Outputs by institute
 
-For the 8 institutes with the most data science projects, I compared each institute's data science projects with similar data science projects at other institutes (made alike in size, grant type, years funded, team, and start year). Each cell shows the institute's share, then the gap in points; **bold** gaps hold up (the 95% range excludes zero).
+For the 8 institutes with the most data science projects, I compared each institute's data science projects with similar data science projects at other institutes (made alike in size, grant type, years funded, team, and start year). Each cell shows the institute's share, then the difference in points; **bold** differences hold up (the 95% range excludes zero).
 
 | Institute | Projects | Highly cited paper | Patent | Clinical trial |
 |---|---:|---:|---:|---:|
@@ -202,7 +202,7 @@ For the 8 institutes with the most data science projects, I compared each instit
 | NIDDK | 766 | 31% (**+4.5**) | 12% (−0.6) | 20% (**+6.7**) |
 | All data science | 15,729 | 23% | 10% | 8% |
 
-Each institute's data science leads somewhere different: trials at NIDDK, cited papers at NIMH and NIA, patents at NCI. NIGMS funds basic research, which rarely leads to trials. These gaps reflect mission, not how well an institute runs data science. Code: `impact_models.py`, section "Outcomes by institute"; table in `reports/results/impact_by_ic.csv`.
+Each institute's data science leads somewhere different: trials at NIDDK, cited papers at NIMH and NIA, patents at NCI. NIGMS funds basic research, which rarely leads to trials. These differences reflect mission, not how well an institute runs data science. Code: `impact_models.py`, section "Outcomes by institute"; table in `reports/results/impact_by_ic.csv`.
 
 ### What could increase outputs
 
@@ -227,7 +227,7 @@ Adding PIs, or PIs with earlier NIH projects, doesn't go with more outputs once 
 
 ## 7. What this means
 
-Target the thin areas. Heart, musculoskeletal, and chronic respiratory disease carry large shares of burden, small shares of data science funding, and few NOFOs that ask for it. NOFOs written for these areas are the most direct lever, though most of the gap reflects NIH's overall funding.
+Grow the high-burden areas. Heart, musculoskeletal, and chronic respiratory disease carry large shares of burden, small shares of data science funding, and few NOFOs that ask for it. NOFOs written for these areas are the most direct lever, though most of the gap reflects NIH's overall funding.
 
 Read rises by institute. Dementia, opioids, and cancer immunotherapy grow with NIA, NIDA, and NCI priorities. Single-cell and spatial omics is the one method growing across institutes; it is a candidate for shared infrastructure and training.
 
@@ -268,7 +268,7 @@ Judge outputs by area. Mental health projects are more likely to have a trial an
 | Data science project | An NIH project whose aims or approach rely on data science, per the NIH Data Science Taxonomy |
 | Embeddings | Numbers a language model gives each text so similar texts sit close together |
 | PubMedBERT, MedCPT, BGE-M3 | Language models trained on biomedical text or PubMed searches; BGE-M3 reads long text |
-| Gap ratio | Share of data science funding ÷ share of disease burden; 1 = in proportion, below 1 = thin |
+| Funding-to-burden ratio | Share of data science funding ÷ share of disease burden; 1 = in proportion, below 1 = room to grow |
 | NOFO | Notice of funding opportunity. RFA and PAR = targeted NOFOs for an area; PA = broad, such as the parent R01 |
 | RCDC | NIH's research, condition, and disease categories, used to tag every project |
 | Relative Citation Ratio (RCR) | Citations per year compared with the field's norm; 1 = a typical NIH paper |
@@ -284,4 +284,4 @@ Judge outputs by area. Mental health projects are more likely to have a trial an
 - **Prediction models (gradient boosting, random forest, logistic regression).** Learn from past projects which traits go with a clinical trial, a patent, or highly cited papers. AUC grades them: 0.5 is a coin flip, 1 is perfect.
 - **SHAP.** Splits each prediction into how much each trait pushed it up or down, so we can see what a model relies on.
 - **Fair comparison (AIPW).** Compares projects with and without a trait after making the two groups alike on size, type, and institute, so the trait doesn't get credit for those differences.
-- **Simple ratios, no model.** Growth = a topic's share now ÷ its share in FY2016–18. Gap ratio = share of data science funding ÷ share of disease burden. A NOFO "asks for data science" when the taxonomy's keyword rules find a data science term in its description.
+- **Simple ratios, no model.** Growth = a topic's share now ÷ its share in FY2016–18. Funding-to-burden ratio = share of data science funding ÷ share of disease burden. A NOFO "asks for data science" when the taxonomy's keyword rules find a data science term in its description.

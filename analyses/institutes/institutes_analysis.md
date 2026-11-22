@@ -1,4 +1,4 @@
-# Data science across NIH institutes: how much, how it got there, and where each could do more
+# Data science across NIH institutes: how much, how it got there, and where each can grow next
 
 **Laura Ellis** · [LinkedIn](https://www.linkedin.com/in/laura-ellis-profile/) · [GitHub](https://github.com/Laura-Ellis/nih-ds-taxonomy) · FY2016 to FY2025 · [Presentation (PDF)](https://laura-ellis.github.io/pdf/data_science_at_each_nih_institute.pdf) · [Institute profiles](README.md)
 
@@ -12,7 +12,7 @@ This page covers the 22 institutes and centers with at least 500 data science pr
 2. [How data science got there](#2-how-data-science-got-there)
 3. [Linking projects to NOFOs](#3-linking-projects-to-nofos)
 4. [What each institute works on](#4-what-each-institute-works-on)
-5. [Where each institute could do more](#5-where-each-institute-could-do-more)
+5. [Where each institute can grow next](#5-where-each-institute-can-grow-next)
 6. [So what](#6-so-what)
 7. [Glossary](#glossary)
 8. [How the methods work, in plain terms](#how-the-methods-work-in-plain-terms)
@@ -150,9 +150,9 @@ The two largest themes in each institute's data science projects, FY2023 to FY20
 
 Most institutes' data science sits in one or two themes that match their mission. Research cores, centers, and data resources shows up at nearly every institute.
 
-## 5. Where each institute could do more
+## 5. Where each institute can grow next
 
-For each institute, the research area (RCDC category with at least 300 of its applications) where the share of its funding going to data science trails the rest of NIH the most. Points = institute's data science funding share − rest of NIH's share in the same area. Categories that describe data science or computing themselves are left out.
+For each institute, the research area (RCDC category with at least 300 of its applications) where the share of its funding going to data science has the most room to grow compared with the rest of NIH. Points = institute's data science funding share − rest of NIH's share in the same area. Categories that describe data science or computing themselves are left out.
 
 | Institute | Area | Points |
 |---|---|---:|
@@ -179,13 +179,13 @@ For each institute, the research area (RCDC category with at least 300 of its ap
 | NHGRI | Human Genome | +15 |
 | NLM | Clinical Research | +47 |
 
-Positive numbers (NCATS, NHGRI, NLM) mean the institute leads the rest of NIH in every qualifying area; the area shown is where it leads least. These gaps don't account for mission: an institute may rightly leave some data science to others. Each [profile](README.md) lists all of an institute's area gaps.
+Positive numbers (NCATS, NHGRI, NLM) mean the institute leads the rest of NIH in every qualifying area; the area shown is where it leads least. These comparisons don't account for mission: an institute may rightly leave some data science to others. Each [profile](README.md) lists all of an institute's area gaps.
 
 ## 6. So what
 
 - **Mission.** Data science follows each institute's mission. Compare an institute with its own past and with similar institutes, not with NLM or NHGRI.
 - **Routes.** Targeted NOFOs work for some institutes; others grow data science through training and broad grants. Each institute can use the route that fits.
-- **Gaps.** Most institutes have areas where a smaller share of their funding goes to data science than at the rest of NIH. Those are the places to look first, keeping mission in mind; they are candidates for targeted NOFOs or partnerships.
+- **Opportunities.** Most institutes have areas where a smaller share of their funding goes to data science than at the rest of NIH. Those are the places to look first, keeping mission in mind; they are candidates for targeted NOFOs or partnerships.
 
 ## Glossary
 
@@ -204,8 +204,8 @@ Positive numbers (NCATS, NHGRI, NLM) mean the institute leads the rest of NIH in
 - **Counts and shares.** No model. Each project counts once in every year it's active, under the institute that manages it. Share = data science projects ÷ all projects.
 - **Data science labels.** Keyword rules first, then two large language models (AI systems that read text) decide whether data science is central to a project. They agree with hand coding most of the time (kappa 0.86).
 - **Themes.** A topic-grouping method (BERTopic) sorts project summaries into groups that share meaning, like sorting mail by subject with no labels. I then grouped the topics into themes by hand.
-- **Area gaps.** No model. An institute's data science share of funding in a research area minus the rest of NIH's share in the same area.
+- **Area opportunities.** No model. An institute's data science share of funding in a research area minus the rest of NIH's share in the same area.
 - **NOFO links.** A ranking model (LightGBM LambdaMART) sorts 150 candidate NOFOs for each project so the best fit comes first. It learns from projects whose NOFO is known, using 300 small yes-or-no decision trees, each fixing the mistakes of the ones before. It finds a project's actual NOFO in the top 10 for 95% of known cases.
 - **Strong or weak fit.** Strong = the best targeted NOFO scores as high as a typical correct match. The bar is strict on purpose. For researcher-initiated projects, the NOFO shown is the best-fitting one, not the one that funded the project.
 
-Code: [`ic_profiles.py`](ic_profiles.py) (profiles, routes, themes, area gaps) and [`nofo_link_ltr.py`](../topics/nofo_link_ltr.py) (NOFO links). Source: NIH RePORTER API and ExPORTER, FY2016 to FY2025; NIH Data Science Taxonomy.
+Code: [`ic_profiles.py`](ic_profiles.py) (profiles, routes, themes, area opportunities) and [`nofo_link_ltr.py`](../topics/nofo_link_ltr.py) (NOFO links). Source: NIH RePORTER API and ExPORTER, FY2016 to FY2025; NIH Data Science Taxonomy.

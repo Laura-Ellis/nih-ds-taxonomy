@@ -150,7 +150,7 @@ Program funding over time · program portfolios by taxonomy group · outputs vs.
 
 1. **Growth and entry:** data science and AI projects, funding, and portfolio share by fiscal year vs. the rest of NIH; new data science PIs each year; first-time vs. returning PIs.
 2. **What got them there:** activity codes, NOFOs, and programs behind the IC's data science projects; training awards that fed its data science PIs (from A); PIs who came from other ICs.
-3. **Where to improve:** RCDC areas where the IC's data science share trails the rest of NIH; taxonomy categories it rarely funds; builders and AI developers vs. NIH overall; outputs vs. matched projects.
+3. **Where to grow next:** RCDC areas where the IC's data science share has room to grow toward the rest of NIH; taxonomy categories it rarely funds; builders and AI developers vs. NIH overall; outputs vs. matched projects.
 4. **Compared with:** any other IC or the rest of NIH (same template).
 
 ### Build
