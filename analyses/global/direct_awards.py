@@ -10,6 +10,8 @@
 # - Regions: WHO regions (`regions.py`).
 # - Administration periods: Obama (FY2016), Trump 1 (FY2017–2020), Biden (FY2021–2024), Trump 2 (FY2025–2026).
 # - DS-I Africa: projects under the Common Fund NOFOs RFA-RM-20-015 to -018, RFA-RM-22-022 and RFA-RM-22-023.
+#   That is the program's full NOFO list (Common Fund and NIH Guide, checked Nov 22, 2026). Administrative
+#   supplements (PA-20-272, PA-21-268, PA-24-254, PA-26-001) share the record, so they count too.
 #
 # Outputs in `reports/results/global/`.
 
