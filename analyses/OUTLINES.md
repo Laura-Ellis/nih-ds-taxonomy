@@ -8,9 +8,9 @@ Six pieces of work, each with a site page (md), a script (py), and a deck. Each 
 |---|---|---|---|
 | A | PI analysis: who does data science, how they get there, who they work with | `analyses/ds_pis/` | Parts 1 to 5 drafted; one page (`pi_analysis.md`) |
 | B | Topics, opportunities, and areas | `analyses/topics/` | Done ([page](topics/topics_analysis.md)) |
-| C | Methods deck: how the taxonomy and dataset were built | `analyses/methods/`, `deck/methods/` | Deck built November 21, 2026 (10 slides) |
-| D | Global research: NIH data science at foreign institutions | `analyses/global/` | Planned; first numbers in hand |
-| E | Data science programs (DS-I Africa first) | `analyses/programs/` | Planned |
+| C | Methods deck: how the taxonomy and dataset were built | `analyses/methods/`, `deck/methods/` | Deck built November 21, 2026; NOFO matching slide added November 22 (11 slides) |
+| D | Global research: NIH data science at foreign institutions | `analyses/global/` | Done: deck, institute pages, and site map (November 22, 2026) |
+| E | Data science programs (DS-I Africa first) | `analyses/programs/` | Sections 1–4 first pass (November 22, 2026); deck outline for approval |
 | F | Institute profiles: one page per IC | `analyses/ic_profiles/` | Planned |
 
 ---

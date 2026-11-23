@@ -1,6 +1,6 @@
 # Methodology: NIH Data Science Taxonomy
 
-**Version:** 0.5.0 · **Updated:** 2026-10-24 · **Author:** Laura Ellis · **GitHub:** [github.com/Laura-Ellis/nih-ds-taxonomy](https://github.com/Laura-Ellis/nih-ds-taxonomy)
+**Version:** 0.5.0 · **Updated:** 2026-11-22 · **Author:** Laura Ellis · **GitHub:** [github.com/Laura-Ellis/nih-ds-taxonomy](https://github.com/Laura-Ellis/nih-ds-taxonomy)
 
 ## Bottom line
 
@@ -99,7 +99,7 @@ Reference: the 150 coded projects (42 substantive AI, 52 substantive data scienc
 
 **Choosing a resolver.** Agreement on the uncertain calls matters most, since those are the only calls a resolver makes. A cheaper resolver is worth using if its pipeline κ is within about 0.02 of Claude's; differences smaller than that are within sampling error on 150 projects. ChatGPT (GPT-6 Luna) meets that bar on both labels (AI 0.92 vs. 0.94; data science 0.86 vs. 0.87) at about one-twentieth of Claude's cost; Gemini Flash-Lite does not (0.89 and 0.81), mainly because it calls mentions substantive. All three models agree with the coding on every substantive AI project (recall 100%); they differ on mentions. Using a second model family also shows the labels do not depend on one vendor.
 
-**Cost at full scale.** The FY2016–2026 keyword run flagged 54,806 of 258,321 records; their combined texts average 1.7 times a single abstract. Jev's confidence falls below 0.90 on about 11% of AI calls and about 40% of AI or data science calls.
+**Cost at full scale.** These estimates come from an earlier keyword run that flagged 54,806 of 258,321 records (the v0.5 terms flag 60,245; section 6). Their combined texts average 1.7 times a single abstract. Jev's confidence falls below 0.90 on about 11% of AI calls and about 40% of AI or data science calls.
 
 | Resolver | Relabels | Resolver cost | Total with Jev (~$11) | Pipeline AI κ | Pipeline DS κ |
 |---|---|---|---|---|---|
@@ -110,7 +110,7 @@ Reference: the 150 coded projects (42 substantive AI, 52 substantive data scienc
 | **ChatGPT (GPT-6 Luna)** | **Uncertain AI or DS (~20,200)** | **~$9** | **~$21** | **0.92** | **0.86** |
 | *Claude alone, Batch API, every flagged record* | *All 50,481* | *~$242* | *n/a* | *0.94* | *0.84* |
 
-Costs are estimates made before the full run: tokens measured on the coded sample × list price × 1.6 for longer texts. The actual full run cost about $24 through the Vercel AI Gateway (section 6), more than the ~$21 estimate because ChatGPT resolved more texts than expected. Claude ~$0.006 per abstract (standard), ChatGPT ~$0.00029, Gemini ~$0.00069, Jev ~$0.00014.
+Costs are estimates made before the full run: tokens measured on the coded sample × list price × 1.6 for longer texts. The actual v0.5 run cost about $24 through the Vercel AI Gateway (section 6), more than the ~$21 estimate because the v0.5 terms flagged more records (60,245 vs. 54,806) and ChatGPT resolved 37,415 texts, not the ~20,200 estimated: Jev was below 90% confidence on AI or data science for 62% of flagged records, not 40%. Claude ~$0.006 per abstract (standard), ChatGPT ~$0.00029, Gemini ~$0.00069, Jev ~$0.00014.
 
 **Why ChatGPT is the resolver.**
 - Accuracy: it comes within 0.02 κ of Claude on both labels (AI 0.92 vs. 0.94; data science 0.86 vs. 0.87), inside the sampling error of a 150-project sample, and finds every substantive AI project (recall 100%).
@@ -146,8 +146,9 @@ FY2026 is preliminary (RePORTER API pull, October 2026), so comparisons below ru
 
 **Scale of the run**
 - 258,321 records (parent projects and subprojects), FY2016–2026, from the RePORTER API
-- 54,806 flagged by keywords; ChatGPT resolved 32,221 uncertain texts
-- Total model cost about $24
+- 60,245 flagged by keywords (v0.5 terms); Jev's label stands for 22,830, and ChatGPT (GPT-6 Luna) resolved the other 37,415, where Jev was less than 90% confident
+- 198,076 not flagged, labeled N by keywords
+- Total model cost about $24 for the v0.5 run (Jev plus ChatGPT, Vercel AI Gateway)
 
 **Trend** (`reports/results/trend_by_fy.csv`)
 
@@ -163,7 +164,7 @@ FY2026 is preliminary (RePORTER API pull, October 2026), so comparisons below ru
 
 **AI role, FY2025:** applies AI 69%, develops AI 21%, supports AI 9%, and studies AI 1%.
 
-**By institute** (extramural, FY2016–2026, `ai_by_institute.csv`): NCI spends the most on AI ($3.1B, 5.9% of its extramural funding), followed by NIAID ($2.3B, 4.3%), NIA ($2.3B, 7.1%), NHLBI ($2.3B, 6.2%), and NIMH ($2.1B, 11.7%). NLM (45.7%, on a small portfolio), NIBIB (19.2%), and NHGRI (18.7%) put the largest shares into AI. NIAID has the largest extramural portfolio ($53.6B) and, among the large institutes, the second lowest AI share after NIDDK (3.4%).
+**By institute** (extramural, FY2016–2026, `ai_by_institute.csv`): NCI spends the most on AI ($3.1B, 5.9% of its extramural funding), followed by NIAID ($2.3B, 4.3%), NIA ($2.3B, 7.1%), NHLBI ($2.3B, 6.2%), and NIMH ($2.1B, 11.7%). NLM (45.7%, on a small portfolio), NIBIB (19.2%), and NHGRI (18.7%) put the largest shares into AI. NIAID has the largest extramural portfolio ($53.6B); among the large institutes, NIAID (4.3%) and NIDDK (3.4%) have the most room to grow their AI share.
 
 **Methods and areas** (`ai_method_by_area.csv`): machine learning appears in every area. Computer vision clusters in imaging (2,759 projects), and language processing in clinical care and electronic health records (740).
 
@@ -173,13 +174,18 @@ FY2026 is preliminary (RePORTER API pull, October 2026), so comparisons below ru
 
 **Data science by group:** `notebooks/13_ds_groups.py` splits data science projects into the eight taxonomy groups by fiscal year and IC, for the dashboard, the Tableau extract, and the API (`api/main.py`).
 
-## 7. Method experiments (November 21, 2026)
+## 7. Method experiments (November 2026)
 
 **A small, free labeling model** (`analyses/methods/small_model.py`). TF-IDF + logistic regression, trained on the pipeline's labels for keyword-flagged records (records holding a coded project dropped), applied after the keyword flag. On the 150 coded projects: AI κ 0.87 (95% CI 0.79–0.96; precision 85%, recall 98%); data science κ 0.81 (0.72–0.91; precision 83%, recall 94%), vs. 0.92 (0.85–0.99) and 0.86 (0.77–0.94) for keywords → Jev → ChatGPT. The intervals overlap: the free model is close to the pipeline, not clearly below it. κ CI = κ ± 1.96 × √(po(1−po) / (n(1−pe)²)). No API cost. Candidate use: a free first screen that sends only its uncertain calls to the resolver.
 
 **Projecting the preliminary year** (`analyses/methods/fy_projection_backtest.py`). Back-test of extramural grants by institute × activity family, FY2021–FY2025, at 24 to 180 days after close. 98–99% of records and funding are in by day 24. Cell error (WAPE) at day 24: completeness 0.8%, gradient boosting 0.7%, quantile regression 0.7%; all-NIH totals within 0.3%. Quantile regression's 80% range covers 90% of cells; the completeness range covers 15%. Contracts and intramural records are not in the back-test.
 
 **Building on RCDC's AI tag** (`analyses/methods/rcdc_compare.py`). NIH's RCDC category "Machine Learning and Artificial Intelligence" starts in FY2019. From FY2019 to FY2025, 8,014 project records carry the tag and the taxonomy identifies 10,863 AI records: 2,849 more (36%). 6,807 are AI in both; 4,056 are identified by the taxonomy only; 1,207 carry the tag but don't meet the taxonomy's bar for substantive AI (often a mention in background). On the 150 coded projects, the RCDC tag is right 92% of the time it tags a project (95% CI 80–97%) and tags 86% of substantive AI projects (72–93%).
+
+**Finding a project's funding opportunity** (`analyses/topics/nofo_match.py`, `nofo_match_bio.py`, `nofo_match_ltr.py`). Can text find the NOFO a project was funded under? Check set: 2,000 data science projects funded under a targeted NOFO (RFA or PAR), ranked against 2,482 targeted NOFOs (Section I text from the NIH Guide). Hit@k = share whose own NOFO is in the top k; MRR = mean of 1 ÷ rank; both are lower bounds, since a project can fit more than one NOFO.
+- Text only: TF-IDF puts the right NOFO first for 20% and in the top 10 for 47% (MRR 0.29). Free biomedical and long-text models score lower: PubMedBERT 40%, MedCPT with its reranker 37%, BGE-M3 36% in the top 10. Rank fusion of TF-IDF and PubMedBERT adds nothing (45%); a 0.6/0.4 score blend adds about one point (47%, MRR 0.30). NOFOs and abstracts share distinctive terms (program names, diseases, methods), which word matching rewards directly.
+- Text + project details: a learning-to-rank model (LightGBM LambdaMART, 5-fold cross-validated by project) adds whether the NOFO allows the project's activity code, whether the project's institute issued or joined it, and whether it was open in the project's funding years. Top 1 47%, top 10 95% (95% CI 94–96%, Wilson, n = 2,000), MRR 0.65. A plain activity code + institute filter already gets title matching to 84% in the top 10.
+- Use: suggest the likely NOFO for projects with none recorded, with a person checking the top picks.
 
 ## Limits
 
